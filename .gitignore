@@ -1,0 +1,11 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+node_modules/
+
+# 演示录像等大媒体文件本地保留，不进版本控制
+*.mov
+*.mp4
+*.mp3
+*.wav

@@ -1,0 +1,31 @@
+Evidence rarely arrives as a complete story. It comes in fragments. In deep
+ontology, isolated observations begin to align, hidden relationships, surface.
+Decision-making becomes more informed. And the case starts to take shape. The
+investigator opens the case in deep and brings together images, video, audio,
+documents, and device metadata. Deep checks the source and quality of each
+item, then extracts the labels, objects, locations, timestamps, and devices that
+may matter to the investigation. Each extracted element becomes part of the case
+ontology. The ontology gives these fragments a common structure. It defines the
+identity and role of each element, maps the relationships between them, and
+preserves the context and source trail around every fact. Records from different
+sources can now be understood as references to the same real-world person, place,
+device, or object. As the ontology grows, the case begins to take shape. A
+location connects to a recording. A recording connects to an object. Separate
+pieces of evidence begin to form a coherent account of the real world behind the
+data. Within that shared structure, a significant pattern emerges. The B12
+label appears across three separate records. The shape of the container and the
+pattern of its seal are also consistent, although the records come from
+different devices, locations, and times. The ontology places every observation in
+context, allowing the three records to be examined as one reviewable path.
+Together, they suggest that the records may refer to the same evidence item
+appearing across multiple spaces. The emerging connection is captured as a
+traceable investigative lead. Every link in the ontology remains connected to
+its source. The investigator can return to the original image or video, inspect
+the evidence behind each relationship, and distinguish sourced facts from
+system-suggested associations. The complete ontology path, together with its
+provenance, is then saved for formal review. A reviewer follows the same
+ontology path, compares the original records, and checks the timing,
+location, and visual evidence. The association can then be accepted, rejected,
+or returned for further investigation, with every decision grounded in the same
+connected model of the case. Deep ontology turns fragmented evidence into
+traceable intelligence for accountable decisions.

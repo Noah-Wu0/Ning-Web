@@ -1,0 +1,13 @@
+{
+  "runs": [
+    {
+      "date": "2026-08-25T10:16:56.499079+00:00",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "files": 279,
+      "semantic_missing_chunks": 1
+    }
+  ],
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

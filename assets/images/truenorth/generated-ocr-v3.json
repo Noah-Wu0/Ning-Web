@@ -1,0 +1,37 @@
+[
+  {
+    "file" : "boss-ai-context.png",
+    "observations" : 0,
+    "text" : ""
+  },
+  {
+    "file" : "boss-ai-hero.png",
+    "observations" : 0,
+    "text" : ""
+  },
+  {
+    "file" : "generated-contact-sheet.jpg",
+    "observations" : 11,
+    "text" : "Boss AI\/Hero\nBoss Al \/Context\nInvestor Al\/Hero\nInvestor Al\/Risk to action\nCustomer\nSolution\nprice\nDelivery\nDelfivery\nTopSalesAl\/Hero\nTopSales Al \/Clcced loop"
+  },
+  {
+    "file" : "investor-ai-action.png",
+    "observations" : 0,
+    "text" : ""
+  },
+  {
+    "file" : "investor-ai-hero.png",
+    "observations" : 0,
+    "text" : ""
+  },
+  {
+    "file" : "topsales-ai-hero.png",
+    "observations" : 5,
+    "text" : "Customer\nSolution\nprice\nDelivery\nDellivery"
+  },
+  {
+    "file" : "topsales-ai-loop.png",
+    "observations" : 1,
+    "text" : "◎"
+  }
+]

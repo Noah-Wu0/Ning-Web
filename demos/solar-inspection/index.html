@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Solar Inspection</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0a1218;color:#c8d6e5;overflow:hidden;height:100vh;font-size:14px}
+:root{--accent:#00ffcc;--warn:#f5a623;--danger:#ff5d6c;--muted:#7a8b9a}
+.topbar{position:relative;z-index:100;display:flex;align-items:center;padding:10px 24px;background:#0d161c;border-bottom:1px solid rgba(255,255,255,0.06);height:56px}
+.topbar .brand{font-weight:800;font-size:22px;color:var(--accent)}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:10px;position:relative;z-index:101}
+.top-action-btn{border:1px solid rgba(0,255,204,.28);border-radius:4px;background:rgba(0,255,204,.06);color:var(--accent);padding:4px 9px;cursor:pointer;font-size:12px;font-weight:700;text-transform:uppercase}
+.top-action-btn:hover{background:rgba(0,255,204,.14)}
+.top-action-btn.restart{border-color:rgba(255,93,108,.35);color:#ff8899;background:rgba(255,93,108,.08)}
+.top-action-btn.restart:hover{background:rgba(255,93,108,.16)}
+.pause-btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(0,255,204,.25);border-left:none;border-radius:0 5px 5px 0;background:rgba(0,255,204,.05);color:var(--accent);cursor:pointer;font-size:12px;padding:3px 7px;vertical-align:middle;line-height:1.2;transition:background .15s}
+.pause-btn:hover{background:rgba(0,255,204,.16)}
+.pause-btn.paused{color:var(--warn);border-color:rgba(245,166,35,.35);background:rgba(245,166,35,.08)}
+.pause-btn.paused:hover{background:rgba(245,166,35,.16)}
+.main{display:grid;grid-template-columns:220px 1fr 280px;height:calc(100vh - 56px)}
+#left-panel{background:#0d161c;border-right:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;overflow:hidden}
+#left-tabs{flex-shrink:0}
+#left-tab-content{display:none}
+#right-panel{background:#0d161c;border-left:1px solid rgba(255,255,255,0.05);overflow-y:auto;padding:12px}
+.tab-btn{display:flex;align-items:center;gap:10px;width:100%;padding:8px 14px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-weight:600;text-align:left;border-left:3px solid transparent;font-size:13px}
+.tab-btn:hover{background:rgba(255,255,255,0.04)}
+.tab-btn.active{color:var(--accent);background:rgba(0,255,204,0.06);border-left-color:var(--accent)}
+.tab-icon{font-size:16px;width:20px;text-align:center}
+#fleet-mini{padding:8px;border-top:1px solid rgba(255,255,255,0.06);flex-shrink:0;margin-top:auto;max-height:420px;overflow-y:auto}
+.fleet-card{display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:5px;margin-bottom:3px;cursor:pointer;font-size:12px;border:1px solid transparent}
+.fleet-card:hover{border-color:rgba(0,255,204,0.2);background:rgba(0,255,204,0.04)}
+.fleet-card.selected{border-color:var(--accent)!important;background:rgba(0,255,204,0.1)!important}
+.fleet-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:var(--accent)}
+.fleet-dot.working{background:var(--warn)}
+.fleet-name{font-weight:600;flex:1;font-size:11px}
+.fleet-batt{font-size:11px;color:var(--muted)}
+.fleet-label{font-size:10px;color:var(--muted);padding:4px 8px}
+#center-panel{display:flex;flex-direction:column;overflow:hidden}
+#sim-wrap{position:relative;overflow:hidden;background:#101719;flex:1.5;min-height:280px}
+#sim-wrap canvas{position:absolute;left:0;top:0;z-index:1}
+.sim-toolbar{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.48);border:1px solid rgba(0,255,204,.22);border-radius:7px;padding:5px 7px;backdrop-filter:blur(4px);pointer-events:auto}
+.sim-toolbar-label{font-size:11px;color:var(--muted);margin-right:2px}
+.speed-btn{min-width:34px;border:1px solid rgba(0,255,204,.28);border-radius:4px;background:rgba(0,255,204,.06);color:#9fb4bf;padding:3px 7px;cursor:pointer;font-size:11px;font-weight:700}
+.speed-btn.active,.view-btn.active{background:rgba(0,255,204,.2);border-color:var(--accent);color:var(--accent)}
+.view-btn{min-width:46px;border:1px solid rgba(0,255,204,.28);border-radius:4px;background:rgba(0,255,204,.06);color:#9fb4bf;padding:3px 7px;cursor:pointer;font-size:11px;font-weight:700}
+#coord-hud{position:absolute;left:10px;bottom:10px;z-index:10;background:rgba(0,0,0,.55);border:1px solid rgba(0,255,204,.25);border-radius:5px;padding:7px 9px;font-family:monospace;font-size:11px;color:#c8d6e5;line-height:1.45;pointer-events:none}
+#center-bottom{flex:1;display:flex;flex-direction:column;background:#0d161c;border-top:1px solid rgba(255,255,255,0.06);min-height:120px}
+#page-wrap{display:none;height:100%;overflow-y:auto;background:#0d161c;padding:18px 22px}
+#fpv-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px 8px;flex:1;min-height:0}
+.fpv-box{background:#0a1218;border-radius:4px;position:relative;overflow:hidden;min-height:60px}
+.fpv-label{position:absolute;top:3px;left:6px;font-size:11px;color:var(--muted);z-index:1}
+.fpv-select{position:absolute;top:3px;right:6px;z-index:2;background:#111b21;color:var(--accent);border:1px solid rgba(0,255,204,0.3);border-radius:3px;font-size:10px;padding:1px 4px;cursor:pointer;font-family:inherit}
+#ai-row{padding:8px 10px;border-top:1px solid rgba(255,255,255,0.06)}
+h3{color:var(--accent);font-size:14px;text-transform:uppercase;margin-bottom:8px}
+h4{color:var(--accent);font-size:12px;margin-bottom:4px}
+.card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:10px 12px;margin-bottom:8px;font-size:12px}
+.card-row{display:flex;justify-content:space-between;align-items:center;padding:2px 0}
+.card-row .val{font-weight:600}
+.progress-bar{width:100%;height:5px;background:rgba(255,255,255,0.08);border-radius:2px;margin:3px 0;overflow:hidden}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px}
+.tag{padding:2px 5px;border-radius:3px;font-size:10px;font-weight:600;display:inline-block;margin:1px}
+.tag.green{background:rgba(0,255,204,0.15);color:var(--accent)}
+.tag.yellow{background:rgba(245,166,35,0.15);color:var(--warn)}
+.tag.red{background:rgba(255,93,108,0.15);color:var(--danger)}
+.tag.blue{background:rgba(100,160,255,0.15);color:#88bbff}
+button{font-family:inherit}
+.btn{border:1px solid rgba(0,255,204,0.3);border-radius:4px;background:rgba(0,255,204,0.08);color:var(--accent);padding:5px 9px;cursor:pointer;font-weight:600;font-size:12px}
+.btn:hover{background:rgba(0,255,204,0.16)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.saving{background:rgba(245,166,35,.22);border-color:var(--warn);color:var(--warn);opacity:1}
+.btn.saved{background:rgba(0,255,204,.28);border-color:var(--accent);color:var(--accent);opacity:1}
+.btn.failed{background:rgba(255,93,108,.22);border-color:var(--danger);color:var(--danger);opacity:1}
+.save-badge{display:inline-block;margin-top:6px;padding:3px 7px;border-radius:4px;font-size:11px;font-weight:700}
+.save-badge.ok{background:rgba(0,255,204,.16);color:var(--accent)}
+.save-badge.fail{background:rgba(255,93,108,.16);color:var(--danger)}
+.settings-section{background:rgba(0,255,204,.035);border:1px solid rgba(0,255,204,.16);border-radius:10px;padding:14px;margin-bottom:14px}
+.settings-section h4{font-size:14px;margin-bottom:10px;letter-spacing:.04em}
+.settings-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.settings-heading h4{margin-bottom:0}
+.setting-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid rgba(255,255,255,.06)}
+.setting-item:first-of-type{border-top:none}
+.setting-title{font-size:14px;font-weight:800;color:#d7edf2}
+.setting-desc{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.35}
+.setting-control{min-width:118px;display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.settings-select,.settings-input{background:#111b21;color:var(--accent);border:1px solid rgba(0,255,204,.38);border-radius:6px;font-size:13px;font-weight:800;padding:7px 10px;font-family:inherit}
+.settings-input{width:84px;color:#c8d6e5}
+.settings-checkbox{width:20px;height:20px;accent-color:#00ffcc}
+.settings-save{width:100%;padding:10px 12px;font-size:14px;border-radius:7px;margin-top:4px}
+.ai-test-result{font-size:11px;color:var(--muted);line-height:1.45;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)}
+textarea{width:100%;padding:8px;border:1px solid rgba(0,255,204,0.3);border-radius:4px;background:#111b21;color:#c8d6e5;font-size:12px;resize:none;font-family:inherit}
+.pipeline-step{padding:4px 8px;margin:3px 0;border-left:2px solid rgba(0,255,204,0.3);background:rgba(0,0,0,0.2);font-size:11px}
+.pipeline-step.fail{border-left-color:var(--danger);color:#ff8899}
+.pipeline-step.ok{border-left-color:var(--accent)}
+.pipeline-json{font-family:monospace;font-size:10px;white-space:pre-wrap;color:#9ab;color:rgba(154,187,255,0.9);background:rgba(0,0,0,0.3);padding:6px;border-radius:4px;margin-top:4px;max-height:80px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;scrollbar-gutter:stable}
+.skill-category{margin:10px 0}
+.skill-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px solid rgba(255,255,255,.045);line-height:1.45}
+.skill-row:first-of-type{border-top:none}
+.skill-label{color:var(--muted);font-size:11px;white-space:nowrap}
+.skill-eg{margin-left:auto;color:var(--muted);font-size:10px;text-align:right;white-space:nowrap;opacity:.88}
+.task-node-row{display:flex;gap:5px;margin:7px 0;align-items:stretch}
+.task-node{flex:1;min-width:34px;border:1px solid rgba(255,255,255,.09);border-radius:5px;padding:5px 4px;text-align:center;font-size:10px;color:var(--muted);background:rgba(255,255,255,.025)}
+.task-node.done{border-color:rgba(0,255,204,.45);color:var(--accent);background:rgba(0,255,204,.08)}
+.task-node.active{border-color:rgba(245,166,35,.65);color:var(--warn);background:rgba(245,166,35,.1)}
+.task-node.blocked{border-color:rgba(245,166,35,.8);color:var(--warn);background:rgba(245,166,35,.14)}
+.task-node.failed{border-color:rgba(255,93,108,.65);color:var(--danger);background:rgba(255,93,108,.1)}
+.task-progress{position:relative;margin:8px 0 5px}
+.task-progress .progress-bar{margin:0}
+.task-dot{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:#18242a;transform:translate(-50%,-50%);box-shadow:0 0 0 2px #0d161c}
+.task-dot.done{border-color:var(--accent);background:var(--accent)}
+.task-dot.active{border-color:var(--warn);background:var(--warn)}
+.task-dot.failed{border-color:var(--danger);background:var(--danger)}
+.task-log{font-size:10px;color:var(--muted);max-height:92px;overflow-y:auto;line-height:1.45;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;scrollbar-gutter:stable}
+.right-task-log{max-height:130px;overflow-y:auto;font-size:10px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;scrollbar-gutter:stable}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.stat-box{background:rgba(0,255,204,0.04);border:1px solid rgba(0,255,204,0.1);border-radius:4px;padding:8px;text-align:center}
+.stat-box .num{font-size:20px;font-weight:800;color:var(--accent)}
+.stat-box .lbl{font-size:10px;color:var(--muted)}
+.analytics-legend{display:flex;flex-wrap:wrap;gap:3px 10px;justify-content:center;font-size:10px;margin-top:8px}
+.analytics-legend span{display:inline-flex;align-items:center;gap:3px}
+.analytics-legend .dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.activity-chart{margin-top:24px}
+.activity-chart h4{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.activity-chart .chart-wrap{position:relative;width:70%;margin:0 auto}
+.activity-chart svg{display:block;width:100%;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:6px}
+.panel-filter-row{display:flex;gap:6px;margin-bottom:8px}
+.panel-filter-row input{flex:1;min-width:0;background:#111b21;color:#c8d6e5;border:1px solid rgba(0,255,204,.3);border-radius:5px;padding:7px;font-size:12px}
+.panel-matrix{display:grid;gap:5px;padding-right:2px}
+.panel-cell{border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:3px 4px;cursor:pointer;background:rgba(40,120,255,.16);font-size:10px;line-height:1.2;color:#d9e8f0}
+.panel-cell:hover,.panel-cell.selected{border-color:var(--accent);box-shadow:0 0 0 1px rgba(0,255,204,.22)}
+.panel-cell.green{background:rgba(0,255,204,.15)}
+.panel-cell.yellow{background:rgba(245,166,35,.18)}
+.panel-cell.red{background:rgba(255,93,108,.18)}
+.panel-cell .panel-pos{font-weight:800}
+.panel-cell .panel-time{color:var(--muted);font-size:9px;margin-top:2px}
+.panel-action-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.mode-badge{margin-left:16px;font-size:12px;font-weight:800;border:1px solid rgba(245,166,35,.35);border-radius:5px;padding:3px 8px;color:var(--warn);background:rgba(245,166,35,.08);line-height:1.2}
+.mode-badge.ready{border-color:rgba(0,255,204,.38);color:var(--accent);background:rgba(0,255,204,.08)}
+.time-badge{font-size:12px;font-weight:800;border:1px solid rgba(0,255,204,.25);border-radius:5px 0 0 5px;padding:3px 8px;color:#c8d6e5;background:rgba(0,255,204,.05);white-space:nowrap;line-height:1.2;display:inline-block;width:175px;text-align:center}
+.time-group{display:inline-flex;align-items:center;margin-left:12px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span class="brand">Solar Inspection</span>
+  <span id="llm-badge" class="mode-badge">Command mode: Guided</span>
+  <span class="time-group"><span id="sim-time-badge" class="time-badge">Time: --</span><button id="pause-btn" class="pause-btn" title="Pause / Resume simulation">&#9654;</button></span>
+  <div class="top-actions">
+    <span id="conn-dot" style="color:#ff4444;font-size:13px">&#11044; Offline</span>
+    <button class="top-action-btn" id="update-btn">Refresh</button>
+    <button class="top-action-btn restart" id="restart-btn">Reset demo</button>
+  </div>
+</div>
+<div class="main">
+  <div id="left-panel">
+    <div id="left-tabs">
+      <button class="tab-btn active" data-tab="overview"><span class="tab-icon">&#127968;</span>Overview</button>
+      <button class="tab-btn" data-tab="robots"><span class="tab-icon">&#129302;</span>Robots</button>
+      <button class="tab-btn" data-tab="tasks"><span class="tab-icon">&#128203;</span>Tasks</button>
+      <button class="tab-btn" data-tab="panels"><span class="tab-icon">&#128421;</span>Panel Monitor</button>
+      <button class="tab-btn" data-tab="faults"><span class="tab-icon">&#128680;</span>Faults</button>
+      <button class="tab-btn" data-tab="analytics"><span class="tab-icon">&#128200;</span>Analytics</button>
+      <button class="tab-btn" data-tab="ai"><span class="tab-icon">&#129504;</span>AI Command</button>
+      <button class="tab-btn" data-tab="safety"><span class="tab-icon">&#128737;</span>Safety</button>
+
+    </div>
+    <div id="left-tab-content"></div>
+    <div id="fleet-mini"></div>
+  </div>
+  <div id="center-panel">
+    <div id="sim-wrap"><div class="sim-toolbar"><span class="sim-toolbar-label">Sim Speed</span><button class="speed-btn active" data-speed="1">1x</button><button class="speed-btn" data-speed="2">2x</button><button class="speed-btn" data-speed="4">4x</button><span class="sim-toolbar-label" style="margin-left:8px">View</span><button class="view-btn active" data-view="free">Free</button><button class="view-btn" data-view="follow">Follow</button></div><div id="coord-hud">X: -- | Z: -- | Y: --</div></div>
+    <div id="center-bottom">
+      <div id="fpv-row">
+        <div class="fpv-box" id="fpv-drone"><span class="fpv-label" id="fpv-drone-label">Drone-01 FPV</span><select class="fpv-select" id="fpv-drone-select"><option value="0">Drone-01</option><option value="1">Drone-02</option><option value="2">Drone-03</option><option value="3">Drone-04</option><option value="4">Drone-05</option></select></div>
+        <div class="fpv-box" id="fpv-go2"><span class="fpv-label" id="fpv-go2-label">Go2-01 FPV</span><select class="fpv-select" id="fpv-go2-select"><option value="0">Go2-01</option><option value="1">Go2-02</option><option value="2">Go2-03</option><option value="3">Go2-04</option><option value="4">Go2-05</option></select></div>
+      </div>
+      <div id="ai-row"></div>
+    </div>
+    <div id="page-wrap"></div>
+  </div>
+  <div id="right-panel"></div>
+</div>
+
+<script src="./three.min.js"></script>
+<script src="./ColladaLoader.js"></script>
+<script src="./go2_visual.js"></script>
+<script>
+var scene,camera,renderer,terrainMesh,raycaster,sceneReady=false,coordGuideGroup=null;
+var droneMeshes=[],panelMeshes=[],baseMarkers=[],go2Models=[],go2UrdfTemplate=null,go2ModelsReady=false,go2RouteLines=[],walkableRegionGroup=null,lastWalkableRegionHash='';
+var PG,PTG,TILT;
+var DRONE_PAD_TOP_Y=0.72,DRONE_PARK_Y=0.65;
+var GO2_VISUAL_YAW_OFFSET=0;
+var ct=1.2,cp=.7,cd=60,ctg=new THREE.Vector3(0,3,0),drag=false,pm={x:0,y:0};
+var smoothTarget=new THREE.Vector3(),followRobot=null;
+var activeTab='overview',lastPipeline=null;
+var selectedPanelKey=null,panelRowFilter='',panelColFilter='';
+var showAssistInfo=localStorage.getItem('solar_show_assist_info')!=='false';
+var simViewMode=localStorage.getItem('solar_sim_view_mode')||'free',freeKeys={};
+var aiTestStatus={cls:'',text:''};
+var settingsSaving=false;
+var activityHistory={drones:{},go2s:{}};
+var lastActivitySample=0;
+function sampleActivity(d){
+  var now=Date.now();
+  if(now-lastActivitySample<1000)return;
+  lastActivitySample=now;
+  function act(robot,kind){
+    var s=robot.status||'idle';
+    var prevBatt=robot._prevBatt;
+    var drainRate=prevBatt!=null?Math.max(0,(prevBatt-(robot.battery||100))):0;
+    robot._prevBatt=robot.battery;
+    if(s==='idle'||s==='landed')return 0;
+    var base=s==='inspecting'?0.7:s==='scanning'||s==='flying'||s==='moving'?0.5:s==='returning'||s==='taking_off'?0.35:0.25;
+    return Math.min(1,base+drainRate*2);
+  }
+  var t=currentSimNow(store);
+  (store.drones||[]).forEach(function(dd){
+    if(!activityHistory.drones[dd.name])activityHistory.drones[dd.name]=[];
+    var h=activityHistory.drones[dd.name];
+    h.push({t:t,v:act(dd,'drone')});
+    if(h.length>600)h.shift();
+  });
+  (store.go2s||[]).forEach(function(gg){
+    if(!activityHistory.go2s[gg.name])activityHistory.go2s[gg.name]=[];
+    var h=activityHistory.go2s[gg.name];
+    h.push({t:t,v:act(gg,'go2')});
+    if(h.length>600)h.shift();
+  });
+}
+
+function n2d(x,y){return Math.sin(x*12.9898+y*78.233)*43758.5453-Math.floor(Math.sin(x*12.9898+y*78.233)*43758.5453)}
+function fbm(x,y,o){o=o||6;var v=0,a=0.5,f=1;for(var i=0;i<o;i++){v+=a*n2d(x*f,y*f);a*=0.5;f*=2}return v}
+function getGroundHeight(x,z){if(!terrainMesh||!raycaster)return 0;raycaster.set(new THREE.Vector3(x,50,z),new THREE.Vector3(0,-1,0));var hits=raycaster.intersectObject(terrainMesh);return hits.length>0?hits[0].point.y:0}
+function go2WorldY(gi){if(gi.pose&&gi.pose.world_y!=null)return gi.pose.world_y;var gh=getGroundHeight(gi.pose.x,gi.pose.y);return gh+(gi.pose.z||0.35)}
+function go2VisualY(gi,gm){
+  return window.GO2Visual?GO2Visual.visualY(gi,gm):getGroundHeight(gi.pose.x,gi.pose.y)+0.35;
+}
+function go2HeadHeight(gm){
+  var h=gm&&gm.userData&&isFinite(gm.userData.visualHeight)?gm.userData.visualHeight*.72:.55;
+  return Math.max(.45,Math.min(1.05,h));
+}
+function makeTextSprite(text,color){
+  var canvas=document.createElement('canvas');canvas.width=256;canvas.height=80;
+  var ctx=canvas.getContext('2d');ctx.clearRect(0,0,256,80);
+  ctx.font='bold 26px monospace';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillStyle='rgba(0,0,0,0.55)';ctx.fillRect(0,0,256,80);
+  ctx.strokeStyle=color;ctx.lineWidth=3;ctx.strokeRect(2,2,252,76);
+  ctx.fillStyle=color;ctx.fillText(text,128,40);
+  var tex=new THREE.CanvasTexture(canvas);
+  var mat=new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false});
+  var sp=new THREE.Sprite(mat);sp.scale.set(3.2,1,1);return sp;
+}
+function buildCoordinateGuides(){
+  if(coordGuideGroup)scene.remove(coordGuideGroup);
+  coordGuideGroup=new THREE.Group();
+  var grid=new THREE.GridHelper(90,18,0x335555,0x224044);grid.position.y=.035;coordGuideGroup.add(grid);
+  coordGuideGroup.add(new THREE.ArrowHelper(new THREE.Vector3(1,0,0),new THREE.Vector3(0,.08,0),45,0xff4444,3,1.4));
+  coordGuideGroup.add(new THREE.ArrowHelper(new THREE.Vector3(0,0,1),new THREE.Vector3(0,.08,0),45,0x4488ff,3,1.4));
+  coordGuideGroup.add(new THREE.ArrowHelper(new THREE.Vector3(0,1,0),new THREE.Vector3(0,.08,0),8,0x44ff88,1.2,.6));
+  var lx=makeTextSprite('+X', '#ff6666');lx.position.set(47,1.4,0);coordGuideGroup.add(lx);
+  var lz=makeTextSprite('+Z / field y', '#66aaff');lz.position.set(0,1.4,47);coordGuideGroup.add(lz);
+  var ly=makeTextSprite('+Y height', '#66ff99');ly.position.set(0,9,0);coordGuideGroup.add(ly);
+  for(var v=-40;v<=40;v+=10){
+    var tx=makeTextSprite('x='+v, '#ff9999');tx.scale.set(2.2,.7,1);tx.position.set(v,.35,-43);coordGuideGroup.add(tx);
+    var tz=makeTextSprite('z='+v, '#99bbff');tz.scale.set(2.2,.7,1);tz.position.set(-43,.35,v);coordGuideGroup.add(tz);
+  }
+  scene.add(coordGuideGroup);
+  coordGuideGroup.visible=showAssistInfo;
+}
+function setAssistInfoVisible(v){
+  showAssistInfo=!!v;
+  localStorage.setItem('solar_show_assist_info',showAssistInfo?'true':'false');
+  if(coordGuideGroup)coordGuideGroup.visible=showAssistInfo;
+  if(walkableRegionGroup)walkableRegionGroup.visible=showAssistInfo;
+}
+
+function initScene(){
+  if(sceneReady)return;
+  scene=new THREE.Scene();scene.background=new THREE.Color(0x0a1418);
+  var sw=document.getElementById('sim-wrap');
+  camera=new THREE.PerspectiveCamera(50,sw.clientWidth/sw.clientHeight,0.5,300);
+  camera.position.set(0,60,20);camera.lookAt(0,0,-5);
+  renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.setSize(sw.clientWidth,sw.clientHeight);
+  sw.appendChild(renderer.domElement);
+
+  scene.add(new THREE.AmbientLight(0xffffff,0.9));
+  var s=new THREE.DirectionalLight(0xffffff,1.2);s.position.set(30,40,20);s.castShadow=true;
+  s.shadow.mapSize.set(2048,2048);s.shadow.camera.near=0.5;s.shadow.camera.far=200;
+  s.shadow.camera.left=-50;s.shadow.camera.right=50;s.shadow.camera.top=50;s.shadow.camera.bottom=-50;
+  scene.add(s);
+
+  var c=document.createElement('canvas');c.width=c.height=512;var cx=c.getContext('2d'),d=cx.createImageData(512,512);
+  for(var y=0;y<512;y++)for(var x=0;x<512;x++){var wx=(x/512-.5)*200,wy=(y/512-.5)*200;var n1=fbm(wx*.03,wy*.03,5),n2=fbm(wx*.08+5,wy*.08+3,4),n3=fbm(wx*.2+10,wy*.2+7,3);var n=n1*.5+n2*.3+n3*.2;var r=.42+n*.28,g=.18+n*.15,b=.10+n*.08;var rb1=Math.abs(wy-Math.sin(wx*.04)*20-8),rb2=Math.abs(wx+Math.cos(wy*.05)*15+5);var rv=rb1<2.5||rb2<3?.25:0;var rk=fbm(wx*.5,wy*.5,2)>.65?.1:0;var i=(y*512+x)*4;d.data[i]=Math.min(255,(r*(1-rv)-rk)*255);d.data[i+1]=Math.min(255,(g*(1-rv*.6)-rk)*255);d.data[i+2]=Math.min(255,(b*(1-rv*.5)-rk)*255);d.data[i+3]=255}cx.putImageData(d,0,0);
+  var tex=new THREE.CanvasTexture(c);
+  var hc=document.createElement('canvas');hc.width=hc.height=256;var hx=hc.getContext('2d'),hd=hx.createImageData(256,256);
+  for(var y=0;y<256;y++)for(var x=0;x<256;x++){var wx=(x/256-.5)*200,wy=(y/256-.5)*200;var h=fbm(wx*.04,wy*.04,4)*.6+fbm(wx*.12,wy*.12,3)*.3+n2d(wx*.3,wy*.3)*.1;var v=Math.floor(h*255),i=(y*256+x)*4;hd.data[i]=v;hd.data[i+1]=v;hd.data[i+2]=v;hd.data[i+3]=255}hx.putImageData(hd,0,0);
+  var TS=200,seg=120,geo=new THREE.PlaneGeometry(TS,TS,seg,seg),p=geo.attributes.position;
+  for(var i=0;i<p.count;i++){var px=p.getX(i),py=p.getY(i),hx2=(px/TS+.5)*255,hy2=(py/TS+.5)*255;var ppx=Math.floor(hx2),ppy=Math.floor(hy2);if(ppx>=0&&ppx<256&&ppy>=0&&ppy<256)p.setZ(i,(hd.data[(ppy*256+ppx)*4]/255)*.6)}geo.computeVertexNormals();
+  var g=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({map:tex,roughness:.8}));g.rotation.x=-Math.PI/2;g.receiveShadow=true;g.name='terrain';scene.add(g);terrainMesh=g;
+  raycaster=new THREE.Raycaster();raycaster.far=100;
+  buildCoordinateGuides();
+
+  PG=new THREE.BoxGeometry(2.0,0.06,1.0);PTG=new THREE.CylinderGeometry(0.04,0.04,0.6,8);TILT=THREE.MathUtils.degToRad(25);
+  sceneReady=true;
+  for(var i=0;i<5;i++)droneMeshes.push(createDrone());
+  loadGo2URDF(buildGo2Fleet);
+}
+
+function buildPanels(d){panelMeshes.forEach(function(m){scene.remove(m.group||m)});panelMeshes=[];if(!d)return;d.forEach(function(p){var grp=new THREE.Group();var gh=getGroundHeight(p.x,p.y);grp.position.set(p.x,gh+.3,p.y);grp.rotation.x=TILT;var b=new THREE.Mesh(PG,new THREE.MeshStandardMaterial({color:0x2266cc,roughness:.2,metalness:.6}));b.castShadow=b.receiveShadow=true;grp.add(b);[-.65,.65].forEach(function(ox){grp.add(new THREE.Mesh(PTG,new THREE.MeshStandardMaterial({color:0x555555,metalness:.6})).translateX(ox).translateY(-.32))});scene.add(grp);panelMeshes.push({group:grp,body:b,panel:p})})}
+function panelColorHex(p){
+  var st=p.status||'';
+  if(st==='confirmed_fault')return 0xff3344;
+  if(st==='drone_anomaly')return 0xf5a623;
+  if(st==='healthy'||st==='repaired')return 0x26c281;
+  if(!st&&p.anomaly_confirmed)return 0xff3344;
+  if(!st&&p.inspected&&p.is_defective)return 0xf5a623;
+  if(!st&&p.inspected)return 0x26c281;
+  return 0x2266cc;
+}
+function updatePanels(d){if(!d)return;d.forEach(function(p,i){if(i>=panelMeshes.length)return;panelMeshes[i].body.material.color.setHex(panelColorHex(p))})}
+
+function buildBases(bases){baseMarkers.forEach(function(m){scene.remove(m)});baseMarkers=[];if(!bases)return;bases.forEach(function(b){var col=b.kind==='go2'?0xf0c040:0x00ffcc;var m=addBaseMarker(b.x,b.y,col,b.kind);baseMarkers.push(m)})}
+function addBaseMarker(x,z,color,kind){var g=new THREE.Group();var gh=getGroundHeight(x,z);if(kind==='go2'){g.position.set(x,gh,z);g.add(new THREE.Mesh(new THREE.CylinderGeometry(.8,.85,.08,24),new THREE.MeshStandardMaterial({color:color,roughness:.2,metalness:.3})).translateY(.04));g.add(new THREE.Mesh(new THREE.TorusGeometry(.7,.03,12,40),new THREE.MeshStandardMaterial({color:color,emissive:color,emissiveIntensity:.6})).rotateX(-Math.PI/2).translateY(.09))}else{var h=Math.max(.12,DRONE_PAD_TOP_Y-gh);g.position.set(x,gh,z);g.add(new THREE.Mesh(new THREE.CylinderGeometry(.8,.9,h,16),new THREE.MeshStandardMaterial({color:0x556666,roughness:.4})).translateY(h/2));g.add(new THREE.Mesh(new THREE.CylinderGeometry(.9,1.0,.06,24),new THREE.MeshStandardMaterial({color:color,roughness:.2,metalness:.3})).translateY(h))}scene.add(g);return g}
+function updateGo2Routes(routes){
+  go2RouteLines.forEach(function(line){scene.remove(line)});
+  go2RouteLines=[];
+  if(!routes)return;
+  var pp=store&&store.settings&&store.settings.path_planning?store.settings.path_planning:{show_target_marker:true};
+  var showTargetMarker=pp.show_target_marker!==false;
+  Object.keys(routes).forEach(function(name){
+    var r=routes[name],pts=r.route||[];
+    if(pts.length<2)return;
+    var routeIndex=Math.max(1,Math.min(Number(r.route_index||1),pts.length-1));
+    var robot=(store.go2s||[]).find(function(g){return g.name===name});
+    var startPoint=robot&&robot.pose&&isFinite(Number(robot.pose.x))&&isFinite(Number(robot.pose.y))
+      ?{x:Number(robot.pose.x),y:Number(robot.pose.y)}
+      :pts[routeIndex-1];
+    var remaining=[startPoint].concat(pts.slice(routeIndex));
+    if(remaining.length<2)return;
+    var vecs=remaining.map(function(p){return new THREE.Vector3(p.x,getGroundHeight(p.x,p.y)+0.12,p.y)});
+    var geo=new THREE.BufferGeometry().setFromPoints(vecs);
+    var mat=new THREE.LineDashedMaterial({color:0xf0c040,dashSize:.9,gapSize:.45,linewidth:2});
+    var line=new THREE.Line(geo,mat);line.computeLineDistances();line.name='route-'+name;scene.add(line);go2RouteLines.push(line);
+    remaining.forEach(function(p,i){
+      if(i===0)return;
+      var radius=i===remaining.length-1?0.18:0.12;
+      var marker=new THREE.Mesh(
+        new THREE.CircleGeometry(radius,24),
+        new THREE.MeshBasicMaterial({color:i===remaining.length-1?0x00ffcc:0xf0c040,transparent:true,opacity:.95,depthTest:false,side:THREE.DoubleSide})
+      );
+      marker.rotation.x=-Math.PI/2;
+      marker.position.set(p.x,getGroundHeight(p.x,p.y)+0.08,p.y);
+      marker.renderOrder=120;
+      scene.add(marker);go2RouteLines.push(marker);
+    });
+    if(showTargetMarker&&r.target_point){
+      var tp=r.target_point;
+      var h=getGroundHeight(tp.x,tp.y)+2.45;
+      var cone=new THREE.Mesh(
+        new THREE.ConeGeometry(0.48,0.72,32),
+        new THREE.MeshBasicMaterial({color:0xf0c040,depthTest:false,depthWrite:false})
+      );
+      cone.rotation.x=Math.PI;
+      cone.position.set(tp.x,h,tp.y);
+      cone.renderOrder=130;scene.add(cone);go2RouteLines.push(cone);
+    }
+  });
+}
+function updateWalkableRegions(regions){
+  if(!regions||!regions.boundary)return;
+  var hash=JSON.stringify(regions.boundary)+'|'+(regions.obstacles||[]).map(function(o){return [o.type,o.kind,o.x,o.y,o.half_x,o.half_y,o.radius].join(':')}).join('|');
+  if(hash===lastWalkableRegionHash)return;
+  lastWalkableRegionHash=hash;
+  if(walkableRegionGroup)scene.remove(walkableRegionGroup);
+  walkableRegionGroup=new THREE.Group();walkableRegionGroup.name='go2-walkable-regions';
+  walkableRegionGroup.visible=showAssistInfo;
+  function regionY(x,z){return getGroundHeight(Number(x),Number(z))+.045}
+  function groundRectGeometry(cx,cz,hx,hz,nx,nz){
+    var verts=[],idx=[];
+    for(var iz=0;iz<=nz;iz++){
+      for(var ix=0;ix<=nx;ix++){
+        var x=cx-hx+(2*hx*ix/nx),z=cz-hz+(2*hz*iz/nz);
+        verts.push(x,regionY(x,z),z);
+      }
+    }
+    for(var z0=0;z0<nz;z0++)for(var x0=0;x0<nx;x0++){
+      var a=z0*(nx+1)+x0,b0=a+1,c=a+(nx+1),d=c+1;
+      idx.push(a,c,b0,b0,c,d);
+    }
+    var geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
+    geo.setIndex(idx);geo.computeVertexNormals();return geo;
+  }
+  function groundCircleGeometry(cx,cz,r,segments){
+    var verts=[cx,regionY(cx,cz),cz],idx=[];
+    for(var i=0;i<=segments;i++){
+      var a=Math.PI*2*i/segments,x=cx+Math.cos(a)*r,z=cz+Math.sin(a)*r;
+      verts.push(x,regionY(x,z),z);
+    }
+    for(var j=1;j<=segments;j++)idx.push(0,j,j+1);
+    var geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
+    geo.setIndex(idx);geo.computeVertexNormals();return geo;
+  }
+  var b=regions.boundary;
+  var boundaryPts=[
+    new THREE.Vector3(b.x_min,regionY(b.x_min,b.y_min),b.y_min),
+    new THREE.Vector3(b.x_max,regionY(b.x_max,b.y_min),b.y_min),
+    new THREE.Vector3(b.x_max,regionY(b.x_max,b.y_max),b.y_max),
+    new THREE.Vector3(b.x_min,regionY(b.x_min,b.y_max),b.y_max),
+    new THREE.Vector3(b.x_min,regionY(b.x_min,b.y_min),b.y_min)
+  ];
+  var boundaryLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints(boundaryPts),new THREE.LineBasicMaterial({color:0x33ff99,transparent:true,opacity:1,depthTest:true}));
+  boundaryLine.renderOrder=90;walkableRegionGroup.add(boundaryLine);
+  var walkMat=new THREE.MeshBasicMaterial({color:0x33ff99,transparent:true,opacity:.10,depthWrite:false,depthTest:true,side:THREE.DoubleSide});
+  var walkCx=(Number(b.x_min)+Number(b.x_max))/2,walkCz=(Number(b.y_min)+Number(b.y_max))/2;
+  var walkGeo=groundRectGeometry(walkCx,walkCz,(Number(b.x_max)-Number(b.x_min))/2,(Number(b.y_max)-Number(b.y_min))/2,28,28);
+  var walkMesh=new THREE.Mesh(walkGeo,walkMat);
+  walkMesh.renderOrder=80;
+  walkableRegionGroup.add(walkMesh);
+  var redMat=new THREE.MeshBasicMaterial({color:0xff3344,transparent:true,opacity:.30,depthWrite:false,depthTest:true,side:THREE.DoubleSide});
+  var redLineMat=new THREE.LineBasicMaterial({color:0xff3344,transparent:true,opacity:1,depthTest:true});
+  (regions.obstacles||[]).forEach(function(o){
+    var mesh=null;
+    if(o.type==='rect'){
+      mesh=new THREE.Mesh(groundRectGeometry(Number(o.x),Number(o.y),Number(o.half_x),Number(o.half_y),1,1),redMat);
+    }else if(o.type==='circle'){
+      mesh=new THREE.Mesh(groundCircleGeometry(Number(o.x),Number(o.y),Number(o.radius),48),redMat);
+    }
+    if(!mesh)return;
+    mesh.renderOrder=100;
+    walkableRegionGroup.add(mesh);
+    if(o.type==='rect'){
+      var hx=Number(o.half_x),hy=Number(o.half_y),x=Number(o.x),y=Number(o.y);
+      var pts=[new THREE.Vector3(x-hx,regionY(x-hx,y-hy),y-hy),new THREE.Vector3(x+hx,regionY(x+hx,y-hy),y-hy),new THREE.Vector3(x+hx,regionY(x+hx,y+hy),y+hy),new THREE.Vector3(x-hx,regionY(x-hx,y+hy),y+hy),new THREE.Vector3(x-hx,regionY(x-hx,y-hy),y-hy)];
+      var line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),redLineMat);line.renderOrder=101;walkableRegionGroup.add(line);
+    }else if(o.type==='circle'){
+      var curve=new THREE.EllipseCurve(Number(o.x),Number(o.y),Number(o.radius),Number(o.radius),0,Math.PI*2,false,0);
+      var cpts=curve.getPoints(48).map(function(p){return new THREE.Vector3(p.x,regionY(p.x,p.y),p.y)});
+      var cline=new THREE.Line(new THREE.BufferGeometry().setFromPoints(cpts),redLineMat);cline.renderOrder=101;walkableRegionGroup.add(cline);
+    }
+  });
+  scene.add(walkableRegionGroup);
+}
+
+function createDrone(){var g=new THREE.Group();var bm=new THREE.MeshStandardMaterial({color:0x2c2c34,roughness:.35,metalness:.5});var fm=new THREE.MeshStandardMaterial({color:0x1a1a22,roughness:.4,metalness:.65});var mm=new THREE.MeshStandardMaterial({color:0x3d3d48,roughness:.25,metalness:.75});var pm=new THREE.MeshStandardMaterial({color:0xe0e0e0,roughness:.2,metalness:.15,opacity:.7,transparent:true});var cm=new THREE.MeshStandardMaterial({color:0x111118,roughness:.2,metalness:.85});var lm=new THREE.MeshStandardMaterial({color:0x223344,roughness:.05,metalness:.3});var sm=new THREE.MeshStandardMaterial({color:0x4a4a4a,roughness:.5,metalness:.4});function m(geo,mat){var o=new THREE.Mesh(geo,mat);o.castShadow=true;o.receiveShadow=true;return o}
+  g.add(m(new THREE.CylinderGeometry(.07,.1,.18,20),bm).translateY(.02));g.add(m(new THREE.SphereGeometry(.09,20,12,0,Math.PI*2,0,Math.PI/2.2),bm).translateY(.11));g.add(m(new THREE.CylinderGeometry(.06,.07,.08,16),bm).translateY(-.06));
+  [[.25,0,0],[-.25,0,0],[0,0,.25],[0,0,-.25]].forEach(function(p){var len=.42;var arm=m(new THREE.BoxGeometry(len,.016,.02),fm);arm.position.set(p[0],p[1],p[2]);if(p[2]!==0)arm.rotation.y=Math.PI/2;g.add(arm);var mx=p[0]*2.05,my=.018,mz=p[2]*2.05;g.add(m(new THREE.CylinderGeometry(.034,.042,.055,18),mm).translateX(mx).translateY(my).translateZ(mz));var prop=m(new THREE.CylinderGeometry(.17,.17,.005,28),pm);prop.name='prop';prop.position.set(mx,my+.05,mz);g.add(prop)});
+  scene.add(g);return g}
+
+function loadGo2URDF(callback){
+  if(go2UrdfTemplate){callback();return}
+  function loadFromSpec(spec){
+    GO2Visual.loadGeometry(spec,function(visual){
+      go2UrdfTemplate=visual;
+      callback();
+    });
+  }
+  if(store&&store.go2_visual_model){
+    loadFromSpec(store.go2_visual_model);
+  }else{
+    fetch('./api/status').then(function(r){return r.json()}).then(function(d){
+      store=d||store;
+      loadFromSpec(d.go2_visual_model);
+    }).catch(function(err){
+      console.error('Go2 visual spec unavailable:',err);
+      go2UrdfTemplate=null;
+      callback();
+    });
+  }
+}
+
+function buildGo2Fleet(){
+  go2Models.forEach(function(m){if(m&&m.parent)scene.remove(m)});
+  go2Models=[];
+  if(go2UrdfTemplate){
+    for(var i=0;i<5;i++)go2Models.push(GO2Visual.createRobot(scene,go2UrdfTemplate));
+  }else{
+    for(var j=0;j<5;j++)go2Models.push(GO2Visual.createRobot(scene,null));
+  }
+  go2ModelsReady=true;
+}
+function ensureGo2Fleet(){
+  if(!scene||go2Models.length>=5)return;
+  for(var i=go2Models.length;i<5;i++)go2Models.push(GO2Visual.createRobot(scene,go2UrdfTemplate||null));
+  go2ModelsReady=true;
+}
+
+function applyGo2Joints(gm,js){
+  if(!gm||!js)return;
+  var urdf=gm.userData.urdf;
+  if(urdf&&typeof urdf.setJointValues==='function')urdf.setJointValues(js);
+}
+
+var simWrap=document.getElementById('sim-wrap');
+simWrap.addEventListener('pointerdown',function(e){drag=true;pm.x=e.clientX;pm.y=e.clientY});
+window.addEventListener('pointerup',function(){drag=false});
+window.addEventListener('pointermove',function(e){if(!drag)return;ct-=(e.clientX-pm.x)*.004;cp=Math.max(.15,Math.min(1.45,cp-(e.clientY-pm.y)*.004));pm.x=e.clientX;pm.y=e.clientY});
+simWrap.addEventListener('wheel',function(e){e.preventDefault();cd=Math.max(8,Math.min(120,cd+e.deltaY*.05))},{passive:false});
+
+var ws,online=false,farmLoaded=false,lastHash='',basesLoaded=false,sfpv='Drone-01',store={},simSpeed=1,speedPendingUntil=0,pendingSimSpeed=null;
+var fleetMini=document.getElementById('fleet-mini'),connDot=document.getElementById('conn-dot'),simTimeBadge=document.getElementById('sim-time-badge');
+var rightPanel=document.getElementById('right-panel'),pageWrap=document.getElementById('page-wrap');
+var cmdLog=[],lastPageRender=0,pageInteractUntil=0;
+try{cmdLog=JSON.parse(sessionStorage.getItem('solar_cmd_log')||'[]')||[]}catch(e){cmdLog=[]}
+
+function setOnline(v){online=v;connDot.innerHTML=v?'&#128994; Online':'&#128308; Offline';connDot.style.color=v?'#44ee66':'#ff4444'}
+function updateSimTimeBadge(d){if(!simTimeBadge)return;simTimeBadge.textContent='Time: '+new Date(currentSimNow(d)*1000).toLocaleString();var pauseBtn=document.getElementById('pause-btn');if(pauseBtn){var paused=!!(d&&d.sim_paused);pauseBtn.innerHTML=paused?'&#9646;&#9646;':'&#9654;';pauseBtn.title=paused?'Resume simulation':'Pause simulation';pauseBtn.classList.toggle('paused',paused)}}
+function markPageInteraction(){pageInteractUntil=Date.now()+3000}
+['wheel','touchstart','pointerdown','scroll'].forEach(function(ev){pageWrap.addEventListener(ev,markPageInteraction,{passive:true})});
+function updateSpeedButtons(){
+  document.querySelectorAll('.speed-btn').forEach(function(b){b.classList.toggle('active',Number(b.dataset.speed)===Number(simSpeed))});
+}
+function updateViewButtons(){
+  document.querySelectorAll('.view-btn').forEach(function(b){b.classList.toggle('active',b.dataset.view===simViewMode)});
+}
+function setSimViewMode(mode){
+  simViewMode=mode==='follow'?'follow':'free';
+  localStorage.setItem('solar_sim_view_mode',simViewMode);
+  if(simViewMode==='follow')cd=22;
+  updateViewButtons();
+}
+var speedRequestSeq=0,suppressNextToolbarClick=false;
+async function setSimSpeed(speed){
+  var desired=Number(speed)||1;
+  var seq=++speedRequestSeq;
+  simSpeed=desired;pendingSimSpeed=desired;speedPendingUntil=Date.now()+10000;updateSpeedButtons();
+  try{
+    var res=await fetch('./api/sim-speed',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({speed:desired})});
+    var data=await res.json();
+    if(data&&data.ok&&data.sim_speed){
+      if(seq===speedRequestSeq){
+        simSpeed=Number(data.sim_speed);
+        pendingSimSpeed=null;speedPendingUntil=0;
+      }
+    }
+  }catch(err){if(seq===speedRequestSeq){pendingSimSpeed=null;speedPendingUntil=0}console.warn('sim speed update failed',err)}
+  updateSpeedButtons();
+}
+var simToolbar=document.querySelector('.sim-toolbar');
+if(simToolbar)simToolbar.addEventListener('pointerdown',function(e){e.stopPropagation()});
+document.addEventListener('pointerdown',function(e){
+  var b=e.target&&e.target.closest?e.target.closest('.speed-btn,.view-btn'):null;
+  if(!b)return;
+  e.preventDefault();e.stopPropagation();
+  suppressNextToolbarClick=true;
+  if(b.classList.contains('speed-btn'))setSimSpeed(Number(b.dataset.speed));
+  else setSimViewMode(b.dataset.view);
+},true);
+document.addEventListener('click',function(e){
+  var b=e.target&&e.target.closest?e.target.closest('.speed-btn,.view-btn'):null;
+  if(!b)return;
+  e.preventDefault();e.stopPropagation();
+  if(suppressNextToolbarClick){suppressNextToolbarClick=false;return}
+  if(b.classList.contains('speed-btn'))setSimSpeed(Number(b.dataset.speed));
+  else setSimViewMode(b.dataset.view);
+},true);
+var pauseBtn=document.getElementById('pause-btn');
+if(pauseBtn){
+  pauseBtn.addEventListener('click',async function(e){
+    e.preventDefault();e.stopPropagation();
+    var currentlyPaused=!!(store&&store.sim_paused);
+    try{
+      var res=await fetch('./api/sim-pause',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paused:!currentlyPaused})});
+      var data=await res.json();
+      if(!res.ok||!data.ok)throw new Error(data.error||'pause toggle failed');
+    }catch(err){console.warn('pause toggle failed',err)}
+  });
+}
+window.addEventListener('keydown',function(e){
+  if(['INPUT','TEXTAREA','SELECT'].indexOf((e.target&&e.target.tagName)||'')>=0)return;
+  freeKeys[e.key.toLowerCase()]=true;
+});
+window.addEventListener('keyup',function(e){freeKeys[e.key.toLowerCase()]=false});
+updateViewButtons();
+function reloadFrontend(cacheBust){
+  var url=new URL(window.location.href);
+  if(cacheBust)url.searchParams.set('_r',Date.now());
+  window.location.replace(url.toString());
+}
+async function fetchJsonWithTimeout(url,opts,timeoutMs){
+  var ctrl=new AbortController();
+  var timer=setTimeout(function(){ctrl.abort()},timeoutMs||1500);
+  try{
+    var res=await fetch(url,Object.assign({},opts||{},{signal:ctrl.signal}));
+    return await res.json();
+  }finally{
+    clearTimeout(timer);
+  }
+}
+function forceReloadSoon(ms){
+  return setTimeout(function(){reloadFrontend(true)},ms||12000);
+}
+async function systemUpdate(){
+  var btn=document.getElementById('update-btn');
+  if(btn){btn.textContent='Updating...';btn.disabled=true}
+  try{sessionStorage.setItem('solar_cmd_log',JSON.stringify(cmdLog.slice(-20)))}catch(e){}
+  var fallback=forceReloadSoon(12000);
+  var oldBoot=store&&store.boot_id;
+  try{var data=await fetchJsonWithTimeout('/api/system-update',{method:'POST'},5000);oldBoot=(data&&data.boot_id)||oldBoot}catch(err){console.warn('system update failed',err)}
+  await waitForBackend(oldBoot);
+  clearTimeout(fallback);
+  reloadFrontend(true);
+}
+function sleep(ms){return new Promise(function(resolve){setTimeout(resolve,ms)})}
+async function waitForBackend(previousBoot){
+  await sleep(500);
+  for(var i=0;i<36;i++){
+    try{
+      var res=await fetch('./api/status?_r='+Date.now(),{cache:'no-store'});
+      if(res.ok){
+        var data=await res.json();
+        if(!previousBoot||data.boot_id!==previousBoot)return true;
+      }
+    }catch(err){}
+    await sleep(250);
+  }
+  return false;
+}
+async function systemRestart(){
+  var btn=document.getElementById('restart-btn');
+  if(btn){btn.textContent='Restarting...';btn.disabled=true}
+  var oldBoot=store&&store.boot_id;
+  try{sessionStorage.removeItem('solar_cmd_log')}catch(e){}
+  cmdLog=[];lastPipeline=null;store={};farmLoaded=false;basesLoaded=false;lastHash='';topActionBusy=false;
+  var fallback=forceReloadSoon(12000);
+  try{var data=await fetchJsonWithTimeout('/api/system-restart',{method:'POST'},5000);oldBoot=(data&&data.boot_id)||oldBoot}catch(err){console.warn('system restart failed',err)}
+  await waitForBackend(oldBoot);
+  clearTimeout(fallback);
+  reloadFrontend(true);
+}
+var topActionBusy=false;
+function triggerTopAction(id){
+  if(topActionBusy)return;
+  topActionBusy=true;
+  if(id==='update-btn')systemUpdate();
+  else if(id==='restart-btn')systemRestart();
+}
+['update-btn','restart-btn'].forEach(function(id){
+  var btn=document.getElementById(id);
+  if(!btn)return;
+  btn.addEventListener('pointerdown',function(e){e.preventDefault();e.stopPropagation()});
+  btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();triggerTopAction(id)});
+});
+document.addEventListener('click',function(e){
+  var b=e.target&&e.target.closest?e.target.closest('#update-btn,#restart-btn'):null;
+  if(!b)return;
+  e.preventDefault();e.stopPropagation();
+  triggerTopAction(b.id);
+},true);
+document.addEventListener('click',function(e){
+  var b=e.target&&e.target.closest?e.target.closest('.task-action-btn'):null;
+  if(!b)return;
+  e.preventDefault();e.stopPropagation();
+  var taskId=b.dataset.taskId,action=b.dataset.taskAction;
+  if(action==='stop-blocked')stopBlockedTask(taskId);
+  else if(action==='retry-blocked')retryBlockedTask(taskId);
+},true);
+
+function connectWS(){
+  ws=new WebSocket((location.protocol==='https:'?'wss:':'ws:')+'//'+location.host+new URL('./ws/solar',location.href).pathname);
+  ws.onopen=function(){setOnline(true)};
+  ws.onclose=function(){setOnline(false);setTimeout(connectWS,2000)};
+  ws.onmessage=function(e){
+    var d=JSON.parse(e.data);store=d;
+    updateSimTimeBadge(d);
+    if(d.sim_speed){
+      var incomingSpeed=Number(d.sim_speed);
+      if(pendingSimSpeed!=null&&incomingSpeed!==pendingSimSpeed&&Date.now()<=speedPendingUntil){
+        updateSpeedButtons();
+      }else{
+        simSpeed=incomingSpeed;
+        if(incomingSpeed===pendingSimSpeed){pendingSimSpeed=null;speedPendingUntil=0}
+        updateSpeedButtons();
+      }
+    }
+    if(d.ai_parser){var mb=document.getElementById('llm-badge');if(mb){mb.textContent=d.ai_parser.llm_available?'Command mode: AI-assisted':'Command mode: Guided';mb.className='mode-badge'+(d.ai_parser.llm_available?' ready':'')}}
+    if(!farmLoaded&&d.farm&&d.farm.panels&&scene){buildPanels(d.farm.panels);farmLoaded=true}
+    if(!basesLoaded&&d.farm&&d.farm.bases&&scene){buildBases(d.farm.bases);basesLoaded=true}
+    if(d.farm&&d.farm.panels){var h=d.farm.panels.map(function(p){return(p.status||'')+':' +(p.last_update_ts||0)+':' +(p.inspected?'1':'0')+(p.anomaly_confirmed?'1':'0')}).join(',');if(h!==lastHash){lastHash=h;updatePanels(d.farm.panels)}}
+    if(scene){updateWalkableRegions(d.go2_walkable_regions);updateGo2Routes(d.go2_routes)}
+    if(d.drones){d.drones.forEach(function(di,i){var dm=droneMeshes[i];if(!dm)return;var parked=di.status==='idle'||di.status==='landed';var wy=parked?(di.pose.z!=null?di.pose.z:getGroundHeight(di.pose.x,di.pose.y)+DRONE_PARK_Y):(di.pose.z!=null?di.pose.z:getGroundHeight(di.pose.x,di.pose.y)+0.45);dm.position.set(di.pose.x,wy,di.pose.y);dm.rotation.set(0,-(di.pose.yaw||0),0)})}
+    if(d.go2s){ensureGo2Fleet();d.go2s.forEach(function(gi,i){var gm=go2Models[i];if(!gm||!gi.pose)return;var x=Number(gi.pose.x),z=Number(gi.pose.y),yaw=Number(gi.pose.yaw||0);if(!isFinite(x)||!isFinite(z)||!isFinite(yaw))return;var wy=go2VisualY(gi,gm);if(!isFinite(wy))wy=getGroundHeight(x,z)+0.35;gm.position.set(x,wy,z);gm.rotation.set(0,-yaw+GO2_VISUAL_YAW_OFFSET,0);applyGo2Joints(gm,gi.joint_states)})}
+    sampleActivity(d);
+    renderFleet(d);renderRight(d);showActiveTab(false);renderBottom(d);
+  };
+}
+
+function send(cmd){if(ws&&ws.readyState===WebSocket.OPEN){ws.send(JSON.stringify({command:cmd}));cmdLog.push({text:cmd,time:new Date().toLocaleTimeString()});if(cmdLog.length>20)cmdLog.shift()}}
+
+function selectedDispatchRobot(){
+  return sfpv||'Go2-01';
+}
+async function saveSettings(){
+  if(settingsSaving)return;
+  settingsSaving=true;
+  markPageInteraction();
+  var btn=document.getElementById('save-settings-btn');
+  if(btn)btn.textContent='Saving...';
+  var mode=document.getElementById('path-mode').value;
+  var interval=Number(document.getElementById('replan-interval').value)||3;
+  var retreatDistance=Number(document.getElementById('retreat-distance').value)||0.6;
+  var targetMarkerEl=document.getElementById('show-target-marker');
+  var showTargetMarker=targetMarkerEl?targetMarkerEl.checked:true;
+  var assistEl=document.getElementById('show-assist-info');
+  if(assistEl)setAssistInfoVisible(assistEl.checked);
+  var go2RedlineEl=document.getElementById('go2-redline');
+  var droneRedlineEl=document.getElementById('drone-redline');
+  var panelTtlEl=document.getElementById('panel-ttl-min');
+  var panelDegradeEl=document.getElementById('panel-degrade-min');
+  var autoInspectEnabledEl=document.getElementById('auto-inspect-enabled');
+  var autoInspectEl=document.getElementById('auto-inspect-min');
+  var aiProvider=document.getElementById('ai-provider');
+  var aiBaseUrl=document.getElementById('ai-base-url');
+  var aiModel=document.getElementById('ai-model');
+  var aiKey=document.getElementById('ai-api-key');
+  try{
+    var disabledGo2=((store&&store.settings&&store.settings.robot_safety&&store.settings.robot_safety.disabled_go2_names)||[]).slice();
+    var body={
+      path_planning:{mode:mode,replan_interval_s:interval,retreat_distance_m:retreatDistance,show_target_marker:showTargetMarker},
+      robot_safety:{
+        go2_battery_redline_pct:go2RedlineEl?Number(go2RedlineEl.value)||20:20,
+        drone_battery_redline_pct:droneRedlineEl?Number(droneRedlineEl.value)||20:20,
+        disabled_go2_names:disabledGo2
+      },
+      panel_status:{
+        healthy_ttl_s:panelTtlEl?(Number(panelTtlEl.value)||0)*60:300,
+        degradation_interval_s:panelDegradeEl?(Number(panelDegradeEl.value)||0)*60:120
+      },
+      automation:{
+        auto_inspect_enabled:autoInspectEnabledEl?autoInspectEnabledEl.checked:false,
+        auto_inspect_interval_s:autoInspectEl?(Number(autoInspectEl.value)||0)*60:360
+      }
+    };
+    if(aiProvider||aiBaseUrl||aiModel||aiKey){
+      body.ai_parser={
+        provider:aiProvider?aiProvider.value:'deepseek',
+        base_url:aiBaseUrl?aiBaseUrl.value:'',
+        model:aiModel?aiModel.value:'',
+        api_key:aiKey?aiKey.value:''
+      };
+    }
+    var res=await fetch('./api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    var data=await res.json();
+    if(!res.ok||!data.ok)throw new Error(data.error||'settings update failed');
+    store.settings=data.settings;
+    if(btn)btn.textContent='Saved';
+    if(aiKey)aiKey.value=(data.settings.ai_parser&&data.settings.ai_parser.api_key_masked)||'';
+  }catch(err){
+    console.warn('settings update failed',err);
+    if(btn)btn.textContent='Failed';
+  }
+  if(btn){setTimeout(function(){settingsSaving=false;btn.textContent='Save Settings'},1000)}
+  else settingsSaving=false;
+}
+
+async function robotAction(robotName,action){
+  if(!robotName||!action)return;
+  markPageInteraction();
+  try{
+    var res=await fetch('./api/robots/'+encodeURIComponent(robotName)+'/'+action,{method:'POST'});
+    var data=await res.json();
+    if(!res.ok||!data.ok)throw new Error(data.message||data.error||'robot action failed');
+    cmdLog.push({time:new Date().toLocaleTimeString(),text:robotName+' '+action+' requested'});
+    cmdLog=cmdLog.slice(-20);
+  }catch(err){
+    cmdLog.push({time:new Date().toLocaleTimeString(),text:robotName+' '+action+' failed: '+String(err)});
+    cmdLog=cmdLog.slice(-20);
+  }
+  renderBottom(store);showActiveTab(true);
+}
+
+async function postTaskAction(taskId,actionPath,label){
+  if(!taskId)return;
+  try{
+    var res=await fetch('./api/tasks/'+encodeURIComponent(taskId)+'/'+actionPath,{method:'POST'});
+    var data=await res.json();
+    cmdLog.push({time:new Date().toLocaleTimeString(),text:data.message||label});
+    cmdLog=cmdLog.slice(-20);
+    if(!res.ok||!data.ok)console.warn(label+' failed',data);
+  }catch(err){
+    cmdLog.push({time:new Date().toLocaleTimeString(),text:label+' failed: '+String(err)});
+    cmdLog=cmdLog.slice(-20);
+  }
+  renderBottom(store);showActiveTab(true);
+}
+
+function stopBlockedTask(taskId){postTaskAction(taskId,'stop-blocked','Stop blocked task')}
+function retryBlockedTask(taskId){postTaskAction(taskId,'retry-blocked','Retry blocked task')}
+
+async function clearAIKey(){
+  markPageInteraction();
+  var status=document.getElementById('ai-test-status'),key=document.getElementById('ai-api-key');
+  aiTestStatus={cls:'',text:'Clearing API key...'};
+  if(status){status.className='ai-test-result';status.textContent=aiTestStatus.text}
+  try{
+    var res=await fetch('./api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ai_parser:{clear_key:true}})});
+    var data=await res.json();
+    if(!res.ok||!data.ok)throw new Error(data.error||'clear failed');
+    store.settings=data.settings;
+    if(key)key.value='';
+    aiTestStatus={cls:'ok',text:'API key cleared.'};
+    if(status){status.className='ai-test-result';status.textContent=aiTestStatus.text}
+  }catch(err){
+    aiTestStatus={cls:'fail',text:'Clear failed.'};
+    if(status){status.className='ai-test-result';status.textContent=aiTestStatus.text}
+  }
+  showActiveTab(true);
+}
+
+async function testAIConnection(){
+  markPageInteraction();
+  var status=document.getElementById('ai-test-status'),key=document.getElementById('ai-api-key');
+  if(key&&!key.value.trim()){
+    aiTestStatus={cls:'fail',text:'Missing API key. Paste a key, click Save Settings, then Test.'};
+    if(status){status.className='ai-test-result pipeline-step fail';status.textContent=aiTestStatus.text}
+    showActiveTab(true);
+    return;
+  }
+  aiTestStatus={cls:'',text:'Testing LLM connection...'};
+  if(status){status.className='ai-test-result';status.textContent=aiTestStatus.text}
+  try{
+    var res=await fetch('./api/ai-parser-test',{method:'POST'});
+    var data=await res.json();
+    if(!res.ok||!data.ok)throw new Error(data.error||'connection failed');
+    if(data.settings){store.settings=store.settings||{};store.settings.ai_parser=data.settings}
+    aiTestStatus={cls:'ok',text:'User: '+(data.user_message||'Hello')+' | LLM raw: '+(data.llm_reply||data.message||'')};
+    if(status){status.className='ai-test-result';status.textContent=aiTestStatus.text}
+  }catch(err){
+    aiTestStatus={cls:'fail',text:'Connection failed: '+String(err.message||err)};
+    if(status){status.className='ai-test-result';status.textContent=aiTestStatus.text}
+  }
+  showActiveTab(true);
+}
+
+async function dispatchAI(text,opts){
+  opts=opts||{};
+  lastPipeline={text:text,steps:[],ok:false};
+  lastPipeline.steps.push({label:'1. Input',text:text,ok:true});
+  try{
+    var target=opts.robot||selectedDispatchRobot();
+    var res=await fetch('./api/ai-command',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text,robot:target})});
+    var data=await res.json();
+    lastPipeline.steps.push({label:'2. Parser',text:'source: '+(data.source||'none')+(data.llm_available?' (LLM available)':' (rules only)'),ok:data.ok});
+    lastPipeline.steps.push({label:'3. JSON',text:JSON.stringify(data.parsed_json||data.actions,null,2),ok:data.ok,isJson:true});
+    if(data.dispatch_log&&data.dispatch_log.length){
+      data.dispatch_log.forEach(function(line){lastPipeline.steps.push({label:'4. Dispatch',text:line,ok:true})});
+    }else if(data.error){
+      lastPipeline.steps.push({label:'4. Dispatch',text:data.error,ok:false});
+    }
+    lastPipeline.ok=data.ok;
+    if(data.ok){
+      var lines=(data.dispatch_log&&data.dispatch_log.length)?data.dispatch_log:[target+' accepted task: '+text];
+      var now=new Date().toLocaleTimeString();
+      lines.forEach(function(line){cmdLog.push({text:line,time:now})});
+      cmdLog=cmdLog.slice(-20);
+    }
+  }catch(err){
+    lastPipeline.steps.push({label:'Error',text:String(err),ok:false});
+  }
+  renderBottom(store);
+  if(!opts.noTabRefresh)showActiveTab(true);
+}
+
+var fleetBuilt=false;
+function renderFleet(d){
+  var di=d.drones||[],gi=d.go2s||[];
+  if(!fleetBuilt){
+    fleetMini.innerHTML='';
+    di.forEach(function(dd){var c=document.createElement('div');c.className='fleet-card';c.dataset.sel=dd.name;c.innerHTML='<span class="fleet-dot"></span><span class="fleet-name">'+dd.name+'</span><span class="fleet-batt"></span>';fleetMini.appendChild(c)});
+    var sep=document.createElement('div');sep.className='fleet-label';sep.textContent='--- Ground ---';fleetMini.appendChild(sep);
+    gi.forEach(function(gg){var c=document.createElement('div');c.className='fleet-card';c.dataset.sel=gg.name;c.innerHTML='<span class="fleet-dot"></span><span class="fleet-name">'+gg.name+'</span><span class="fleet-batt"></span>';fleetMini.appendChild(c)});
+    fleetBuilt=true;
+  }
+  fleetMini.querySelectorAll('.fleet-card').forEach(function(c){
+    var name=c.dataset.sel;var dd=di.find(function(x){return x.name===name})||gi.find(function(x){return x.name===name});
+    if(!dd)return;
+    c.querySelector('.fleet-dot').className='fleet-dot'+(dd.status!=='idle'&&dd.status!=='landed'?' working':'');
+    c.querySelector('.fleet-batt').textContent=(dd.battery||100).toFixed(0)+'%';
+    c.classList.toggle('selected',sfpv===name);
+  });
+}
+fleetMini.addEventListener('click',function(e){var c=e.target.closest('.fleet-card');if(!c)return;sfpv=c.dataset.sel;followRobot=c.dataset.sel;if(simViewMode==='follow'){var rd=store.drones?store.drones.find(function(dd){return dd.name===sfpv}):null;if(!rd&&store.go2s)rd=store.go2s.find(function(gg){return gg.name===sfpv});if(rd){smoothTarget.set(rd.pose.x,(rd.pose.z||2)+getGroundHeight(rd.pose.x,rd.pose.y),rd.pose.y);ctg.copy(smoothTarget)}}});
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function fmtPct(v){return Math.round(Math.max(0,Math.min(1,Number(v)||0))*100)}
+function currentSimNow(d){return Number((d&&d.sim_time_ts)||(store&&store.sim_time_ts)||Date.now()/1000)}
+function relTime(ts,d){if(!ts)return'never';var sec=Math.max(0,Math.floor(currentSimNow(d)-Number(ts)));if(sec<5)return'now';if(sec<60)return sec+'s ago';if(sec<3600)return Math.floor(sec/60)+'m ago';return Math.floor(sec/3600)+'h ago'}
+function panelStatusMeta(p){var st=p.status||'';if(st==='confirmed_fault')return{label:'Fault',short:'FLT',tag:'red',cls:'red'};if(st==='drone_anomaly')return{label:'Drone Anomaly',short:'ANM',tag:'yellow',cls:'yellow'};if(st==='healthy')return{label:'Healthy',short:'OK',tag:'green',cls:'green'};if(st==='repaired')return{label:'Repaired',short:'REP',tag:'green',cls:'green'};if(!st&&p.anomaly_confirmed)return{label:'Fault',short:'FLT',tag:'red',cls:'red'};if(!st&&p.inspected&&p.is_defective)return{label:'Drone Anomaly',short:'ANM',tag:'yellow',cls:'yellow'};if(!st&&p.inspected)return{label:'Healthy',short:'OK',tag:'green',cls:'green'};return{label:'Unknown',short:'UNK',tag:'blue',cls:'blue'}}
+function panelExpiryText(p,d){if(p.status!=='healthy'&&p.status!=='repaired')return'Not expiring';var ttl=((d.settings&&d.settings.panel_status&&d.settings.panel_status.healthy_ttl_s)||300);if(!ttl||ttl<=0)return'TTL disabled';var remain=Math.ceil((Number(p.last_update_ts||0)+ttl)-currentSimNow(d));return remain>0?Math.ceil(remain/60)+' min remaining':'expiring now'}
+function selectPanel(row,col){selectedPanelKey=row+','+col;showActiveTab(true)}
+async function updateManualPanelStatus(row,col,status){try{var res=await fetch('./api/panels/'+row+'/'+col+'/status',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:status,note:'manual '+status})});var data=await res.json();if(!res.ok||!data.ok)throw new Error(data.error||'panel update failed');cmdLog.push({time:new Date().toLocaleTimeString(),text:'Panel ('+row+','+col+') marked '+status});cmdLog=cmdLog.slice(-20)}catch(err){cmdLog.push({time:new Date().toLocaleTimeString(),text:'Panel update failed: '+String(err.message||err)});cmdLog=cmdLog.slice(-20)}showActiveTab(true)}
+function taskTag(st){return st==='done'?'green':(st==='failed'||st==='cancelled'?'red':(st==='running'||st==='active'||st==='blocked'?'yellow':'blue'))}
+function taskStepNodes(task){
+  var steps=task.steps||[];
+  if(!steps.length)return '';
+  return '<div class="task-node-row">'+steps.map(function(s,i){return'<div class="task-node '+esc(s.status)+'"><div>'+(i+1)+'</div><div>'+esc(s.status)+'</div></div>'}).join('')+'</div>';
+}
+function taskProgressBar(task,pct){
+  var steps=task.steps||[];
+  var dots=steps.map(function(s,i){
+    var left=steps.length===1?100:((i+1)/steps.length*100);
+    return '<span class="task-dot '+esc(s.status)+'" style="left:'+left+'%" title="Step '+(i+1)+': '+esc(s.status)+'"></span>';
+  }).join('');
+  return '<div class="task-progress"><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div>'+dots+'</div>';
+}
+function taskPrimaryStep(task){
+  var steps=task.steps||[];
+  return steps.find(function(s){return s.status==='active'||s.status==='blocked'})||steps[task.current_step_index]||steps[steps.length-1]||null;
+}
+function taskLogHtml(task,limit){
+  var logs=(task.logs||[]).slice(-(limit||6)).reverse();
+  return logs.length?'<div class="task-log">'+logs.map(function(l){return'<div>'+esc(l)+'</div>'}).join('')+'</div>':'<div class="task-log">No task logs yet.</div>';
+}
+function renderTaskCard(task,compact){
+  var step=taskPrimaryStep(task);
+  var pct=fmtPct(task.progress);
+  var h='<div class="card"><div class="card-row"><span style="font-size:10px;color:var(--muted)">'+esc(task.id)+'</span><span class="tag '+taskTag(task.status)+'">'+esc(task.status)+'</span></div>'
+    +'<h4 style="margin-top:4px">'+esc(task.text||'Task')+'</h4>'
+    +taskProgressBar(task,pct)
+    +'<div class="card-row"><span>Progress</span><span class="val">'+pct+'%</span></div>';
+  if(step)h+='<div class="card-row"><span>Current Step</span><span class="val" style="font-size:10px">'+esc(step.label)+'</span></div>'
+    +'<div class="card-row"><span>Targets</span><span class="val" style="font-size:10px">'+esc((step.targets||[]).join(', ')||'Fleet')+'</span></div>';
+  if(task.status==='blocked')h+='<div style="display:flex;gap:6px;margin:6px 0"><button class="btn task-action-btn" data-task-action="stop-blocked" data-task-id="'+esc(task.id)+'" style="flex:1">Stop</button><button class="btn task-action-btn" data-task-action="retry-blocked" data-task-id="'+esc(task.id)+'" style="flex:1">Retry</button></div>';
+  h+=taskStepNodes(task);
+  if(!compact){
+    h+='<div class="pipeline-json">'+esc(JSON.stringify((task.steps||[]).map(function(s){return{label:s.label,status:s.status,targets:s.targets,actions:s.actions}}),null,2))+'</div>';
+    h+=taskLogHtml(task,10);
+  }else{
+    h+=taskLogHtml(task,4);
+  }
+  return h+'</div>';
+}
+function panelFaultStatus(panel){
+  var m=panelStatusMeta(panel);
+  if(m.tag==='red')return {label:'Repair Required',tag:'red',detail:'Go2/manual confirmed fault'};
+  if(m.tag==='yellow')return {label:'Pending Ground Check',tag:'yellow',detail:'Drone reported anomaly'};
+  if(m.tag==='green')return {label:m.label,tag:'green',detail:'Panel currently clear'};
+  return {label:'Unscanned',tag:'blue',detail:'Waiting for drone scan'};
+}
+function problemPanels(panels){
+  return (panels||[]).filter(function(p){return p.status==='drone_anomaly'||p.status==='confirmed_fault'});
+}
+function renderPanelMonitor(d,panels){
+  var rows=Array.from(new Set(panels.map(function(p){return p.row}))).sort(function(a,b){return a-b});
+  var cols=Array.from(new Set(panels.map(function(p){return p.col}))).sort(function(a,b){return a-b});
+  var filtered=panels.filter(function(p){
+    return (!panelRowFilter||String(p.row)===String(panelRowFilter))&&(!panelColFilter||String(p.col)===String(panelColFilter));
+  });
+  if(!selectedPanelKey&&panels.length)selectedPanelKey=panels[0].row+','+panels[0].col;
+  var selected=panels.find(function(p){return selectedPanelKey===p.row+','+p.col})||filtered[0]||panels[0];
+  if(selected)selectedPanelKey=selected.row+','+selected.col;
+  var gridCols=panelColFilter?'1fr':'repeat('+Math.max(1,cols.length)+', minmax(46px,1fr))';
+  var h='<h3>Panel Monitor</h3><div class="card"><div class="card-row"><span>Total Panels</span><span class="val">'+panels.length+'</span></div><div class="card-row"><span>Rows / Cols</span><span class="val">'+rows.length+' / '+cols.length+'</span></div><div class="card-row"><span>Visible</span><span class="val">'+filtered.length+'</span></div></div>';
+  h+='<div class="panel-filter-row"><input id="panel-row-filter" placeholder="Row" value="'+esc(panelRowFilter)+'" oninput="panelRowFilter=this.value.trim();showActiveTab(true)"><input id="panel-col-filter" placeholder="Col" value="'+esc(panelColFilter)+'" oninput="panelColFilter=this.value.trim();showActiveTab(true)"></div>';
+  h+='<div class="panel-matrix" style="grid-template-columns:'+gridCols+'">';
+  filtered.forEach(function(p){
+    var m=panelStatusMeta(p),sel=selected&&selected.row===p.row&&selected.col===p.col;
+    h+='<div class="panel-cell '+m.cls+(sel?' selected':'')+'" onclick="selectPanel('+p.row+','+p.col+')"><div class="panel-pos">R'+p.row+' C'+p.col+'</div><div>'+m.short+'</div><div class="panel-time">'+relTime(p.last_update_ts,d)+'</div></div>';
+  });
+  h+='</div>';
+  if(selected){
+    var sm=panelStatusMeta(selected);
+    h+='<div class="card" style="margin-top:10px"><div class="card-row"><h4>Panel ('+selected.row+','+selected.col+')</h4><span class="tag '+sm.tag+'">'+sm.label+'</span></div>'
+      +'<div class="card-row"><span>Coords</span><span class="val">X '+Number(selected.x).toFixed(1)+' / Z '+Number(selected.y).toFixed(1)+'</span></div>'
+      +'<div class="card-row"><span>Source</span><span class="val">'+esc(selected.last_update_source||'system')+'</span></div>'
+      +'<div class="card-row"><span>Last Update</span><span class="val">'+relTime(selected.last_update_ts,d)+'</span></div>'
+      +'<div class="card-row"><span>Expiry</span><span class="val">'+esc(panelExpiryText(selected,d))+'</span></div>'
+      +'<div style="font-size:11px;color:var(--muted);margin-top:6px">Note: '+esc(selected.last_update_note||'none')+'</div>'
+      +'<div class="panel-action-row"><button class="btn" onclick="updateManualPanelStatus('+selected.row+','+selected.col+',\'healthy\')">Mark Healthy</button><button class="btn" onclick="updateManualPanelStatus('+selected.row+','+selected.col+',\'repaired\')">Mark Repaired</button><button class="btn" onclick="updateManualPanelStatus('+selected.row+','+selected.col+',\'confirmed_fault\')">Mark Fault</button><button class="btn" onclick="updateManualPanelStatus('+selected.row+','+selected.col+',\'unknown\')">Reset Unknown</button></div>'
+      +'</div>';
+  }
+  return h;
+}
+
+function renderRight(d){
+  var nestedScrolls=[].map.call(rightPanel.querySelectorAll('.task-log,.right-task-log'),function(el){return el.scrollTop});
+  var panels=d.farm?d.farm.panels||[]:[],insp=panels.filter(function(p){return p.inspected}).length;
+  var faultPanels=problemPanels(panels),anom=d.farm?d.farm.anomalies_found||[]:[],inspAnom=d.farm?d.farm.anomalies_inspected||[]:[],pct=panels.length?Math.round(insp/panels.length*100):0;
+  var di=d.drones||[],gi=d.go2s||[];
+  var active=d.active_tasks||[],tasks=d.tasks||[],top=active[0]||tasks.slice().reverse().find(function(t){return t.status!=='done'})||tasks[tasks.length-1];
+  var serverLogs=[];tasks.forEach(function(t){(t.logs||[]).forEach(function(line){serverLogs.push({text:line,time:''})})});
+  var mergedLogs=serverLogs.concat(cmdLog).slice(-12).reverse();
+  var taskHtml='<h3>Active Tasks</h3>'+(top?renderTaskCard(top,true):'<div class="card"><span style="color:var(--muted)">No active tasks. Awaiting command.</span></div>')
+    +'<div class="card"><div class="card-row"><span>Active</span><span class="val">'+active.length+'</span></div><div class="card-row"><span>Recent</span><span class="val">'+tasks.length+'</span></div><div class="card-row"><span>Farm Scan</span><span class="val">'+insp+'/'+panels.length+' panels</span></div></div>';
+  rightPanel.innerHTML=taskHtml
+    +'<h3>Faults</h3><div class="card">'+(faultPanels.length?faultPanels.map(function(p){var st=panelFaultStatus(p);return'<div class="card-row"><span>('+p.row+','+p.col+')</span><span class="tag '+st.tag+'">'+st.label+'</span></div>'}).join(''):'<div class="card-row"><span>None</span></div>')+'</div>'
+    +'<h3>Fleet</h3><div class="card"><div class="card-row"><span>Drones</span><span class="val">'+di.filter(function(x){return x.status!=='idle'&&x.status!=='landed'}).length+' active / '+di.length+'</span></div><div class="card-row"><span>Go2</span><span class="val">'+gi.filter(function(x){return x.status!=='idle'}).length+' active / '+gi.length+'</span></div></div>'
+    +'<h3>Task Log</h3><div class="card right-task-log">'+(mergedLogs.length?mergedLogs.map(function(l){return'<div style="padding:1px 0">'+(l.time?'<span style="color:var(--muted)">'+esc(l.time)+'</span> ':'')+esc(l.text)+'</div>'}).join(''):'<span style="color:var(--muted)">Awaiting commands...</span>')+'</div>';
+  [].forEach.call(rightPanel.querySelectorAll('.task-log,.right-task-log'),function(el,i){if(nestedScrolls[i]!=null)el.scrollTop=nestedScrolls[i]});
+}
+
+function panelDonut(panels){
+  var counts={unknown:0,healthy:0,drone_anomaly:0,confirmed_fault:0,repaired:0};
+  panels.forEach(function(p){if(counts.hasOwnProperty(p.status))counts[p.status]++});
+  var colors={unknown:'#88bbff',healthy:'#00ffcc',drone_anomaly:'#f5a623',confirmed_fault:'#ff5d6c',repaired:'#44cc88'};
+  var labels={unknown:'Unknown',healthy:'Healthy',drone_anomaly:'Anomaly',confirmed_fault:'Fault',repaired:'Repaired'};
+  var total=panels.length||1;
+  var r=62,sw=18,cx=80,cy=80,size=160;
+  var circ=2*Math.PI*r;
+  var html='<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" style="display:block;margin:0 auto">';
+  html+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="'+sw+'"/>';
+  var offset=0;
+  Object.keys(counts).forEach(function(k){
+    var pct=counts[k]/total;
+    if(pct<=0)return;
+    var dash=circ*pct;
+    html+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+colors[k]+'" stroke-width="'+sw+'" stroke-dasharray="'+dash+' '+(circ-dash)+'" transform="rotate('+(offset-90)+' '+cx+' '+cy+')"/>';
+    offset+=pct*360;
+  });
+  html+='<text x="'+cx+'" y="'+(cy-4)+'" text-anchor="middle" font-size="30" font-weight="800" fill="#c8d6e5">'+total+'</text>';
+  html+='<text x="'+cx+'" y="'+(cy+16)+'" text-anchor="middle" font-size="11" fill="#7a8b9a">panels</text>';
+  html+='</svg>';
+  var legend='<div class="analytics-legend">';
+  Object.keys(counts).forEach(function(k){
+    legend+='<span><span class="dot" style="background:'+colors[k]+'"></span>'+labels[k]+' <b>'+counts[k]+'</b></span>';
+  });
+  legend+='</div>';
+  return'<div style="text-align:center;margin-bottom:24px">'+html+legend+'</div>';
+}
+function renderLineChart(title,pts,color){
+  var vbW=280,vbH=90,padL=20,padR=4,padT=10,padB=20;
+  var pw=vbW-padL-padR,ph=vbH-padT-padB;
+  if(!pts||!pts.length)return'<div class="activity-chart"><h4>'+title+'</h4><div style="font-size:10px;color:var(--muted);padding:8px">No data yet</div></div>';
+  var tMax=pts[pts.length-1].t,WINDOW=600,tMin=tMax-WINDOW;
+  function tx(t){return padL+(t-tMin)/(tMax-tMin)*pw}
+  function ty(v){return padT+ph-(v/5)*ph}
+  function fmtTime(t){var sec=Math.max(0,Math.floor(tMax-t));if(sec<60)return sec+'s ago';if(sec<3600)return Math.floor(sec/60)+'m ago';return Math.floor(sec/3600)+'h ago';}
+  var svg='<svg viewBox="0 0 '+vbW+' '+vbH+'" preserveAspectRatio="xMidYMid meet">';
+  svg+='<rect x="'+padL+'" y="'+padT+'" width="'+(vbW-padL-padR)+'" height="'+ph+'" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>';
+  for(var v=0;v<=5;v++){
+    var y=ty(v);
+    svg+='<line x1="'+padL+'" y1="'+y.toFixed(1)+'" x2="'+(vbW-padR)+'" y2="'+y.toFixed(1)+'" stroke="rgba(255,255,255,'+(v===0?'0.08':'0.04')+')" stroke-width="1" stroke-dasharray="'+(v===0?'3,4':'2,5')+'"/>';
+    svg+='<text x="'+(padL-3)+'" y="'+(y+3)+'" text-anchor="end" font-size="7" fill="#7a8b9a">'+v+'</text>';
+  }
+  var tTicks=[];for(var i=0;i<=4;i++)tTicks.push(tMax-WINDOW*i/4);
+  tTicks.forEach(function(tl){
+    var x=tx(tl);
+    svg+='<line x1="'+x.toFixed(1)+'" y1="'+(padT+ph)+'" x2="'+x.toFixed(1)+'" y2="'+(padT+ph+3)+'" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>';
+    svg+='<text x="'+x.toFixed(1)+'" y="'+(padT+ph+11)+'" text-anchor="middle" font-size="7" fill="#7a8b9a">'+fmtTime(tl)+'</text>';
+  });
+  var visible=[];for(var i=0;i<pts.length;i++){if(pts[i].t>=tMin)visible.push(pts[i])}
+  if(visible.length){
+    var d='M'+tx(visible[0].t).toFixed(1)+','+ty(visible[0].v).toFixed(1);
+    for(var i=1;i<visible.length;i++)d+=' L'+tx(visible[i].t).toFixed(1)+','+ty(visible[i].v).toFixed(1);
+    svg+='<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="0.9" opacity="0.85"/>';
+  }
+  svg+='</svg>';
+  return'<div class="activity-chart"><h4>'+title+'</h4><div class="chart-wrap">'+svg+'</div></div>';
+}
+function renderAnalytics(d){
+  var panels=d.farm?d.farm.panels||[]:[];
+  var droneCounts=[],go2Counts=[];
+  (d.drones||[]).forEach(function(dd){
+    var pts=activityHistory.drones[dd.name]||[];
+    for(var i=0;i<pts.length;i++){
+      if(!droneCounts[i])droneCounts[i]={t:pts[i].t,v:0};
+      if(pts[i].v>0)droneCounts[i].v++;
+    }
+  });
+  (d.go2s||[]).forEach(function(gg){
+    var pts=activityHistory.go2s[gg.name]||[];
+    for(var i=0;i<pts.length;i++){
+      if(!go2Counts[i])go2Counts[i]={t:pts[i].t,v:0};
+      if(pts[i].v>0)go2Counts[i].v++;
+    }
+  });
+  return'<h3>Analytics</h3>'
+    +panelDonut(panels)
+    +renderLineChart('Drone Active',droneCounts,'#00ffcc')
+    +renderLineChart('Go2 Active',go2Counts,'#f5a623');
+}
+function renderLeftTab(d){
+  var di=d.drones||[],gi=d.go2s||[],panels=d.farm?d.farm.panels||[]:[];
+  var insp=panels.filter(function(p){return p.inspected}).length,pct=panels.length?Math.round(insp/panels.length*100):0;
+  var anom=d.farm?d.farm.anomalies_found||[]:[],inspAnom=d.farm?d.farm.anomalies_inspected||[]:[];
+  var h='';
+  if(activeTab==='overview'){
+    h='<h3>Farm Overview</h3><div class="stat-grid"><div class="stat-box"><div class="num">'+panels.length+'</div><div class="lbl">Panels</div></div><div class="stat-box"><div class="num">'+pct+'%</div><div class="lbl">Scanned</div></div><div class="stat-box"><div class="num">'+di.length+'</div><div class="lbl">Drones</div></div><div class="stat-box"><div class="num">'+gi.length+'</div><div class="lbl">Go2 Units</div></div></div>'
+      +'<div class="card"><h4>Task Status</h4><div class="card-row"><span>Phase</span><span class="tag '+(d.mission&&d.mission.state!=='idle'?'yellow':'green')+'">'+(d.mission?d.mission.state:'idle')+'</span></div><div class="card-row"><span>Anomalies</span><span class="val">'+anom.length+' found, '+inspAnom.length+' confirmed</span></div></div>'
+      +'<div class="card"><h4>Quick Commands</h4><button class="btn" style="margin:2px" onclick="dispatchAI(\'inspect solar field\')">Inspect Field</button><button class="btn" style="margin:2px" onclick="dispatchAI(\'drone return\')">Drone Return</button><button class="btn" style="margin:2px" onclick="dispatchAI(\'go2 inspect\')">Go2 Inspect</button></div>';
+  }else if(activeTab==='robots'){
+    var rs=d.settings&&d.settings.robot_safety?d.settings.robot_safety:{go2_battery_redline_pct:20,drone_battery_redline_pct:20};
+    h='<h3>Robot Fleet</h3>';
+    di.forEach(function(dd){var p=dd.pose||{};h+='<div class="card"><h4>'+dd.name+'</h4><div class="card-row"><span>Status</span><span class="tag '+(dd.status==='idle'||dd.status==='landed'?'green':'yellow')+'">'+dd.status+'</span></div><div class="card-row"><span>Battery</span><span class="val">'+(dd.battery||100).toFixed(0)+'% / redline '+(rs.drone_battery_redline_pct||20)+'%</span></div><div class="card-row"><span>Coords</span><span class="val">X '+Number(p.x||0).toFixed(1)+' / Z '+Number(p.y||0).toFixed(1)+' / Alt '+Number(p.z||0).toFixed(1)+'m</span></div><div class="card-row"><span>Task</span><span class="val" style="font-size:10px">'+(dd.task_desc||'standby')+'</span></div><button class="btn" style="margin-top:4px;width:100%" onclick="robotAction(\''+dd.name+'\',\'return\')">Return</button></div>'});
+    gi.forEach(function(gg){var p=gg.pose||{},wy=p.world_y!=null?p.world_y:p.z,available=gg.available!==false;var autoNote=available?' <span class="tag green">Available</span>':' <span class="tag yellow">Unavailable</span>';h+='<div class="card"><h4>'+gg.name+' '+autoNote+'</h4><div class="card-row"><span>Status</span><span class="tag '+(gg.status==='idle'?'green':'yellow')+'">'+(gg.status||'idle')+'</span></div><div class="card-row"><span>Battery</span><span class="val">'+(gg.battery||100).toFixed(0)+'% / redline '+(rs.go2_battery_redline_pct||20)+'%</span></div><div class="card-row"><span>Coords</span><span class="val">X '+Number(p.x||0).toFixed(1)+' / Z '+Number(p.y||0).toFixed(1)+' / Y '+Number(wy||0).toFixed(2)+'</span></div><div class="card-row"><span>Task</span><span class="val" style="font-size:10px">'+(gg.task_desc||'standby')+'</span></div><div style="display:flex;gap:4px;margin-top:4px"><button class="btn" style="flex:1" onclick="robotAction(\''+gg.name+'\',\'return\')">Return</button><button class="btn" style="flex:1" '+(!available?'disabled':'')+' onclick="robotAction(\''+gg.name+'\',\'disable\')">Disable</button><button class="btn" style="flex:1" '+(available?'disabled':'')+' onclick="robotAction(\''+gg.name+'\',\'enable\')">Enable</button></div></div>'});
+  }else if(activeTab==='tasks'){
+    var tasks=d.tasks||[],active=d.active_tasks||[];
+    h='<h3>Task History</h3><div class="card"><div class="card-row"><span>Active Tasks</span><span class="val">'+active.length+'</span></div><div class="card-row"><span>Total Tasks</span><span class="val">'+tasks.length+'</span></div><div class="card-row"><span>Farm Scan</span><span class="val">'+insp+'/'+panels.length+' panels</span></div></div>';
+    if(!tasks.length){
+      h+='<div class="card"><span style="color:var(--muted)">No tasks yet. Submit a command from Overview.</span></div>';
+    }else{
+      tasks.slice().reverse().forEach(function(task){h+=renderTaskCard(task,false)});
+    }
+    h+='<h3>Task Queues</h3><div class="card"><h4>Anomaly Queue</h4>'+(d.mission&&d.mission.anomaly_queue&&d.mission.anomaly_queue.length?d.mission.anomaly_queue.map(function(a){return'<div class="card-row"><span>Panel ('+a[0]+','+a[1]+')</span><span class="tag yellow">Pending</span></div>'}).join(''):'<div class="card-row"><span>Empty</span></div>')+'</div>'
+      +'<div class="card"><h4>Confirmed</h4>'+(inspAnom.length?inspAnom.map(function(a){return'<div class="card-row"><span>('+a[0]+','+a[1]+')</span><span class="tag green">Done</span></div>'}).join(''):'<div class="card-row"><span>None yet</span></div>')+'</div>';
+  }else if(activeTab==='panels'){
+    h=renderPanelMonitor(d,panels);
+  }else if(activeTab==='faults'){
+    var faults=problemPanels(panels);
+    h='<h3>Fault Management</h3><div class="card"><div class="card-row"><span>Drone Reported</span><span class="val">'+panels.filter(function(p){return p.status==='drone_anomaly'}).length+'</span></div><div class="card-row"><span>Repair Required</span><span class="val">'+panels.filter(function(p){return p.status==='confirmed_fault'}).length+'</span></div><div class="card-row"><span>Scan Progress</span><span class="val">'+insp+'/'+panels.length+'</span></div></div>';
+    if(!faults.length){
+      h+='<div class="card"><span style="color:var(--muted)">No fault panels reported yet.</span></div>';
+    }else{
+      faults.forEach(function(p){
+        var st=panelFaultStatus(p);
+        h+='<div class="card"><div class="card-row"><h4>Panel ('+p.row+','+p.col+')</h4><span class="tag '+st.tag+'">'+st.label+'</span></div>'
+          +'<div style="font-size:11px;color:var(--muted);margin:4px 0">'+st.detail+'</div>'
+          +'<div class="card-row"><span>Location</span><span class="val">X '+p.x.toFixed(1)+' / Z '+p.y.toFixed(1)+'</span></div>'
+          +'<button class="btn" style="margin:4px 4px 0 0" onclick="updateManualPanelStatus('+p.row+','+p.col+',\'confirmed_fault\')">Confirm Fault</button>'
+          +'<button class="btn" style="margin:4px 4px 0 0" onclick="updateManualPanelStatus('+p.row+','+p.col+',\'healthy\')">Mark Healthy</button>'
+          +'</div>';
+      });
+    }
+  }else if(activeTab==='analytics'){
+    h=renderAnalytics(d);
+  }else if(activeTab==='settings'){
+    var pp=d.settings&&d.settings.path_planning?d.settings.path_planning:{mode:'static',replan_interval_s:3,retreat_distance_m:.6,show_target_marker:true};
+    var rs=d.settings&&d.settings.robot_safety?d.settings.robot_safety:{go2_battery_redline_pct:20,drone_battery_redline_pct:20};
+    var ps=d.settings&&d.settings.panel_status?d.settings.panel_status:{healthy_ttl_s:300,degradation_interval_s:120};
+    var auto=d.settings&&d.settings.automation?d.settings.automation:{auto_inspect_enabled:false,auto_inspect_interval_s:360};
+    var ai=d.settings&&d.settings.ai_parser?d.settings.ai_parser:{provider:'deepseek',base_url:'https://api.deepseek.com',model:'deepseek-v4-flash',api_key_set:false,llm_available:false,last_error:''};
+    var aiStatusText=ai.api_key_set?(aiTestStatus.text||'No connection test yet.'):'Missing API key. Paste a key, click Save Settings, then Test.';
+    var aiStatusCls=ai.api_key_set?aiTestStatus.cls:'fail';
+    h='<h3>Settings</h3>'
+      +'<div class="settings-section"><h4>Path Planning</h4>'
+      +'<div class="setting-item"><div><div class="setting-title">Planning Mode</div><div class="setting-desc">Static plans once before departure. Go2 follows the panel-field outer ring, enters at the target row, then approaches the selected panel.</div></div><div class="setting-control"><select id="path-mode" class="settings-select" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"><option value="static" '+(pp.mode==='static'?'selected':'')+'>Static</option><option value="dynamic" '+(pp.mode==='dynamic'?'selected':'')+'>Dynamic</option></select></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Dynamic Replan Interval</div><div class="setting-desc">Seconds between route refreshes when dynamic mode is enabled.</div></div><div class="setting-control"><input id="replan-interval" class="settings-input" type="number" min="1" max="30" step="1" value="'+esc(pp.replan_interval_s||3)+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"> <span class="val">sec</span></div></div>'
+      +'</div>'
+      +'<div class="settings-section"><h4>Obstacle Recovery</h4>'
+      +'<div class="setting-item"><div><div class="setting-title">Retreat Distance</div><div class="setting-desc">Distance Go2 backs away after its body guard predicts a forbidden-buffer collision. Previous fixed behavior was about 0.35m.</div></div><div class="setting-control"><input id="retreat-distance" class="settings-input" type="number" min="0.2" max="3" step="0.1" value="'+esc(pp.retreat_distance_m||0.6)+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"> <span class="val">m</span></div></div>'
+      +'</div>'
+      +'<div class="settings-section"><h4>Assist Display</h4>'
+      +'<div class="setting-item"><div><div class="setting-title">Show Assist Info</div><div class="setting-desc">Toggle red forbidden buffers, green walkable boundary, and XYZ coordinate guides.</div></div><div class="setting-control"><input id="show-assist-info" class="settings-checkbox" type="checkbox" '+(showAssistInfo?'checked':'')+' onchange="setAssistInfoVisible(this.checked);markPageInteraction()"></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Show Navigate Target Marker</div><div class="setting-desc">Toggle the red downward arrow above the active navigate target. This value is synced with the backend.</div></div><div class="setting-control"><input id="show-target-marker" class="settings-checkbox" type="checkbox" '+(pp.show_target_marker!==false?'checked':'')+' onchange="markPageInteraction()"></div></div>'
+      +'</div>'
+      +'<div class="settings-section"><h4>Fleet Safety</h4>'
+      +'<div class="setting-item"><div><div class="setting-title">Go2 Redline Battery</div><div class="setting-desc">Go2 units below this battery return to base and stop accepting automatic tasks.</div></div><div class="setting-control"><input id="go2-redline" class="settings-input" type="number" min="5" max="80" step="1" value="'+esc(rs.go2_battery_redline_pct||20)+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"> <span class="val">%</span></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Drone Redline Battery</div><div class="setting-desc">Drones below this battery return to their pads.</div></div><div class="setting-control"><input id="drone-redline" class="settings-input" type="number" min="5" max="80" step="1" value="'+esc(rs.drone_battery_redline_pct||20)+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"> <span class="val">%</span></div></div>'
+      +'</div>'
+      +'<div class="settings-section"><h4>Panel Status</h4>'
+      +'<div class="setting-item"><div><div class="setting-title">Healthy Status TTL</div><div class="setting-desc">Healthy and repaired panels automatically return to unknown after this many minutes. Set 0 to disable expiry.</div></div><div class="setting-control"><input id="panel-ttl-min" class="settings-input" type="number" min="0" max="1440" step="1" value="'+esc(Math.round((ps.healthy_ttl_s||0)/60))+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"> <span class="val">min</span></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Hidden Fault Degradation</div><div class="setting-desc">Simulation minutes between random hidden failures. Set 0 to disable random degradation.</div></div><div class="setting-control"><input id="panel-degrade-min" class="settings-input" type="number" min="0" max="1440" step="1" value="'+esc(Math.round(((ps.degradation_interval_s==null?120:ps.degradation_interval_s)||0)/60))+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"> <span class="val">min</span></div></div>'
+      +'</div>'
+      +'<div class="settings-section"><h4>Automation</h4>'
+      +'<div class="setting-item"><div><div class="setting-title">Enable Timed Inspection</div><div class="setting-desc">When enabled, the backend calls inspect solar field automatically while the system is idle.</div></div><div class="setting-control"><input id="auto-inspect-enabled" class="settings-checkbox" type="checkbox" '+(auto.auto_inspect_enabled?'checked':'')+' onchange="markPageInteraction()"></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Automatic Timed Inspection</div><div class="setting-desc">Simulation minutes between automatic full-field inspections after the checkbox is enabled. Default interval is 6 minutes.</div></div><div class="setting-control"><input id="auto-inspect-min" class="settings-input" type="number" min="0" max="1440" step="1" value="'+esc(Math.round(((auto.auto_inspect_interval_s==null?360:auto.auto_inspect_interval_s)||0)/60))+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"> <span class="val">min</span></div></div>'
+      +'</div>'
+      +'<div class="settings-section"><div class="settings-heading"><h4>AI Parser</h4><span class="tag '+(ai.api_key_set?'green':'yellow')+'">'+(ai.api_key_set?'Ready':'Rules only')+'</span></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Provider</div><div class="setting-desc">DeepSeek uses the OpenAI-compatible chat completions API. Other compatible providers can reuse the same schema.</div></div><div class="setting-control"><select id="ai-provider" class="settings-select" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"><option value="deepseek" '+(ai.provider==='deepseek'?'selected':'')+'>DeepSeek</option><option value="openai-compatible" '+(ai.provider==='openai-compatible'?'selected':'')+'>OpenAI compatible</option></select></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Base URL</div><div class="setting-desc">Runtime only. OpenAI-compatible DeepSeek default is https://api.deepseek.com. Anthropic-compatible endpoint is https://api.deepseek.com/anthropic.</div></div><div class="setting-control"><input id="ai-base-url" class="settings-input" style="width:260px" value="'+esc(ai.base_url||'https://api.deepseek.com')+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Model</div><div class="setting-desc">Default model is deepseek-v4-flash. deepseek-v4-pro is also available; deepseek-chat and deepseek-reasoner are deprecated after 2026/07/24.</div></div><div class="setting-control"><input id="ai-model" class="settings-input" style="width:180px" value="'+esc(ai.model||'deepseek-v4-flash')+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">API Key</div><div class="setting-desc">Stored only in backend memory. Update preserves it; Restart clears it. After saving, only the first and last characters are shown.</div></div><div class="setting-control"><input id="ai-api-key" class="settings-input" style="width:220px" value="'+esc(ai.api_key_masked||'')+'" placeholder="'+(ai.runtime_key_set?'Key is set':'Paste DeepSeek key')+'" onfocus="markPageInteraction()" onpointerdown="markPageInteraction()" onchange="markPageInteraction()"><button class="btn" onclick="clearAIKey()">Clear</button></div></div>'
+      +'<div class="setting-item"><div><div class="setting-title">Connection</div><div class="setting-desc">Sends a small hello request to the configured LLM and shows the exchange below.</div></div><div class="setting-control"><button class="btn" onclick="testAIConnection()">Test</button></div></div>'
+      +'<div id="ai-test-status" class="ai-test-result '+(aiStatusCls==='fail'?'pipeline-step fail':aiStatusCls==='ok'?'pipeline-step ok':'')+'">'+esc(aiStatusText)+'</div>'
+      +(ai.last_error?'<div class="pipeline-step fail">'+esc(ai.last_error)+'</div>':'')
+      +'</div>'
+      +'<div class="settings-section"><h4>Apply Changes</h4>'
+      +'<button class="btn settings-save" id="save-settings-btn" onclick="saveSettings()">Save Settings</button>'
+      +'</div>';
+  }else if(activeTab==='safety'){
+    h='<h3>Safety / CAS</h3><div class="card"><h4>Connection</h4><div class="card-row"><span>Operations link</span><span class="tag '+(online?'green':'red')+'">'+(online?'Online':'Offline')+'</span></div><div class="card-row"><span>Command interpretation</span><span class="tag '+(d.llm_available?'green':'yellow')+'">'+(d.llm_available?'AI-assisted':'Guided')+'</span></div></div>'
+      +'<div class="card"><h4>Geofence</h4><div class="card-row"><span>Boundary</span><span class="tag green">ACTIVE</span></div><div class="card-row"><span>Range</span><span class="val">'+(d.farm&&d.farm.boundary?d.farm.boundary.x_min.toFixed(0)+'..'+d.farm.boundary.x_max.toFixed(0):'?')+'</span></div></div>'
+      +'<div class="card"><h4>CAS Risk</h4><div class="card-row"><span>Level</span><span class="tag green">LOW</span></div><div class="card-row"><span>Units</span><span class="val">'+(di.length+gi.length)+'</span></div></div>';
+  }else if(activeTab==='intro'){
+    h='<h3>Introduction</h3><div class="card"><h4>Skills</h4><div style="font-size:11px;color:var(--muted);margin-bottom:8px">Only skills listed here are executable in this solar inspection demo.</div>';
+    var skills=d.skills||[];
+    var cats={};skills.forEach(function(s){if(!cats[s.category])cats[s.category]=[];cats[s.category].push(s)});
+    Object.keys(cats).forEach(function(cat){
+      h+='<div class="skill-category"><h4>'+cat.charAt(0).toUpperCase()+cat.slice(1)+'</h4>';
+      cats[cat].forEach(function(s){h+='<div class="skill-row"><span class="tag green">'+esc(s.skill)+'</span><span class="skill-label">'+esc(s.label)+'</span><span class="skill-eg">e.g. "'+esc(s.examples?s.examples[0]:'')+'"</span></div>'});
+      h+='</div>';
+    });
+    h+='</div><div class="card"><h4>JSON Design</h4><div style="font-size:11px;color:var(--muted);margin-bottom:8px">Natural language is normalized into a task plan. The backend validates the fields, expands composite steps, creates TaskRecord nodes, and dispatches each action to the simulator.</div>'
+      +'<div class="skill-row"><span class="tag blue">version</span><span class="skill-label">Schema marker. Current value is solar-command-v1 so the backend knows how to normalize the plan.</span></div>'
+      +'<div class="skill-row"><span class="tag blue">intent</span><span class="skill-label">Short parser summary such as inspect_row, return_base, navigate_panel. Used for observability, not motion control.</span></div>'
+      +'<div class="skill-row"><span class="tag blue">confidence</span><span class="skill-label">LLM confidence from 0 to 1. It is shown in AI Command traces; invalid commands are rejected by validation.</span></div>'
+      +'<div class="skill-row"><span class="tag green">tasks</span><span class="skill-label">Top-level user goals. Multiple tasks are allowed when one command asks for separate work streams.</span></div>'
+      +'<div class="skill-row"><span class="tag green">task.label</span><span class="skill-label">Human-readable title shown in Tasks and logs.</span></div>'
+      +'<div class="skill-row"><span class="tag green">task.mode</span><span class="skill-label">sequential means steps run in order. parallel groups same-time work. conditional is used when later work depends on scan results.</span></div>'
+      +'<div class="skill-row"><span class="tag yellow">steps</span><span class="skill-label">Progress nodes inside a task. Each step maps to one dot/node in the Tasks tab and completes from simulator state.</span></div>'
+      +'<div class="skill-row"><span class="tag yellow">actions</span><span class="skill-label">Executable skill calls inside a step. Actions in the same step are dispatched together.</span></div>'
+      +'<div class="skill-row"><span class="tag red">action.skill</span><span class="skill-label">Must be one executable skill listed above, for example drone_scan_row, go2_navigate, go2_return_base.</span></div>'
+      +'<div class="skill-row"><span class="tag red">action.robot</span><span class="skill-label">Optional target: Drone-01..05, Go2-01..05, auto, Go2 Fleet, or Fleet. If omitted, the selected UI robot or skill default is used.</span></div>'
+      +'<div class="skill-row"><span class="tag red">row / col / panels</span><span class="skill-label">Panel coordinates. row and col address one panel; panels is a list of [row,col] pairs for batch scans or confirmations.</span></div>'
+      +'<div class="skill-row"><span class="tag red">params</span><span class="skill-label">Skill-specific numeric values. Movement uses distance_m; turning uses angle_deg with a 90 degree default.</span></div>'
+      +'<div class="skill-row"><span class="tag red">desc</span><span class="skill-label">Optional action text shown in logs and task details.</span></div></div>';
+  }else if(activeTab==='ai'){
+    var ai=d.ai_parser||{};
+    h='<h3>AI Command History</h3><div class="card"><div class="card-row"><span>Command interpretation</span><span class="tag '+(ai.api_key_set?'green':'yellow')+'">'+(ai.api_key_set?'AI-assisted':'Guided')+'</span></div><div class="card-row"><span>Safety validation</span><span class="tag green">ACTIVE</span></div></div>';
+    var traces=d.command_traces||[];
+    if(!traces.length)h+='<div class="card"><span style="color:var(--muted)">No commands yet. Use the input below.</span></div>';
+    traces.slice().reverse().forEach(function(tr){
+      h+='<div class="card"><div class="card-row"><span style="font-size:10px;color:var(--muted)">'+tr.id+'</span><span class="tag '+(tr.ok?'green':'red')+'">'+tr.source+'</span></div><div style="margin:4px 0">'+esc(tr.text)+'</div>';
+      h+='<div class="pipeline-step '+(tr.ok?'ok':'fail')+'">Selected context: '+esc(tr.selected_robot||'none')+'</div>';
+      if(tr.llm_request_summary&&Object.keys(tr.llm_request_summary).length)h+='<div class="pipeline-step ok">LLM request: '+esc(JSON.stringify(tr.llm_request_summary))+'</div>';
+      if(tr.normalized_json&&Object.keys(tr.normalized_json).length)h+='<h4>Normalized JSON</h4><div class="pipeline-json">'+esc(JSON.stringify(tr.normalized_json,null,2))+'</div>';
+      else if(tr.actions&&tr.actions.length)h+='<h4>Actions JSON</h4><div class="pipeline-json">'+esc(JSON.stringify({actions:tr.actions},null,2))+'</div>';
+      if(tr.generated_tasks&&tr.generated_tasks.length)h+='<h4>Generated Tasks</h4><div class="pipeline-json">'+esc(JSON.stringify(tr.generated_tasks,null,2))+'</div>';
+      if(tr.validation_errors&&tr.validation_errors.length)tr.validation_errors.forEach(function(e){h+='<div class="pipeline-step fail">'+esc(e)+'</div>'});
+      if(tr.dispatch_log&&tr.dispatch_log.length)tr.dispatch_log.forEach(function(l){h+='<div class="pipeline-step ok">'+l+'</div>'});
+      if(tr.error)h+='<div class="pipeline-step fail">'+tr.error+'</div>';
+      h+='</div>';
+    });
+  }
+  pageWrap.innerHTML=h;
+}
+
+function showActiveTab(force){
+  var overview=activeTab==='overview';
+  document.getElementById('sim-wrap').style.display=overview?'block':'none';
+  document.getElementById('center-bottom').style.display=overview?'flex':'none';
+  pageWrap.style.display=overview?'none':'block';
+  pageWrap.style.overflowY=(activeTab==='panels')?'visible':'auto';
+  var now=Date.now();
+  if(!force&&!overview&&(now<pageInteractUntil||now-lastPageRender<1000))return;
+  var outerScroll=pageWrap.scrollTop;
+  var nestedScrolls=[].map.call(pageWrap.querySelectorAll('.pipeline-json,.task-log'),function(el){return el.scrollTop});
+  renderLeftTab(store||{});
+  if(!force&&!overview){
+    pageWrap.scrollTop=outerScroll;
+    [].forEach.call(pageWrap.querySelectorAll('.pipeline-json,.task-log'),function(el,i){if(nestedScrolls[i]!=null)el.scrollTop=nestedScrolls[i]});
+  }
+  lastPageRender=now;
+}
+
+var fpvDroneRenderer,fpvGo2Renderer,fpvDroneIdx=0,fpvGo2Idx=0;
+function setupFpvRenderers(){
+  var fd=document.getElementById('fpv-drone'),fg=document.getElementById('fpv-go2');
+  if(!fpvDroneRenderer&&fd.clientWidth>0){fpvDroneRenderer=new THREE.WebGLRenderer({antialias:true});fpvDroneRenderer.setSize(fd.clientWidth,fd.clientHeight);fd.appendChild(fpvDroneRenderer.domElement)}
+  if(!fpvGo2Renderer&&fg.clientWidth>0){fpvGo2Renderer=new THREE.WebGLRenderer({antialias:true});fpvGo2Renderer.setSize(fg.clientWidth,fg.clientHeight);fg.appendChild(fpvGo2Renderer.domElement)}
+}
+document.getElementById('fpv-drone-select').addEventListener('change',function(){fpvDroneIdx=Number(this.value)||0;document.getElementById('fpv-drone-label').textContent='Drone-0'+(fpvDroneIdx+1)+' FPV'});
+document.getElementById('fpv-go2-select').addEventListener('change',function(){fpvGo2Idx=Number(this.value)||0;document.getElementById('fpv-go2-label').textContent='Go2-0'+(fpvGo2Idx+1)+' FPV'});
+var aiRowBuilt=false;
+function doSend(){var ta=document.getElementById('ai-cmd');var v=ta.value.trim();if(!v)return;dispatchAI(v);ta.value='';ta.focus()}
+function renderBottom(d){
+  if(!aiRowBuilt){
+    document.getElementById('ai-row').innerHTML='<h4 style="color:var(--accent);margin-bottom:6px">Command</h4><textarea id="ai-cmd" placeholder="Selected robot receives this command, e.g. move forward" style="min-height:36px"></textarea><button class="btn" id="ai-send" style="margin-top:4px;width:100%">Execute</button>';
+    document.getElementById('ai-send').addEventListener('click',doSend);
+    document.getElementById('ai-cmd').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();doSend()}});
+    aiRowBuilt=true;
+  }
+  setupFpvRenderers();
+}
+
+function renderFpv(){
+  if(!scene||!store)return;
+  var fd=document.getElementById('fpv-drone'),fg=document.getElementById('fpv-go2');
+  if(fd.clientWidth>0&&fpvDroneRenderer)fpvDroneRenderer.setSize(fd.clientWidth,fd.clientHeight);
+  if(fg.clientWidth>0&&fpvGo2Renderer)fpvGo2Renderer.setSize(fg.clientWidth,fg.clientHeight);
+  var fpvHiddenHelpers=go2RouteLines.slice();
+  if(walkableRegionGroup)fpvHiddenHelpers.push(walkableRegionGroup);
+  if(coordGuideGroup)fpvHiddenHelpers.push(coordGuideGroup);
+  var helperVisibility=fpvHiddenHelpers.map(function(o){return o.visible});
+  fpvHiddenHelpers.forEach(function(o){o.visible=false});
+  if(fpvDroneRenderer&&store.drones){var di=Math.max(0,Math.min(fpvDroneIdx,store.drones.length-1));var d0=store.drones[di];if(d0){var dm=droneMeshes[di];if(dm)dm.visible=false;var h=d0.pose.z!=null?d0.pose.z:getGroundHeight(d0.pose.x,d0.pose.y)+0.5;var ground=getGroundHeight(d0.pose.x,d0.pose.y);var fc=new THREE.PerspectiveCamera(80,fd.clientWidth/Math.max(1,fd.clientHeight),0.1,200);fc.position.set(d0.pose.x,h-0.05,d0.pose.y);fc.up.set(Math.cos(-d0.pose.yaw),0,Math.sin(-d0.pose.yaw));fc.lookAt(d0.pose.x,ground,d0.pose.y);fpvDroneRenderer.render(scene,fc);if(dm)dm.visible=true}}
+  if(fpvGo2Renderer&&store.go2s){var gi=Math.max(0,Math.min(fpvGo2Idx,store.go2s.length-1));var g0=store.go2s[gi];if(g0){var gm=go2Models[gi];if(gm)gm.visible=false;var ground=getGroundHeight(g0.pose.x,g0.pose.y);var yaw=g0.pose.yaw||0;var fx=Math.cos(yaw),fz=Math.sin(yaw);var head=go2HeadHeight(gm);var gc=new THREE.PerspectiveCamera(75,fg.clientWidth/Math.max(1,fg.clientHeight),0.1,200);gc.position.set(g0.pose.x+fx*0.35,ground+head,g0.pose.y+fz*0.35);gc.lookAt(g0.pose.x+fx*6,ground+head*.92,g0.pose.y+fz*6);fpvGo2Renderer.render(scene,gc);if(gm)gm.visible=true}}
+  fpvHiddenHelpers.forEach(function(o,i){o.visible=helperVisibility[i]});
+}
+
+function updateCoordHud(){
+  var el=document.getElementById('coord-hud');if(!el)return;
+  var rd=store.drones?store.drones.find(function(dd){return dd.name===sfpv}):null;
+  if(!rd&&store.go2s)rd=store.go2s.find(function(gg){return gg.name===sfpv});
+  if(!rd||!rd.pose){el.innerHTML='Selected: --<br>X: -- | Z: -- | Y: --';return}
+  var x=rd.pose.x||0,z=rd.pose.y||0;
+  var y=rd.pose.world_y!=null?rd.pose.world_y:(rd.pose.z!=null?rd.pose.z:getGroundHeight(x,z));
+  var yaw=rd.pose.yaw||0;
+  el.innerHTML='Selected: '+rd.name+'<br>X: '+x.toFixed(2)+' | Z(field y): '+z.toFixed(2)+' | Y: '+y.toFixed(2)+'<br>yaw: '+yaw.toFixed(2)+' rad / '+(yaw*180/Math.PI).toFixed(0)+' deg';
+}
+
+document.querySelectorAll('.tab-btn').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.tab-btn').forEach(function(x){x.classList.remove('active')});this.classList.add('active');
+  activeTab=this.dataset.tab;showActiveTab(true);
+})});
+
+function animate(){
+  requestAnimationFrame(animate);
+  if(!scene||!renderer||!renderer.domElement.parentNode)return;
+  if(simViewMode==='follow'&&store){var followName=followRobot||sfpv;var rd=store.drones?store.drones.find(function(dd){return dd.name===followName}):null;if(!rd&&store.go2s)rd=store.go2s.find(function(gg){return gg.name===followName});if(rd){var gy=rd.pose.world_y!=null?rd.pose.world_y:getGroundHeight(rd.pose.x,rd.pose.y)+(rd.pose.z||0);smoothTarget.lerp(new THREE.Vector3(rd.pose.x,gy+1,rd.pose.y),0.05);ctg.copy(smoothTarget);cp+=((0.55)-cp)*0.04}}
+  if(simViewMode==='free'){
+    var move=.45,forward=new THREE.Vector3(Math.sin(ct),0,Math.cos(ct)),right=new THREE.Vector3(Math.cos(ct),0,-Math.sin(ct));
+    if(freeKeys['w']||freeKeys['arrowup'])ctg.addScaledVector(forward,move);
+    if(freeKeys['s']||freeKeys['arrowdown'])ctg.addScaledVector(forward,-move);
+    if(freeKeys['a']||freeKeys['arrowleft'])ctg.addScaledVector(right,-move);
+    if(freeKeys['d']||freeKeys['arrowright'])ctg.addScaledVector(right,move);
+    if(freeKeys['q'])ctg.y+=move;
+    if(freeKeys['e'])ctg.y-=move;
+  }
+  camera.position.set(ctg.x+cd*Math.sin(ct)*Math.cos(cp),ctg.y+cd*Math.sin(cp),ctg.z+cd*Math.cos(ct)*Math.cos(cp));camera.lookAt(ctg);
+  droneMeshes.forEach(function(dm){dm.children.forEach(function(c){if(c.name==='prop')c.rotation.y+=.35})});
+  var sw=document.getElementById('sim-wrap');if(sw&&sw.clientWidth>0){renderer.setSize(sw.clientWidth,sw.clientHeight);camera.aspect=sw.clientWidth/sw.clientHeight;camera.updateProjectionMatrix()}
+  updateCoordHud();
+  renderer.render(scene,camera);renderFpv();
+}
+
+initScene();connectWS();setupFpvRenderers();showActiveTab(true);animate();
+</script>
+</body>
+</html>

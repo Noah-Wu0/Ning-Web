@@ -1,0 +1,1280 @@
+{
+  "assets/images/truenorth/generated-ocr-final.json": {
+    "mtime": 1785999906.0,
+    "seen": 1787653016.49389,
+    "ast_hash": "b058867faa4ef2d5d9524a7f9b7dc83e",
+    "semantic_hash": "b058867faa4ef2d5d9524a7f9b7dc83e"
+  },
+  "assets/images/truenorth/generated-ocr-v2.json": {
+    "mtime": 1785999523.0,
+    "seen": 1787653016.4938931,
+    "ast_hash": "c1e0c531fe8cba8b8ebfd01f4561243f",
+    "semantic_hash": "c1e0c531fe8cba8b8ebfd01f4561243f"
+  },
+  "assets/images/truenorth/generated-ocr-v3.json": {
+    "mtime": 1785999798.0,
+    "seen": 1787653016.4938939,
+    "ast_hash": "1522afed51e13c93361eb680c0b6a351",
+    "semantic_hash": "1522afed51e13c93361eb680c0b6a351"
+  },
+  "assets/images/truenorth/generated-ocr.json": {
+    "mtime": 1785999356.0,
+    "seen": 1787653016.4938939,
+    "ast_hash": "d5d1311f55df1aa24d79f026b24bb1c8",
+    "semantic_hash": "d5d1311f55df1aa24d79f026b24bb1c8"
+  },
+  "assets/images/truenorth/openai-refresh-ocr.json": {
+    "mtime": 1786004347.0,
+    "seen": 1787653016.4938948,
+    "ast_hash": "b058867faa4ef2d5d9524a7f9b7dc83e",
+    "semantic_hash": "b058867faa4ef2d5d9524a7f9b7dc83e"
+  },
+  "demos/leadership-ai/_next/static/4A7nFNYC76ZW8q1k3t62O/_buildManifest.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4938948,
+    "ast_hash": "3f290ecb505664f59e6ec20e14f7fccd",
+    "semantic_hash": "3f290ecb505664f59e6ec20e14f7fccd"
+  },
+  "demos/leadership-ai/_next/static/4A7nFNYC76ZW8q1k3t62O/_clientMiddlewareManifest.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4938948,
+    "ast_hash": "013eb57bab04ab886e7d6f5105a343c8",
+    "semantic_hash": "013eb57bab04ab886e7d6f5105a343c8"
+  },
+  "demos/leadership-ai/_next/static/4A7nFNYC76ZW8q1k3t62O/_ssgManifest.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493902,
+    "ast_hash": "128421e0cc03c0a5daf491a1bb3269f8",
+    "semantic_hash": "128421e0cc03c0a5daf491a1bb3269f8"
+  },
+  "demos/leadership-ai/_next/static/HGvKa-XljZXWhTO-74zis/_buildManifest.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939032,
+    "ast_hash": "3f290ecb505664f59e6ec20e14f7fccd",
+    "semantic_hash": "3f290ecb505664f59e6ec20e14f7fccd"
+  },
+  "demos/leadership-ai/_next/static/HGvKa-XljZXWhTO-74zis/_clientMiddlewareManifest.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939032,
+    "ast_hash": "013eb57bab04ab886e7d6f5105a343c8",
+    "semantic_hash": "013eb57bab04ab886e7d6f5105a343c8"
+  },
+  "demos/leadership-ai/_next/static/HGvKa-XljZXWhTO-74zis/_ssgManifest.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939039,
+    "ast_hash": "128421e0cc03c0a5daf491a1bb3269f8",
+    "semantic_hash": "128421e0cc03c0a5daf491a1bb3269f8"
+  },
+  "demos/leadership-ai/_next/static/chunks/04bzhnn2h6b1h.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939039,
+    "ast_hash": "6839979d9fd83f39a916f335824122e1",
+    "semantic_hash": "6839979d9fd83f39a916f335824122e1"
+  },
+  "demos/leadership-ai/_next/static/chunks/0cz1d0mv5g_q7.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939039,
+    "ast_hash": "846118c33b2c0e922d7b3a7676f81f6f",
+    "semantic_hash": "846118c33b2c0e922d7b3a7676f81f6f"
+  },
+  "demos/leadership-ai/_next/static/chunks/0fmghbx-z5ywh.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939048,
+    "ast_hash": "b8b16a45995ebfeec6be98e99fa67282",
+    "semantic_hash": "b8b16a45995ebfeec6be98e99fa67282"
+  },
+  "demos/leadership-ai/_next/static/chunks/0nm_ikx_yxvo3.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939048,
+    "ast_hash": "cc77b0e248d71e6488e9699ee112c5ff",
+    "semantic_hash": "cc77b0e248d71e6488e9699ee112c5ff"
+  },
+  "demos/leadership-ai/_next/static/chunks/0oala5ybm6kab.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939048,
+    "ast_hash": "d98a5d3bd6099c881e614371a2784f31",
+    "semantic_hash": "d98a5d3bd6099c881e614371a2784f31"
+  },
+  "demos/leadership-ai/_next/static/chunks/0ob48n2m2jzj3.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939048,
+    "ast_hash": "781314965f68541059a603dbfc152288",
+    "semantic_hash": "781314965f68541059a603dbfc152288"
+  },
+  "demos/leadership-ai/_next/static/chunks/0p_20ro8m411s.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493906,
+    "ast_hash": "df3a66b3df959eb51cd43100fa2fd8c2",
+    "semantic_hash": "df3a66b3df959eb51cd43100fa2fd8c2"
+  },
+  "demos/leadership-ai/_next/static/chunks/0y0t_ff7ouybs.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493906,
+    "ast_hash": "9e2488e7aff5b78ff5342b1d42b5b37a",
+    "semantic_hash": "9e2488e7aff5b78ff5342b1d42b5b37a"
+  },
+  "demos/leadership-ai/_next/static/chunks/0yx9i5blnw3pu.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493906,
+    "ast_hash": "d451c8d5661b9903b5edb2461f7cd18a",
+    "semantic_hash": "d451c8d5661b9903b5edb2461f7cd18a"
+  },
+  "demos/leadership-ai/_next/static/chunks/10gpajd23w7l8.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493906,
+    "ast_hash": "a9a2108a87c13f18bfcdd6a98885d1a1",
+    "semantic_hash": "a9a2108a87c13f18bfcdd6a98885d1a1"
+  },
+  "demos/leadership-ai/_next/static/chunks/14h-e_mo_971-.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493907,
+    "ast_hash": "024a87c6e7f8c2b637be7635821cc74a",
+    "semantic_hash": "024a87c6e7f8c2b637be7635821cc74a"
+  },
+  "demos/leadership-ai/_next/static/chunks/1746j5s4yand0.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493907,
+    "ast_hash": "1ef4b24481712d39fcbfc341e59a061e",
+    "semantic_hash": "1ef4b24481712d39fcbfc341e59a061e"
+  },
+  "demos/leadership-ai/_next/static/chunks/1cs-2wdila3x1.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493907,
+    "ast_hash": "58ce7fb3b2ee29dbb81ecbf6eb505a8a",
+    "semantic_hash": "58ce7fb3b2ee29dbb81ecbf6eb505a8a"
+  },
+  "demos/leadership-ai/_next/static/chunks/1h9h3xsaki20e.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493908,
+    "ast_hash": "43600932f3c847dc97b3665b92e28170",
+    "semantic_hash": "43600932f3c847dc97b3665b92e28170"
+  },
+  "demos/leadership-ai/_next/static/chunks/1pndnawo6an6j.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493908,
+    "ast_hash": "ab5b5a5002c83e7ca0ca3deb0b17342d",
+    "semantic_hash": "ab5b5a5002c83e7ca0ca3deb0b17342d"
+  },
+  "demos/leadership-ai/_next/static/chunks/1s66hu8rgmt81.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493908,
+    "ast_hash": "4da09a778d568e1809abb3f7d67b88a6",
+    "semantic_hash": "4da09a778d568e1809abb3f7d67b88a6"
+  },
+  "demos/leadership-ai/_next/static/chunks/1xwk9suidv0uc.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493908,
+    "ast_hash": "88322081ce8fa34fb1974eea5ab19338",
+    "semantic_hash": "88322081ce8fa34fb1974eea5ab19338"
+  },
+  "demos/leadership-ai/_next/static/chunks/21n4ohono7-k-.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493909,
+    "ast_hash": "f64c254bbd6bfa398816e06c228d3e4d",
+    "semantic_hash": "f64c254bbd6bfa398816e06c228d3e4d"
+  },
+  "demos/leadership-ai/_next/static/chunks/2648bxou8_c72.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493909,
+    "ast_hash": "e9b10776c1b58ae3a3b3e82d855a9268",
+    "semantic_hash": "e9b10776c1b58ae3a3b3e82d855a9268"
+  },
+  "demos/leadership-ai/_next/static/chunks/2i8kjibdhqipn.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493909,
+    "ast_hash": "60b6a8c9d76330cfc10f75274b0a14d4",
+    "semantic_hash": "60b6a8c9d76330cfc10f75274b0a14d4"
+  },
+  "demos/leadership-ai/_next/static/chunks/2kw5nn277709m.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493909,
+    "ast_hash": "7bf7257d1e65974aeaef5dbd407a395c",
+    "semantic_hash": "7bf7257d1e65974aeaef5dbd407a395c"
+  },
+  "demos/leadership-ai/_next/static/chunks/2l4ue4-uhwi3y.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49391,
+    "ast_hash": "bff75da7462fe0ad34d1513d4f719c1f",
+    "semantic_hash": "bff75da7462fe0ad34d1513d4f719c1f"
+  },
+  "demos/leadership-ai/_next/static/chunks/2x2jax8623r2_.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49391,
+    "ast_hash": "0efca17beb6eef36414df4cef46304c4",
+    "semantic_hash": "0efca17beb6eef36414df4cef46304c4"
+  },
+  "demos/leadership-ai/_next/static/chunks/346479xgesmf5.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49391,
+    "ast_hash": "cfa81118021303c0a17bcb834a028e38",
+    "semantic_hash": "cfa81118021303c0a17bcb834a028e38"
+  },
+  "demos/leadership-ai/_next/static/chunks/3_bij3l2nt1rt.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49391,
+    "ast_hash": "0e533042f0a495b89818f9f33b448983",
+    "semantic_hash": "0e533042f0a495b89818f9f33b448983"
+  },
+  "demos/leadership-ai/_next/static/chunks/3aw2tafd8pocj.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493911,
+    "ast_hash": "6446ca7fc12ea00e3edaec3c8ea48ecd",
+    "semantic_hash": "6446ca7fc12ea00e3edaec3c8ea48ecd"
+  },
+  "demos/leadership-ai/_next/static/chunks/3cegpt36tc6za.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493911,
+    "ast_hash": "a874414f0f78382715ad378fa7ea4a24",
+    "semantic_hash": "a874414f0f78382715ad378fa7ea4a24"
+  },
+  "demos/leadership-ai/_next/static/chunks/3g13ukqbsbxmx.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493911,
+    "ast_hash": "3aab79faf2f22a001a9447ade404787b",
+    "semantic_hash": "3aab79faf2f22a001a9447ade404787b"
+  },
+  "demos/leadership-ai/_next/static/chunks/3lptw4q1anjzd.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493911,
+    "ast_hash": "f664451823d047387aa474780bdf6d58",
+    "semantic_hash": "f664451823d047387aa474780bdf6d58"
+  },
+  "demos/leadership-ai/_next/static/chunks/3pxk8wi8vg82t.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493912,
+    "ast_hash": "bad7c5249bb416a854ecb340fc241671",
+    "semantic_hash": "bad7c5249bb416a854ecb340fc241671"
+  },
+  "demos/leadership-ai/_next/static/chunks/3ufmuen2wes_a.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493912,
+    "ast_hash": "ba6f21ece7f91ae07efd18f8ffc31169",
+    "semantic_hash": "ba6f21ece7f91ae07efd18f8ffc31169"
+  },
+  "demos/leadership-ai/_next/static/chunks/turbopack-08tdg-marxd3u.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493912,
+    "ast_hash": "13f115e7f769764c8df9824269fd15d3",
+    "semantic_hash": "13f115e7f769764c8df9824269fd15d3"
+  },
+  "demos/leadership-ai/_next/static/chunks/turbopack-3_-nv1-4t3lx7.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939132,
+    "ast_hash": "a641d110122837b66e08000a01d3a92b",
+    "semantic_hash": "a641d110122837b66e08000a01d3a92b"
+  },
+  "demos/solar-inspection/ColladaLoader.js": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939132,
+    "ast_hash": "406e6153f8df657bb8c768b65d6e4654",
+    "semantic_hash": "406e6153f8df657bb8c768b65d6e4654"
+  },
+  "demos/solar-inspection/GLTFLoader.js": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939132,
+    "ast_hash": "78abcc3f16dc6a93f7bb228fb3bec79a",
+    "semantic_hash": "78abcc3f16dc6a93f7bb228fb3bec79a"
+  },
+  "demos/solar-inspection/assets/solar_field/field_config.json": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939141,
+    "ast_hash": "6b99bbf7e1b2bb3f465f9872223727e1",
+    "semantic_hash": "6b99bbf7e1b2bb3f465f9872223727e1"
+  },
+  "demos/solar-inspection/go2_visual.js": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939141,
+    "ast_hash": "fe1fae3239c562dd87555459192bf748",
+    "semantic_hash": "fe1fae3239c562dd87555459192bf748"
+  },
+  "demos/solar-inspection/go2_visual_model.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939141,
+    "ast_hash": "425d7a491a9a6d219e5592bd895fbda4",
+    "semantic_hash": "425d7a491a9a6d219e5592bd895fbda4"
+  },
+  "demos/solar-inspection/server.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939141,
+    "ast_hash": "0ea073883754df22f874044f78ec45a0",
+    "semantic_hash": "0ea073883754df22f874044f78ec45a0"
+  },
+  "demos/solar-inspection/sim_solar.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939141,
+    "ast_hash": "a9f8d6896a4d309cd918ceb1244cf1b4",
+    "semantic_hash": "a9f8d6896a4d309cd918ceb1244cf1b4"
+  },
+  "demos/solar-inspection/solar_llm.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939148,
+    "ast_hash": "75447168e5872ab943cdc30dc17aa932",
+    "semantic_hash": "75447168e5872ab943cdc30dc17aa932"
+  },
+  "demos/solar-inspection/solar_map.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939148,
+    "ast_hash": "031f8f41c860be6e8b09e2f277688984",
+    "semantic_hash": "031f8f41c860be6e8b09e2f277688984"
+  },
+  "demos/solar-inspection/solar_orchestrator.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939148,
+    "ast_hash": "62cd1f260727b800da4e3b109c5f74be",
+    "semantic_hash": "62cd1f260727b800da4e3b109c5f74be"
+  },
+  "demos/solar-inspection/solar_semantic.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939148,
+    "ast_hash": "6223baa92f3e3fb99aea0ce04c98ba5e",
+    "semantic_hash": "6223baa92f3e3fb99aea0ce04c98ba5e"
+  },
+  "demos/solar-inspection/solar_skills.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939158,
+    "ast_hash": "deb07c1c0985d1bee47dacbe1627c397",
+    "semantic_hash": "deb07c1c0985d1bee47dacbe1627c397"
+  },
+  "demos/solar-inspection/terrain_height.py": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939158,
+    "ast_hash": "7e4bb7ea1ab61bd82e200465cf18dc8a",
+    "semantic_hash": "7e4bb7ea1ab61bd82e200465cf18dc8a"
+  },
+  "demos/solar-inspection/three.min.js": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939158,
+    "ast_hash": "eb8549863a97355411c3259a3f93b8e1",
+    "semantic_hash": "eb8549863a97355411c3259a3f93b8e1"
+  },
+  "demos/solar-inspection/urdf-loader.min.js": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939158,
+    "ast_hash": "dbfa79def0abf538ee37a6a2a92b87fa",
+    "semantic_hash": "dbfa79def0abf538ee37a6a2a92b87fa"
+  },
+  "js/app.js": {
+    "mtime": 1785477502.0,
+    "seen": 1787653016.493917,
+    "ast_hash": "9356eca4ef88b2574ec8d00c302ee47c",
+    "semantic_hash": "9356eca4ef88b2574ec8d00c302ee47c"
+  },
+  "js/mining-case.js": {
+    "mtime": 1785991185.0,
+    "seen": 1787653016.493917,
+    "ast_hash": "c593cf370cc540e22e35f527b47247c0",
+    "semantic_hash": "c593cf370cc540e22e35f527b47247c0"
+  },
+  "js/truenorth-products.js": {
+    "mtime": 1786000038.0,
+    "seen": 1787653016.493917,
+    "ast_hash": "d73399ed274356abc569ede4637d525a",
+    "semantic_hash": "d73399ed274356abc569ede4637d525a"
+  },
+  "scripts/audit_customer_voice.py": {
+    "mtime": 1786007574.0,
+    "seen": 1787653016.493917,
+    "ast_hash": "fa3b906987380d53b5621fd6b906156e",
+    "semantic_hash": "fa3b906987380d53b5621fd6b906156e"
+  },
+  "scripts/extract_true_north_decks.py": {
+    "mtime": 1785998827.0,
+    "seen": 1787653016.493918,
+    "ast_hash": "520d946cb8dd1dbdb24701ca088c08a7",
+    "semantic_hash": "520d946cb8dd1dbdb24701ca088c08a7"
+  },
+  "scripts/make_true_north_contact_sheet.py": {
+    "mtime": 1785999335.0,
+    "seen": 1787653016.493918,
+    "ast_hash": "b6523a64aedb484b8e2880b1eed83ae8",
+    "semantic_hash": "b6523a64aedb484b8e2880b1eed83ae8"
+  },
+  "scripts/ocr_json_to_markdown.py": {
+    "mtime": 1785999061.0,
+    "seen": 1787653016.493918,
+    "ast_hash": "fdeb0e4f7781c15981d3056be814ad3e",
+    "semantic_hash": "fdeb0e4f7781c15981d3056be814ad3e"
+  },
+  "scripts/ocr_slides.swift": {
+    "mtime": 1785998873.0,
+    "seen": 1787653016.493918,
+    "ast_hash": "718c8898e7134e181127245937b1c5d8",
+    "semantic_hash": "718c8898e7134e181127245937b1c5d8"
+  },
+  "scripts/qa_true_north_pages.py": {
+    "mtime": 1786008376.0,
+    "seen": 1787653016.493919,
+    "ast_hash": "fb67ec9f976bb7642c5ff0a09dd895fe",
+    "semantic_hash": "fb67ec9f976bb7642c5ff0a09dd895fe"
+  },
+  "serve.py": {
+    "mtime": 1785477848.0,
+    "seen": 1787653016.493919,
+    "ast_hash": "7bfd524041b055efb8d341267513f14c",
+    "semantic_hash": "7bfd524041b055efb8d341267513f14c"
+  },
+  "sources/true-north-extracted/boss-ai-ocr.json": {
+    "mtime": 1785998890.0,
+    "seen": 1787653016.493919,
+    "ast_hash": "b4fa02a1f73de79fa214ff85fe5f5f09",
+    "semantic_hash": "b4fa02a1f73de79fa214ff85fe5f5f09"
+  },
+  "sources/true-north-extracted/investor-ai-ocr.json": {
+    "mtime": 1785998887.0,
+    "seen": 1787653016.493919,
+    "ast_hash": "cff42d1c2a24cd377d09a47df1114d64",
+    "semantic_hash": "cff42d1c2a24cd377d09a47df1114d64"
+  },
+  "sources/true-north-extracted/manifest.json": {
+    "mtime": 1785998859.0,
+    "seen": 1787653016.493919,
+    "ast_hash": "e13759a4e777490b0b8adf8045a8ffea",
+    "semantic_hash": "e13759a4e777490b0b8adf8045a8ffea"
+  },
+  "sources/true-north-extracted/topsales-ai-ocr.json": {
+    "mtime": 1785998895.0,
+    "seen": 1787653016.49392,
+    "ast_hash": "209bba146fdda0391620d21b9569ba3c",
+    "semantic_hash": "209bba146fdda0391620d21b9569ba3c"
+  },
+  "vendor/three.module.min.js": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49392,
+    "ast_hash": "3eb31ec476700d53a41d4d0bcd98b366",
+    "semantic_hash": "3eb31ec476700d53a41d4d0bcd98b366"
+  },
+  "CUSTOMER_VOICE_AUDIT.md": {
+    "mtime": 1786013351.0,
+    "seen": 1787653016.49392,
+    "ast_hash": "699a806825f95d261270b155e03295ec",
+    "semantic_hash": "699a806825f95d261270b155e03295ec"
+  },
+  "PRESENTATION_SCRIPT_EN.md": {
+    "mtime": 1785480163.0,
+    "seen": 1787653016.49392,
+    "ast_hash": "ca08c965441afe28ff75ac5a02e257ec",
+    "semantic_hash": "ca08c965441afe28ff75ac5a02e257ec"
+  },
+  "README.md": {
+    "mtime": 1785478397.0,
+    "seen": 1787653016.493921,
+    "ast_hash": "9f46262fa42d7088b11c44b65a55de31",
+    "semantic_hash": "9f46262fa42d7088b11c44b65a55de31"
+  },
+  "demos/kazakhstan-energy.html": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493921,
+    "ast_hash": "92907c1ed0c01fbc1dfafb4f0b58166d",
+    "semantic_hash": "92907c1ed0c01fbc1dfafb4f0b58166d"
+  },
+  "demos/leadership-ai/404.html": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.493921,
+    "ast_hash": "545f380c352a7143db09c8785dfb80d8",
+    "semantic_hash": "545f380c352a7143db09c8785dfb80d8"
+  },
+  "demos/leadership-ai/__next.__PAGE__.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493921,
+    "ast_hash": "7a70dcdcf73c33ac639165ad0305d2a1",
+    "semantic_hash": "7a70dcdcf73c33ac639165ad0305d2a1"
+  },
+  "demos/leadership-ai/__next._full.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493922,
+    "ast_hash": "153fd64418b46ec90a57ee14eac1decd",
+    "semantic_hash": "153fd64418b46ec90a57ee14eac1decd"
+  },
+  "demos/leadership-ai/__next._index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493922,
+    "ast_hash": "82b23f0b12c1281e42990ed025ec700d",
+    "semantic_hash": "82b23f0b12c1281e42990ed025ec700d"
+  },
+  "demos/leadership-ai/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493922,
+    "ast_hash": "5f0b266f0d542b3ff35722425b45fa92",
+    "semantic_hash": "5f0b266f0d542b3ff35722425b45fa92"
+  },
+  "demos/leadership-ai/_not-found/__next._head.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939232,
+    "ast_hash": "1b85cc2d7b827d63434d0495c267b213",
+    "semantic_hash": "1b85cc2d7b827d63434d0495c267b213"
+  },
+  "demos/leadership-ai/_not-found/__next._index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939232,
+    "ast_hash": "82b23f0b12c1281e42990ed025ec700d",
+    "semantic_hash": "82b23f0b12c1281e42990ed025ec700d"
+  },
+  "demos/leadership-ai/_not-found/__next._not-found.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939232,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/_not-found/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939241,
+    "ast_hash": "c54ca42945af0ea8a73d23e794a1b28d",
+    "semantic_hash": "c54ca42945af0ea8a73d23e794a1b28d"
+  },
+  "demos/leadership-ai/_not-found/index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939241,
+    "ast_hash": "81396e94449373d96ca4244ecbb5f46a",
+    "semantic_hash": "81396e94449373d96ca4244ecbb5f46a"
+  },
+  "demos/leadership-ai/daily-vanguard/__next.!KGFwcCk.daily-vanguard.__PAGE__.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939241,
+    "ast_hash": "e3e825f46b48e561ae2fd676c53f0f8c",
+    "semantic_hash": "e3e825f46b48e561ae2fd676c53f0f8c"
+  },
+  "demos/leadership-ai/daily-vanguard/__next.!KGFwcCk.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939241,
+    "ast_hash": "5152e5b39afce3ede5cc3238fee9576c",
+    "semantic_hash": "5152e5b39afce3ede5cc3238fee9576c"
+  },
+  "demos/leadership-ai/daily-vanguard/__next._full.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493925,
+    "ast_hash": "60451c7b0817ee196ff63c6f395e10f9",
+    "semantic_hash": "60451c7b0817ee196ff63c6f395e10f9"
+  },
+  "demos/leadership-ai/daily-vanguard/__next._index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493925,
+    "ast_hash": "82b23f0b12c1281e42990ed025ec700d",
+    "semantic_hash": "82b23f0b12c1281e42990ed025ec700d"
+  },
+  "demos/leadership-ai/daily-vanguard/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493925,
+    "ast_hash": "6d022d46963a6345d8303ac8b7add8e3",
+    "semantic_hash": "6d022d46963a6345d8303ac8b7add8e3"
+  },
+  "demos/leadership-ai/daily-vanguard/dashboard/__next.!KGFwcCk.daily-vanguard.dashboard.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493925,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/daily-vanguard/dashboard/__next.!KGFwcCk.daily-vanguard.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939258,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/daily-vanguard/dashboard/__next._full.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939258,
+    "ast_hash": "8358bcae65070e50d1bf206c6a1c4813",
+    "semantic_hash": "8358bcae65070e50d1bf206c6a1c4813"
+  },
+  "demos/leadership-ai/daily-vanguard/dashboard/__next._head.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939258,
+    "ast_hash": "3a1eb0fb28eac93e04c96a052ab0363c",
+    "semantic_hash": "3a1eb0fb28eac93e04c96a052ab0363c"
+  },
+  "demos/leadership-ai/daily-vanguard/dashboard/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939258,
+    "ast_hash": "0221650ee8c3aeba164c52bca4d54a60",
+    "semantic_hash": "0221650ee8c3aeba164c52bca4d54a60"
+  },
+  "demos/leadership-ai/daily-vanguard/dashboard/index.html": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.493927,
+    "ast_hash": "f071fe520ce52e3639c24483f10647f4",
+    "semantic_hash": "f071fe520ce52e3639c24483f10647f4"
+  },
+  "demos/leadership-ai/daily-vanguard/index.html": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.493927,
+    "ast_hash": "9899ba380418f2c1186a36de33429943",
+    "semantic_hash": "9899ba380418f2c1186a36de33429943"
+  },
+  "demos/leadership-ai/daily-vanguard/index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493927,
+    "ast_hash": "60451c7b0817ee196ff63c6f395e10f9",
+    "semantic_hash": "60451c7b0817ee196ff63c6f395e10f9"
+  },
+  "demos/leadership-ai/execution/__next.!KGFwcCk.execution.__PAGE__.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493927,
+    "ast_hash": "48b9abf8dbdb3dc02d341d1e6d055cc6",
+    "semantic_hash": "48b9abf8dbdb3dc02d341d1e6d055cc6"
+  },
+  "demos/leadership-ai/execution/__next.!KGFwcCk.execution.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493928,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/execution/__next._full.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493928,
+    "ast_hash": "7ddf0f9a1619d3f2631a9349b1c713ad",
+    "semantic_hash": "7ddf0f9a1619d3f2631a9349b1c713ad"
+  },
+  "demos/leadership-ai/execution/__next._head.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493928,
+    "ast_hash": "3a1eb0fb28eac93e04c96a052ab0363c",
+    "semantic_hash": "3a1eb0fb28eac93e04c96a052ab0363c"
+  },
+  "demos/leadership-ai/execution/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493928,
+    "ast_hash": "bdc83e6ba8fd92df9d84665939c7b154",
+    "semantic_hash": "bdc83e6ba8fd92df9d84665939c7b154"
+  },
+  "demos/leadership-ai/execution/index.html": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.493929,
+    "ast_hash": "836655a005424d5a15939e090d8dcf56",
+    "semantic_hash": "836655a005424d5a15939e090d8dcf56"
+  },
+  "demos/leadership-ai/execution/reports/__next.!KGFwcCk.execution.reports.__PAGE__.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493929,
+    "ast_hash": "45767a13dc24663bd4e055e873a482a0",
+    "semantic_hash": "45767a13dc24663bd4e055e873a482a0"
+  },
+  "demos/leadership-ai/execution/reports/__next.!KGFwcCk.execution.reports.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493929,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/execution/reports/__next.!KGFwcCk.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493929,
+    "ast_hash": "5152e5b39afce3ede5cc3238fee9576c",
+    "semantic_hash": "5152e5b39afce3ede5cc3238fee9576c"
+  },
+  "demos/leadership-ai/execution/reports/__next._full.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49393,
+    "ast_hash": "6ac1a54cb95b60b85351ab2ea58b9389",
+    "semantic_hash": "6ac1a54cb95b60b85351ab2ea58b9389"
+  },
+  "demos/leadership-ai/execution/reports/__next._index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49393,
+    "ast_hash": "82b23f0b12c1281e42990ed025ec700d",
+    "semantic_hash": "82b23f0b12c1281e42990ed025ec700d"
+  },
+  "demos/leadership-ai/execution/reports/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49393,
+    "ast_hash": "1cc9ecc443cf4da117d532efc37f7ea6",
+    "semantic_hash": "1cc9ecc443cf4da117d532efc37f7ea6"
+  },
+  "demos/leadership-ai/execution/reports/index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.49393,
+    "ast_hash": "6ac1a54cb95b60b85351ab2ea58b9389",
+    "semantic_hash": "6ac1a54cb95b60b85351ab2ea58b9389"
+  },
+  "demos/leadership-ai/index.html": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.493931,
+    "ast_hash": "5e4fcf0a6380d89f9d5258eb814300db",
+    "semantic_hash": "5e4fcf0a6380d89f9d5258eb814300db"
+  },
+  "demos/leadership-ai/meetings/__next.!KGFwcCk.meetings.__PAGE__.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493931,
+    "ast_hash": "004f45387dfc904d66fabb03daab6082",
+    "semantic_hash": "004f45387dfc904d66fabb03daab6082"
+  },
+  "demos/leadership-ai/meetings/__next.!KGFwcCk.meetings.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493931,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/meetings/__next._full.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493931,
+    "ast_hash": "2ef15b3fccd03af9b868f9709a0dc651",
+    "semantic_hash": "2ef15b3fccd03af9b868f9709a0dc651"
+  },
+  "demos/leadership-ai/meetings/__next._head.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493932,
+    "ast_hash": "3a1eb0fb28eac93e04c96a052ab0363c",
+    "semantic_hash": "3a1eb0fb28eac93e04c96a052ab0363c"
+  },
+  "demos/leadership-ai/meetings/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493932,
+    "ast_hash": "99c77928d94774d801c80ae1ff3e76b0",
+    "semantic_hash": "99c77928d94774d801c80ae1ff3e76b0"
+  },
+  "demos/leadership-ai/meetings/index.html": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.493932,
+    "ast_hash": "0e81c0191ddc2646e292867427b01d1b",
+    "semantic_hash": "0e81c0191ddc2646e292867427b01d1b"
+  },
+  "demos/leadership-ai/meetings/live/logistics-joint-review/__next._full.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493932,
+    "ast_hash": "c1c7df84ed7765fb3cbd49bf1e8491c3",
+    "semantic_hash": "c1c7df84ed7765fb3cbd49bf1e8491c3"
+  },
+  "demos/leadership-ai/meetings/live/logistics-joint-review/__next._head.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493933,
+    "ast_hash": "3a1eb0fb28eac93e04c96a052ab0363c",
+    "semantic_hash": "3a1eb0fb28eac93e04c96a052ab0363c"
+  },
+  "demos/leadership-ai/meetings/live/logistics-joint-review/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493933,
+    "ast_hash": "13eef255f20d4d8fd50ef2b05efe497b",
+    "semantic_hash": "13eef255f20d4d8fd50ef2b05efe497b"
+  },
+  "demos/leadership-ai/meetings/live/logistics-joint-review/__next.meetings.live.$d$id.__PAGE__.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493933,
+    "ast_hash": "2e204f80ef97fd02182e485142728384",
+    "semantic_hash": "2e204f80ef97fd02182e485142728384"
+  },
+  "demos/leadership-ai/meetings/live/logistics-joint-review/__next.meetings.live.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493933,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/meetings/live/logistics-joint-review/__next.meetings.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939342,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/meetings/live/logistics-joint-review/index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939342,
+    "ast_hash": "c1c7df84ed7765fb3cbd49bf1e8491c3",
+    "semantic_hash": "c1c7df84ed7765fb3cbd49bf1e8491c3"
+  },
+  "demos/leadership-ai/strategy/__next.!KGFwcCk.strategy.__PAGE__.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939342,
+    "ast_hash": "ab7caa09d55e0a84b145d177ff06d73c",
+    "semantic_hash": "ab7caa09d55e0a84b145d177ff06d73c"
+  },
+  "demos/leadership-ai/strategy/__next.!KGFwcCk.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939342,
+    "ast_hash": "5152e5b39afce3ede5cc3238fee9576c",
+    "semantic_hash": "5152e5b39afce3ede5cc3238fee9576c"
+  },
+  "demos/leadership-ai/strategy/__next._full.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493935,
+    "ast_hash": "ea25a0edc61d7f65feeccf829c3d63da",
+    "semantic_hash": "ea25a0edc61d7f65feeccf829c3d63da"
+  },
+  "demos/leadership-ai/strategy/__next._index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493935,
+    "ast_hash": "82b23f0b12c1281e42990ed025ec700d",
+    "semantic_hash": "82b23f0b12c1281e42990ed025ec700d"
+  },
+  "demos/leadership-ai/strategy/__next._tree.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493935,
+    "ast_hash": "0a0752478612402a1ea3a153909b6b26",
+    "semantic_hash": "0a0752478612402a1ea3a153909b6b26"
+  },
+  "demos/leadership-ai/strategy/index.html": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.493935,
+    "ast_hash": "00bd303db80f46f5111a1bdc482f7406",
+    "semantic_hash": "00bd303db80f46f5111a1bdc482f7406"
+  },
+  "demos/leadership-ai/strategy/index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493936,
+    "ast_hash": "ea25a0edc61d7f65feeccf829c3d63da",
+    "semantic_hash": "ea25a0edc61d7f65feeccf829c3d63da"
+  },
+  "demos/leadership-ai/strategy/simulation/__next.!KGFwcCk.strategy.simulation.__PAGE__.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493936,
+    "ast_hash": "cb4010b403efaa51c0d8fceb34f18c3b",
+    "semantic_hash": "cb4010b403efaa51c0d8fceb34f18c3b"
+  },
+  "demos/leadership-ai/strategy/simulation/__next.!KGFwcCk.strategy.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493936,
+    "ast_hash": "1f32550422cd91e61e12213b8ad6eb10",
+    "semantic_hash": "1f32550422cd91e61e12213b8ad6eb10"
+  },
+  "demos/leadership-ai/strategy/simulation/__next.!KGFwcCk.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493936,
+    "ast_hash": "5152e5b39afce3ede5cc3238fee9576c",
+    "semantic_hash": "5152e5b39afce3ede5cc3238fee9576c"
+  },
+  "demos/leadership-ai/strategy/simulation/__next._head.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939368,
+    "ast_hash": "3a1eb0fb28eac93e04c96a052ab0363c",
+    "semantic_hash": "3a1eb0fb28eac93e04c96a052ab0363c"
+  },
+  "demos/leadership-ai/strategy/simulation/__next._index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939368,
+    "ast_hash": "82b23f0b12c1281e42990ed025ec700d",
+    "semantic_hash": "82b23f0b12c1281e42990ed025ec700d"
+  },
+  "demos/leadership-ai/strategy/simulation/index.html": {
+    "mtime": 1785477442.0,
+    "seen": 1787653016.4939368,
+    "ast_hash": "652ffc48bf378bf429c35be0f5749997",
+    "semantic_hash": "652ffc48bf378bf429c35be0f5749997"
+  },
+  "demos/leadership-ai/strategy/simulation/index.txt": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939368,
+    "ast_hash": "a73b48c510033fbaefd9adcd68c93012",
+    "semantic_hash": "a73b48c510033fbaefd9adcd68c93012"
+  },
+  "demos/refinery.html": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493938,
+    "ast_hash": "429400445bd6dd801d7902a66fdf2b04",
+    "semantic_hash": "429400445bd6dd801d7902a66fdf2b04"
+  },
+  "demos/solar-inspection/index.html": {
+    "mtime": 1786008170.0,
+    "seen": 1787653016.493938,
+    "ast_hash": "9d2aa10c6c9b8600b98bb15ae8458d42",
+    "semantic_hash": "9d2aa10c6c9b8600b98bb15ae8458d42"
+  },
+  "fde.html": {
+    "mtime": 1786012644.0,
+    "seen": 1787653016.493938,
+    "ast_hash": "942c51235e44900eb18c7d3105dcf25f",
+    "semantic_hash": "942c51235e44900eb18c7d3105dcf25f"
+  },
+  "index.html": {
+    "mtime": 1786012347.0,
+    "seen": 1787653016.493938,
+    "ast_hash": "937a9217a080e6cf25994e0eb35acbd8",
+    "semantic_hash": "937a9217a080e6cf25994e0eb35acbd8"
+  },
+  "mining-case.html": {
+    "mtime": 1786008071.0,
+    "seen": 1787653016.493939,
+    "ast_hash": "cf09da41e1878b3e7b227eb013a1aa52",
+    "semantic_hash": "cf09da41e1878b3e7b227eb013a1aa52"
+  },
+  "requirements.txt": {
+    "mtime": 1785477486.0,
+    "seen": 1787653016.493939,
+    "ast_hash": "b8115f046b23b3094d102df41383643e",
+    "semantic_hash": "b8115f046b23b3094d102df41383643e"
+  },
+  "sources/true-north-extracted/boss-ai-ocr.md": {
+    "mtime": 1785999073.0,
+    "seen": 1787653016.493939,
+    "ast_hash": "4cea9747920deaa8757246893ebe6b7a",
+    "semantic_hash": "4cea9747920deaa8757246893ebe6b7a"
+  },
+  "sources/true-north-extracted/investor-ai-ocr.md": {
+    "mtime": 1785999073.0,
+    "seen": 1787653016.493939,
+    "ast_hash": "007d330f333d3e2c1983033d4bb620fb",
+    "semantic_hash": "007d330f333d3e2c1983033d4bb620fb"
+  },
+  "topsales-ai.html": {
+    "mtime": 1786007955.0,
+    "seen": 1787653016.4939399,
+    "ast_hash": "a1c026521b8cd076c0a93ac688031bf6",
+    "semantic_hash": "a1c026521b8cd076c0a93ac688031bf6"
+  },
+  "worldwise.html": {
+    "mtime": 1786008264.0,
+    "seen": 1787653016.4939399,
+    "ast_hash": "f43f21841a7274a43d274202515ea33d",
+    "semantic_hash": "f43f21841a7274a43d274202515ea33d"
+  },
+  "graphify-out/transcripts/Investor AI demo-EN.txt": {
+    "mtime": 1787651793.0315802,
+    "seen": 1787653016.4939399,
+    "ast_hash": "2ec9eac7a92dc52d4a3af8698f248129",
+    "semantic_hash": "2ec9eac7a92dc52d4a3af8698f248129"
+  },
+  "graphify-out/transcripts/Ontology_case_analysis.txt": {
+    "mtime": 1787651798.957015,
+    "seen": 1787653016.4939399,
+    "ast_hash": "f7a5f89de85385c7747c248c8104a7d6",
+    "semantic_hash": "f7a5f89de85385c7747c248c8104a7d6"
+  },
+  "assets/images/boss-ai-video-poster.png": {
+    "mtime": 1785994722.0,
+    "seen": 1787653016.4939399,
+    "ast_hash": "23e0bb1949e34c28ae5ecbf51526341b",
+    "semantic_hash": "23e0bb1949e34c28ae5ecbf51526341b"
+  },
+  "assets/images/case-agriculture.jpg": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493941,
+    "ast_hash": "9de9e1b8ace7b27ad5236e694df6a3da",
+    "semantic_hash": "9de9e1b8ace7b27ad5236e694df6a3da"
+  },
+  "assets/images/case-mining-coordinated-operations.png": {
+    "mtime": 1786004562.0,
+    "seen": 1787653016.493941,
+    "ast_hash": "332d95fc82067e462fe461d9f6c2baff",
+    "semantic_hash": "332d95fc82067e462fe461d9f6c2baff"
+  },
+  "assets/images/case-mining-panorama.jpg": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493941,
+    "ast_hash": "58b712441ffa408f223f9a1a84ad0f6b",
+    "semantic_hash": "58b712441ffa408f223f9a1a84ad0f6b"
+  },
+  "assets/images/energy-system-preview.jpg": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493941,
+    "ast_hash": "f6226aecccadce8beb5cdb9ec458bf49",
+    "semantic_hash": "f6226aecccadce8beb5cdb9ec458bf49"
+  },
+  "assets/images/fde/minesite.jpeg": {
+    "mtime": 1786009298.0,
+    "seen": 1787653016.493942,
+    "ast_hash": "ac2b3d5e0d3f79da6eaceade7339383e",
+    "semantic_hash": "ac2b3d5e0d3f79da6eaceade7339383e"
+  },
+  "assets/images/mining-case/master-data.png": {
+    "mtime": 1785991059.0,
+    "seen": 1787653016.493942,
+    "ast_hash": "b9e3fb617530603b773cf942123b1ab7",
+    "semantic_hash": "b9e3fb617530603b773cf942123b1ab7"
+  },
+  "assets/images/mining-case/operations-intelligence.png": {
+    "mtime": 1785990934.0,
+    "seen": 1787653016.493942,
+    "ast_hash": "ab2b9a83b9cd7f9b700499a74b469f39",
+    "semantic_hash": "ab2b9a83b9cd7f9b700499a74b469f39"
+  },
+  "assets/images/mining-case/scheduling.png": {
+    "mtime": 1785991061.0,
+    "seen": 1787653016.493942,
+    "ast_hash": "8c9372bd56ee682357adc7831d2d2ece",
+    "semantic_hash": "8c9372bd56ee682357adc7831d2d2ece"
+  },
+  "assets/images/ontology-video-poster.png": {
+    "mtime": 1785994722.0,
+    "seen": 1787653016.493943,
+    "ast_hash": "6ee99a657f3aa4d5ecca0cdaa3c5c43e",
+    "semantic_hash": "6ee99a657f3aa4d5ecca0cdaa3c5c43e"
+  },
+  "assets/images/truenorth/boss-ai-context.png": {
+    "mtime": 1785999512.0,
+    "seen": 1787653016.493943,
+    "ast_hash": "4fa5b58221ecc5424e50b04de997f7df",
+    "semantic_hash": "4fa5b58221ecc5424e50b04de997f7df"
+  },
+  "assets/images/truenorth/boss-ai-hero.png": {
+    "mtime": 1786004063.0,
+    "seen": 1787653016.493943,
+    "ast_hash": "76e883cb2354dd3040e17730e6db1627",
+    "semantic_hash": "76e883cb2354dd3040e17730e6db1627"
+  },
+  "assets/images/truenorth/investor-ai-action.png": {
+    "mtime": 1785999517.0,
+    "seen": 1787653016.493943,
+    "ast_hash": "c09239ccfea21e097916156def89b4f7",
+    "semantic_hash": "c09239ccfea21e097916156def89b4f7"
+  },
+  "assets/images/truenorth/investor-ai-hero.png": {
+    "mtime": 1786004191.0,
+    "seen": 1787653016.4939442,
+    "ast_hash": "58e9c5be3bea6114b91bc01a4db0482c",
+    "semantic_hash": "58e9c5be3bea6114b91bc01a4db0482c"
+  },
+  "assets/images/truenorth/topsales-ai-loop.png": {
+    "mtime": 1785999796.0,
+    "seen": 1787653016.4939442,
+    "ast_hash": "de3539483ea1c28ef0b4ca749cc6719a",
+    "semantic_hash": "de3539483ea1c28ef0b4ca749cc6719a"
+  },
+  "assets/images/two-worlds-autonomous-enterprise.png": {
+    "mtime": 1786011805.0,
+    "seen": 1787653016.4939442,
+    "ast_hash": "26803f47ab2a002529fcce1383d60c5f",
+    "semantic_hash": "26803f47ab2a002529fcce1383d60c5f"
+  },
+  "assets/images/worldwise/data-agent.png": {
+    "mtime": 1786007572.0,
+    "seen": 1787653016.4939442,
+    "ast_hash": "8248be9b5eeb7d31c2efa15f1d7aa42c",
+    "semantic_hash": "8248be9b5eeb7d31c2efa15f1d7aa42c"
+  },
+  "assets/images/worldwise/model-platform.png": {
+    "mtime": 1786007573.0,
+    "seen": 1787653016.4939451,
+    "ast_hash": "14ea78a3e682f6d978cac8fca63c9b3b",
+    "semantic_hash": "14ea78a3e682f6d978cac8fca63c9b3b"
+  },
+  "demos/leadership-ai/globe.svg": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.4939451,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": "2aaafa6a49b6563925fe440891e32717"
+  },
+  "demos/leadership-ai/next.svg": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493946,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": "8e061864f388b47f33a1c3780831193e"
+  },
+  "demos/leadership-ai/window.svg": {
+    "mtime": 1785477127.0,
+    "seen": 1787653016.493946,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": "a2760511c65806022ad20adf74370ff3"
+  },
+  "sources/true-north-extracted/boss-ai-contact-sheet.jpg": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493946,
+    "ast_hash": "67ae68119530f0d20117f2fda34ecbda",
+    "semantic_hash": "67ae68119530f0d20117f2fda34ecbda"
+  },
+  "sources/true-north-extracted/boss-ai/slide-02.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493946,
+    "ast_hash": "5ada5e74ecf967de046798fedbcff972",
+    "semantic_hash": "5ada5e74ecf967de046798fedbcff972"
+  },
+  "sources/true-north-extracted/boss-ai/slide-03.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493946,
+    "ast_hash": "bba4f1d12bcfdd3940a544b4258b312f",
+    "semantic_hash": "bba4f1d12bcfdd3940a544b4258b312f"
+  },
+  "sources/true-north-extracted/boss-ai/slide-05.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.4939468,
+    "ast_hash": "f66768c8836f65eddf38f286673d7095",
+    "semantic_hash": "f66768c8836f65eddf38f286673d7095"
+  },
+  "sources/true-north-extracted/boss-ai/slide-06.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.4939468,
+    "ast_hash": "70d4952875af4301bbff3fbd3e135558",
+    "semantic_hash": "70d4952875af4301bbff3fbd3e135558"
+  },
+  "sources/true-north-extracted/boss-ai/slide-08.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.4939468,
+    "ast_hash": "7e93c89c3d3d7b9cc23539575637ccf5",
+    "semantic_hash": "7e93c89c3d3d7b9cc23539575637ccf5"
+  },
+  "sources/true-north-extracted/boss-ai/slide-09.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.4939468,
+    "ast_hash": "f9472a5fbb146c0e237aeb53b1e6acaa",
+    "semantic_hash": "f9472a5fbb146c0e237aeb53b1e6acaa"
+  },
+  "sources/true-north-extracted/boss-ai/slide-11.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493948,
+    "ast_hash": "9c05d70ffa364a687713dfce65545552",
+    "semantic_hash": "9c05d70ffa364a687713dfce65545552"
+  },
+  "sources/true-north-extracted/boss-ai/slide-12.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493948,
+    "ast_hash": "ae473ac3e4f5737dc21e51b939bb573d",
+    "semantic_hash": "ae473ac3e4f5737dc21e51b939bb573d"
+  },
+  "sources/true-north-extracted/boss-ai/slide-14.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493948,
+    "ast_hash": "e5841e1566f517ee540d64464fe288eb",
+    "semantic_hash": "e5841e1566f517ee540d64464fe288eb"
+  },
+  "sources/true-north-extracted/boss-ai/slide-15.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493948,
+    "ast_hash": "61345ab04f8b44d55a7afd2f3e0034f5",
+    "semantic_hash": "61345ab04f8b44d55a7afd2f3e0034f5"
+  },
+  "sources/true-north-extracted/boss-ai/slide-17.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493948,
+    "ast_hash": "9da7cdefe46e135a8d04d699e7cf49c3",
+    "semantic_hash": "9da7cdefe46e135a8d04d699e7cf49c3"
+  },
+  "sources/true-north-extracted/boss-ai/slide-18.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493949,
+    "ast_hash": "f5479ee07d4f4aa66a7e81f8ca8aa010",
+    "semantic_hash": "f5479ee07d4f4aa66a7e81f8ca8aa010"
+  },
+  "sources/true-north-extracted/investor-ai/slide-01.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493949,
+    "ast_hash": "dd2b34dbef8119cdfdd2b5160766ca1e",
+    "semantic_hash": "dd2b34dbef8119cdfdd2b5160766ca1e"
+  },
+  "sources/true-north-extracted/investor-ai/slide-02.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493949,
+    "ast_hash": "92f41b493fd7c4a64ba4f488e746c9bc",
+    "semantic_hash": "92f41b493fd7c4a64ba4f488e746c9bc"
+  },
+  "sources/true-north-extracted/investor-ai/slide-04.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493949,
+    "ast_hash": "a95da86b62239f2d2781abe228cfb998",
+    "semantic_hash": "a95da86b62239f2d2781abe228cfb998"
+  },
+  "sources/true-north-extracted/investor-ai/slide-05.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.49395,
+    "ast_hash": "b2ce7bc6d1f5013bb0499e3beb36dd64",
+    "semantic_hash": "b2ce7bc6d1f5013bb0499e3beb36dd64"
+  },
+  "sources/true-north-extracted/investor-ai/slide-07.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.49395,
+    "ast_hash": "46c755f3d29c3cb33211024e88e1d974",
+    "semantic_hash": "46c755f3d29c3cb33211024e88e1d974"
+  },
+  "sources/true-north-extracted/investor-ai/slide-08.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.49395,
+    "ast_hash": "a4e728f1a654ba2437d0c7b4775ceba9",
+    "semantic_hash": "a4e728f1a654ba2437d0c7b4775ceba9"
+  },
+  "sources/true-north-extracted/investor-ai/slide-10.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.49395,
+    "ast_hash": "cbd16bcdb61bfd4c2aff406836975671",
+    "semantic_hash": "cbd16bcdb61bfd4c2aff406836975671"
+  },
+  "sources/true-north-extracted/investor-ai/slide-11.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493951,
+    "ast_hash": "bf8dd6914784964b80d754eefb99a5bd",
+    "semantic_hash": "bf8dd6914784964b80d754eefb99a5bd"
+  },
+  "sources/true-north-extracted/investor-ai/slide-13.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493951,
+    "ast_hash": "0f2abadb4bcc9e19df5a2255c4fcd284",
+    "semantic_hash": "0f2abadb4bcc9e19df5a2255c4fcd284"
+  },
+  "sources/true-north-extracted/investor-ai/slide-14.png": {
+    "mtime": 1785998857.0,
+    "seen": 1787653016.493951,
+    "ast_hash": "ba063def6348d9792251c1d42a6772d9",
+    "semantic_hash": "ba063def6348d9792251c1d42a6772d9"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-01.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493951,
+    "ast_hash": "abd4897b08b89964c3de8ad223d1f2b5",
+    "semantic_hash": "abd4897b08b89964c3de8ad223d1f2b5"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-02.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493952,
+    "ast_hash": "1d3728a2eac994f33fcb0a3678b617ef",
+    "semantic_hash": "1d3728a2eac994f33fcb0a3678b617ef"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-04.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493952,
+    "ast_hash": "d98a19129484d759fcbb48a11ab9e831",
+    "semantic_hash": "d98a19129484d759fcbb48a11ab9e831"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-05.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493952,
+    "ast_hash": "5b4334306322457281793ac91ff3a3ca",
+    "semantic_hash": "5b4334306322457281793ac91ff3a3ca"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-07.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493952,
+    "ast_hash": "8cb8322c872f5204818e610fa8c1f61d",
+    "semantic_hash": "8cb8322c872f5204818e610fa8c1f61d"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-08.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493953,
+    "ast_hash": "94935cd817fd07624a2eeff3bafc09a2",
+    "semantic_hash": "94935cd817fd07624a2eeff3bafc09a2"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-10.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493953,
+    "ast_hash": "09d64f38d6c5fce08e17b3fdb88509c9",
+    "semantic_hash": "09d64f38d6c5fce08e17b3fdb88509c9"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-11.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493953,
+    "ast_hash": "699baa2a212c3478b9f3baf4e7fd64f6",
+    "semantic_hash": "699baa2a212c3478b9f3baf4e7fd64f6"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-13.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493953,
+    "ast_hash": "e33a5c878de3fed06a8c9a2774801f03",
+    "semantic_hash": "e33a5c878de3fed06a8c9a2774801f03"
+  },
+  "sources/true-north-extracted/topsales-ai/slide-14.png": {
+    "mtime": 1785998858.0,
+    "seen": 1787653016.493953,
+    "ast_hash": "35bb7db48220ca2e5c67f7263fac86e9",
+    "semantic_hash": "35bb7db48220ca2e5c67f7263fac86e9"
+  },
+  "assets/videos/Boss_AI_walk_through.mov": {
+    "mtime": 1785993809.0,
+    "seen": 1787653016.493954,
+    "ast_hash": "0bb6039d3a9c6d6a4c8c17165133364b",
+    "semantic_hash": "0bb6039d3a9c6d6a4c8c17165133364b"
+  },
+  "assets/videos/Boss_AI_walk_through.mp4": {
+    "mtime": 1785994883.0,
+    "seen": 1787653016.493954,
+    "ast_hash": "64a0b8bb229d312515ba9884d79a4bb3",
+    "semantic_hash": "64a0b8bb229d312515ba9884d79a4bb3"
+  },
+  "assets/videos/Investor AI demo-EN.mp4": {
+    "mtime": 1785995897.0,
+    "seen": 1787653016.493954,
+    "ast_hash": "542cc9e17a8d4e86e642f118e303451d",
+    "semantic_hash": "542cc9e17a8d4e86e642f118e303451d"
+  },
+  "assets/videos/Ontology_case_analysis.mov": {
+    "mtime": 1785993834.0,
+    "seen": 1787653016.493954,
+    "ast_hash": "5100f61f7f1153b0ca6b895ddde72730",
+    "semantic_hash": "5100f61f7f1153b0ca6b895ddde72730"
+  },
+  "assets/videos/Ontology_case_analysis.mp4": {
+    "mtime": 1785994885.0,
+    "seen": 1787653016.4939551,
+    "ast_hash": "2c0278ac7511b086ecf377f67f6c1d02",
+    "semantic_hash": "2c0278ac7511b086ecf377f67f6c1d02"
+  }
+}

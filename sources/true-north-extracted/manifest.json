@@ -1,0 +1,346 @@
+{
+  "investor-ai": {
+    "slides": [
+      {
+        "slide": 1,
+        "file": "sources/true-north-extracted/investor-ai/slide-01.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 2,
+        "file": "sources/true-north-extracted/investor-ai/slide-02.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 3,
+        "file": "sources/true-north-extracted/investor-ai/slide-03.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 4,
+        "file": "sources/true-north-extracted/investor-ai/slide-04.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 5,
+        "file": "sources/true-north-extracted/investor-ai/slide-05.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 6,
+        "file": "sources/true-north-extracted/investor-ai/slide-06.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 7,
+        "file": "sources/true-north-extracted/investor-ai/slide-07.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 8,
+        "file": "sources/true-north-extracted/investor-ai/slide-08.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 9,
+        "file": "sources/true-north-extracted/investor-ai/slide-09.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 10,
+        "file": "sources/true-north-extracted/investor-ai/slide-10.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 11,
+        "file": "sources/true-north-extracted/investor-ai/slide-11.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 12,
+        "file": "sources/true-north-extracted/investor-ai/slide-12.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 13,
+        "file": "sources/true-north-extracted/investor-ai/slide-13.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 14,
+        "file": "sources/true-north-extracted/investor-ai/slide-14.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      }
+    ],
+    "contact_sheet": "sources/true-north-extracted/investor-ai-contact-sheet.jpg"
+  },
+  "boss-ai": {
+    "slides": [
+      {
+        "slide": 1,
+        "file": "sources/true-north-extracted/boss-ai/slide-01.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 2,
+        "file": "sources/true-north-extracted/boss-ai/slide-02.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 3,
+        "file": "sources/true-north-extracted/boss-ai/slide-03.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 4,
+        "file": "sources/true-north-extracted/boss-ai/slide-04.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 5,
+        "file": "sources/true-north-extracted/boss-ai/slide-05.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 6,
+        "file": "sources/true-north-extracted/boss-ai/slide-06.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 7,
+        "file": "sources/true-north-extracted/boss-ai/slide-07.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 8,
+        "file": "sources/true-north-extracted/boss-ai/slide-08.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 2
+      },
+      {
+        "slide": 9,
+        "file": "sources/true-north-extracted/boss-ai/slide-09.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 10,
+        "file": "sources/true-north-extracted/boss-ai/slide-10.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 11,
+        "file": "sources/true-north-extracted/boss-ai/slide-11.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 2
+      },
+      {
+        "slide": 12,
+        "file": "sources/true-north-extracted/boss-ai/slide-12.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 13,
+        "file": "sources/true-north-extracted/boss-ai/slide-13.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 2
+      },
+      {
+        "slide": 14,
+        "file": "sources/true-north-extracted/boss-ai/slide-14.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 15,
+        "file": "sources/true-north-extracted/boss-ai/slide-15.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 16,
+        "file": "sources/true-north-extracted/boss-ai/slide-16.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 17,
+        "file": "sources/true-north-extracted/boss-ai/slide-17.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 18,
+        "file": "sources/true-north-extracted/boss-ai/slide-18.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      }
+    ],
+    "contact_sheet": "sources/true-north-extracted/boss-ai-contact-sheet.jpg"
+  },
+  "topsales-ai": {
+    "slides": [
+      {
+        "slide": 1,
+        "file": "sources/true-north-extracted/topsales-ai/slide-01.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 2,
+        "file": "sources/true-north-extracted/topsales-ai/slide-02.png",
+        "width": 5120,
+        "height": 2880,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 3,
+        "file": "sources/true-north-extracted/topsales-ai/slide-03.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 4,
+        "file": "sources/true-north-extracted/topsales-ai/slide-04.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 5,
+        "file": "sources/true-north-extracted/topsales-ai/slide-05.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 6,
+        "file": "sources/true-north-extracted/topsales-ai/slide-06.png",
+        "width": 5120,
+        "height": 2880,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 7,
+        "file": "sources/true-north-extracted/topsales-ai/slide-07.png",
+        "width": 5120,
+        "height": 2880,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 8,
+        "file": "sources/true-north-extracted/topsales-ai/slide-08.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 9,
+        "file": "sources/true-north-extracted/topsales-ai/slide-09.png",
+        "width": 5120,
+        "height": 2880,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 10,
+        "file": "sources/true-north-extracted/topsales-ai/slide-10.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 11,
+        "file": "sources/true-north-extracted/topsales-ai/slide-11.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 12,
+        "file": "sources/true-north-extracted/topsales-ai/slide-12.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 13,
+        "file": "sources/true-north-extracted/topsales-ai/slide-13.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 14,
+        "file": "sources/true-north-extracted/topsales-ai/slide-14.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      },
+      {
+        "slide": 15,
+        "file": "sources/true-north-extracted/topsales-ai/slide-15.png",
+        "width": 1672,
+        "height": 941,
+        "picture_shapes": 1
+      }
+    ],
+    "contact_sheet": "sources/true-north-extracted/topsales-ai-contact-sheet.jpg"
+  }
+}

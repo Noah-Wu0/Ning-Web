@@ -1,0 +1,42 @@
+<mujoco model="quadrotor_drone">
+  <compiler angle="radian"/>
+
+  <worldbody>
+    <!-- Drone body: cross-shaped frame -->
+    <body name="drone_base" pos="0 0 0.05">
+      <!-- Central hub -->
+      <geom name="hub" type="box" size="0.08 0.08 0.04" pos="0 0 0" rgba="0.3 0.3 0.35 1"/>
+      
+      <!-- Four arms -->
+      <geom name="arm_front" type="box" size="0.18 0.015 0.01" pos="0.18 0 0" rgba="0.2 0.2 0.25 1"/>
+      <geom name="arm_back" type="box" size="0.18 0.015 0.01" pos="-0.18 0 0" rgba="0.2 0.2 0.25 1"/>
+      <geom name="arm_left" type="box" size="0.015 0.18 0.01" pos="0 0.18 0" rgba="0.2 0.2 0.25 1"/>
+      <geom name="arm_right" type="box" size="0.015 0.18 0.01" pos="0 -0.18 0" rgba="0.2 0.2 0.25 1"/>
+      
+      <!-- Four motors -->
+      <geom name="motor_front" type="cylinder" size="0.025 0.015" pos="0.28 0 0.015" rgba="0.15 0.15 0.15 1"/>
+      <geom name="motor_back" type="cylinder" size="0.025 0.015" pos="-0.28 0 0.015" rgba="0.15 0.15 0.15 1"/>
+      <geom name="motor_left" type="cylinder" size="0.025 0.015" pos="0 0.28 0.015" rgba="0.15 0.15 0.15 1"/>
+      <geom name="motor_right" type="cylinder" size="0.025 0.015" pos="0 -0.28 0.015" rgba="0.15 0.15 0.15 1"/>
+      
+      <!-- Four propellers (flat discs, shown spinning in frontend) -->
+      <geom name="prop_front" type="cylinder" size="0.12 0.003" pos="0.28 0 0.035" rgba="0.85 0.85 0.85 0.5"/>
+      <geom name="prop_back" type="cylinder" size="0.12 0.003" pos="-0.28 0 0.035" rgba="0.85 0.85 0.85 0.5"/>
+      <geom name="prop_left" type="cylinder" size="0.12 0.003" pos="0 0.28 0.035" rgba="0.85 0.85 0.85 0.5"/>
+      <geom name="prop_right" type="cylinder" size="0.12 0.003" pos="0 -0.28 0.035" rgba="0.85 0.85 0.85 0.5"/>
+      
+      <!-- Landing gear -->
+      <geom name="leg_fl" type="cylinder" size="0.005 0.04" pos="0.12 0.12 -0.06" rgba="0.1 0.1 0.1 1"/>
+      <geom name="leg_fr" type="cylinder" size="0.005 0.04" pos="0.12 -0.12 -0.06" rgba="0.1 0.1 0.1 1"/>
+      <geom name="leg_bl" type="cylinder" size="0.005 0.04" pos="-0.12 0.12 -0.06" rgba="0.1 0.1 0.1 1"/>
+      <geom name="leg_br" type="cylinder" size="0.005 0.04" pos="-0.12 -0.12 -0.06" rgba="0.1 0.1 0.1 1"/>
+      
+      <!-- Camera/gimbal underneath -->
+      <geom name="camera_body" type="cylinder" size="0.02 0.025" pos="0 0 -0.06" rgba="0.05 0.05 0.05 1"/>
+      <geom name="camera_lens" type="cylinder" size="0.012 0.01" pos="0 -0.005 -0.08" rgba="0.1 0.1 0.12 1"/>
+      
+      <!-- Free joint for 6-DOF flight -->
+      <joint name="drone_free" type="free"/>
+    </body>
+  </worldbody>
+</mujoco>

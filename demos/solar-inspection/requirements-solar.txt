@@ -1,0 +1,6 @@
+# Runtime server and WebSocket stack
+fastapi
+uvicorn[standard]
+
+# Asset conversion helper: convert_meshes.py
+numpy
