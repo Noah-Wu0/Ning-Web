@@ -86,14 +86,25 @@ body.linear .loop-detail{
   border-color:var(--tn-line) !important;
 }
 
-/* Eyebrows/kickers and accents */
+/* Eyebrows/kickers/architecture labels — muted, accent only on CTA/key */
 body.linear .tn-kicker,
 body.linear .tn-eyebrow,
 body.linear .eyebrow,
+body.linear .section-index,
 body.linear .tn-layer b,
 body.linear .ww-architecture b,
-body.linear .ww-lifecycle small{
-  color:var(--tn-accent) !important;
+body.linear .ww-lifecycle small,
+body.linear .ww-capability-copy small,
+body.linear .system-strip article b,
+body.linear .method-grid b,
+body.linear .path-line small,
+body.linear .loop-detail span,
+body.linear .decision-loop button small,
+body.linear .runtime-row small,
+body.linear .runtime-core small,
+body.linear .fde-node small,
+body.linear .runtime-core:before{
+  color:#A1A1AA !important;
 }
 
 /* Alt sections */
@@ -120,7 +131,26 @@ body.linear .path-line p{
 
 /* Mining case specifics */
 body.linear .progress{ background:var(--accent) !important; }
-body.linear .hero-shade{ background:linear-gradient(0deg,rgba(10,10,11,.8),transparent 56%) !important; }
+body.linear .hero-shade{
+  background:rgba(10,10,11,.72) !important;
+  background-image:none !important;
+}
+@media (max-width:900px){
+  body.linear .hero-shade{
+    background:rgba(10,10,11,.88) !important;
+    background-image:none !important;
+  }
+}
+/* FDE: kill glow + warm gradient */
+body.linear .fde-arrow{
+  text-shadow:none !important;
+  color:#A1A1AA !important;
+}
+body.linear .fde-node.outcome{
+  background:var(--tn-panel) !important;
+  background-image:none !important;
+  border-color:var(--tn-line) !important;
+}
 body.linear .system-strip>i,
 body.linear .cause-chain i,
 body.linear .operations-intelligence-grid .icon,
@@ -145,3 +175,37 @@ body.linear .tn-step-panel .state-change span:last-child{
 body.linear .header-cta-text{ color:var(--tn-muted) !important; }
 body.linear .header-cta-text:hover{ color:var(--tn-ink) !important; }
 
+/* Old cyan #66e5dc → brand accent or neutral */
+body.linear .truenorth-product:hover{
+  border-color:var(--tn-line) !important;
+}
+body.linear .truenorth-product em{
+  color:#A1A1AA !important;
+}
+body.linear .offering-link:hover{
+  border-color:var(--tn-line) !important;
+}
+body.linear .offering-link:after{
+  background:var(--accent) !important;
+  border-color:var(--accent) !important;
+  color:#0a1513 !important;
+  font-weight:500 !important;
+}
+body.linear .offering-link:focus-visible{
+  outline-color:var(--accent) !important;
+}
+
+/* Filled primary CTA font-weight 500 */
+body.linear .header-cta,
+body.linear .tn-btn.primary,
+body.linear .primary,
+body.linear .offering-link:after{
+  font-weight:500 !important;
+}
+body.linear .tn-btn,
+body.linear .ghost,
+body.linear .tn-kicker,
+body.linear .tn-eyebrow,
+body.linear .eyebrow{
+  font-weight:500 !important;
+}
