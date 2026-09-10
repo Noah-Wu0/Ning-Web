@@ -14,16 +14,73 @@ if(leadershipFrame&&leadershipLoading&&leadershipStatus){
   setTimeout(()=>{if(!checkLeadership(false))beginLeadershipCheck()},500);
 }
 
-// Ambient field
-const ambient=document.querySelector('#ambient'),ctx=ambient.getContext('2d');let pts=[];function resizeAmbient(){ambient.width=innerWidth*devicePixelRatio;ambient.height=innerHeight*devicePixelRatio;ambient.style.width=innerWidth+'px';ambient.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);pts=Array.from({length:Math.min(90,Math.floor(innerWidth/16))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14}))}addEventListener('resize',resizeAmbient);resizeAmbient();(function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>innerWidth)p.vx*=-1;if(p.y<0||p.y>innerHeight)p.vy*=-1;ctx.fillStyle='rgba(150,175,182,.3)';ctx.fillRect(p.x,p.y,1.4,1.4)});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<105){ctx.strokeStyle=`rgba(102,229,220,${(1-d/105)*.06})`;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}requestAnimationFrame(draw)})();
+// Ambient field (optional; disabled when canvas is absent)
+const ambient=document.querySelector('#ambient');
+if(ambient){
+  const ctx=ambient.getContext('2d');let pts=[];
+  function resizeAmbient(){
+    ambient.width=innerWidth*devicePixelRatio;ambient.height=innerHeight*devicePixelRatio;
+    ambient.style.width=innerWidth+'px';ambient.style.height=innerHeight+'px';
+    ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    pts=Array.from({length:Math.min(90,Math.floor(innerWidth/16))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14}));
+  }
+  addEventListener('resize',resizeAmbient);resizeAmbient();
+  (function draw(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>innerWidth)p.vx*=-1;if(p.y<0||p.y>innerHeight)p.vy*=-1;ctx.fillStyle='rgba(150,175,182,.3)';ctx.fillRect(p.x,p.y,1.4,1.4)});
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<105){ctx.strokeStyle=`rgba(102,229,220,${(1-d/105)*.06})`;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+    }
+    requestAnimationFrame(draw)
+  })();
+}
 
 // Leadership AI is embedded directly in the page.
 
-// Solar mini preview
-const sm=document.querySelector('#solarMini'),smc=sm.getContext('2d');function resizeMini(){sm.width=sm.clientWidth*devicePixelRatio;sm.height=sm.clientHeight*devicePixelRatio;smc.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}addEventListener('resize',resizeMini);resizeMini();(function mini(t=0){const w=sm.clientWidth,h=sm.clientHeight;smc.clearRect(0,0,w,h);smc.fillStyle='#10211a';smc.fillRect(0,0,w,h);smc.save();smc.translate(w*.12,h*.16);for(let r=0;r<7;r++)for(let c=0;c<12;c++){smc.fillStyle=(r===4&&c===7)?'#ff4b45':'#194754';smc.beginPath();smc.moveTo(c*30+r*5,r*24);smc.lineTo(c*30+25+r*5,r*24);smc.lineTo(c*30+30+r*5,r*24+13);smc.lineTo(c*30+5+r*5,r*24+13);smc.closePath();smc.fill()}smc.restore();const q=(t/5000)%1;smc.fillStyle='#66e5dc';smc.shadowColor='#66e5dc';smc.shadowBlur=15;smc.beginPath();smc.arc(w*.12+q*w*.72,h*.2+Math.sin(q*Math.PI*6)*30,6,0,7);smc.fill();smc.shadowBlur=0;smc.fillStyle='#f4b660';smc.fillRect(w*.58,h*.73,13,8);requestAnimationFrame(mini)})();
+// Solar mini preview (optional; removed from minimal homepage)
+const sm=document.querySelector('#solarMini');
+if(sm){
+  const smc=sm.getContext('2d');
+  function resizeMini(){sm.width=sm.clientWidth*devicePixelRatio;sm.height=sm.clientHeight*devicePixelRatio;smc.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+  addEventListener('resize',resizeMini);resizeMini();
+  (function mini(t=0){
+    const w=sm.clientWidth,h=sm.clientHeight;smc.clearRect(0,0,w,h);
+    smc.fillStyle='#10211a';smc.fillRect(0,0,w,h);
+    smc.save();smc.translate(w*.12,h*.16);
+    for(let r=0;r<7;r++)for(let c=0;c<12;c++){
+      smc.fillStyle=(r===4&&c===7)?'#ff4b45':'#194754';
+      smc.beginPath();smc.moveTo(c*30+r*5,r*24);smc.lineTo(c*30+25+r*5,r*24);smc.lineTo(c*30+30+r*5,r*24+13);smc.lineTo(c*30+5+r*5,r*24+13);smc.closePath();smc.fill()
+    }
+    smc.restore();
+    const q=(t/5000)%1;smc.fillStyle='#66e5dc';smc.shadowColor='#66e5dc';smc.shadowBlur=15;smc.beginPath();smc.arc(w*.12+q*w*.72,h*.2+Math.sin(q*Math.PI*6)*30,6,0,7);smc.fill();smc.shadowBlur=0;smc.fillStyle='#f4b660';smc.fillRect(w*.58,h*.73,13,8);requestAnimationFrame(mini)
+  })();
+}
 
 // Demos
-const modal=document.querySelector('#demoModal'),frame=document.querySelector('#demoFrame'),modalTitle=document.querySelector('#modalTitle');const demos={kazakhstan:{title:'NATIONAL ENERGY DIGITAL TWIN',src:'demos/kazakhstan-energy.html?v=2'},refinery:{title:'REFINERY LIVE DIGITAL TWIN',src:'demos/refinery.html?v=4'},solar:{title:'SOLAR EMBODIED AI INSPECTION',src:'demos/solar-inspection/'},ontology:{title:'ONTOLOGY & LINEAGE WORKBENCH',src:'demos/ontology-lineage.html?v=5'},leadership:{title:'LEADERSHIP AI WORKSPACE',src:'demos/leadership-ai/daily-vanguard/?v=3'}};function openDemo(name){const d=demos[name];modal.classList.add('open');modal.setAttribute('aria-hidden','false');modalTitle.textContent=d.title;frame.onload=()=>{if(name==='refinery')setTimeout(()=>{try{const b=[...frame.contentDocument.querySelectorAll('button')].find(x=>x.textContent.includes('ACR'));if(b)b.click()}catch{}},700)};frame.src=d.src;document.body.style.overflow='hidden'}document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>openDemo(b.dataset.demo));document.querySelectorAll('[data-open-demo]').forEach(b=>b.onclick=()=>openDemo(b.dataset.openDemo));document.querySelector('#closeDemo').onclick=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');frame.src='about:blank';document.body.style.overflow=''};addEventListener('keydown',e=>{if(e.key==='Escape'){if(modal.classList.contains('open'))document.querySelector('#closeDemo').click();if(document.querySelector('#lightbox').classList.contains('open'))document.querySelector('#closeLightbox').click()}});
+const modal=document.querySelector('#demoModal'),frame=document.querySelector('#demoFrame'),modalTitle=document.querySelector('#modalTitle');
+const demos={kazakhstan:{title:'NATIONAL ENERGY DIGITAL TWIN',src:'demos/kazakhstan-energy.html?v=2'},refinery:{title:'REFINERY LIVE DIGITAL TWIN',src:'demos/refinery.html?v=4'},solar:{title:'SOLAR EMBODIED AI INSPECTION',src:'demos/solar-inspection/'},ontology:{title:'ONTOLOGY & LINEAGE WORKBENCH',src:'demos/ontology-lineage.html?v=5'},leadership:{title:'LEADERSHIP AI WORKSPACE',src:'demos/leadership-ai/daily-vanguard/?v=3'}};
+function openDemo(name){
+  const d=demos[name]; if(!modal||!frame||!modalTitle||!d) return;
+  modal.classList.add('open');modal.setAttribute('aria-hidden','false');modalTitle.textContent=d.title;
+  frame.onload=()=>{if(name==='refinery')setTimeout(()=>{try{const b=[...frame.contentDocument.querySelectorAll('button')].find(x=>x.textContent.includes('ACR'));if(b)b.click()}catch{}},700)};
+  frame.src=d.src;document.body.style.overflow='hidden'
+}
+document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>openDemo(b.dataset.demo));
+document.querySelectorAll('[data-open-demo]').forEach(b=>b.onclick=()=>openDemo(b.dataset.openDemo));
+const closeDemoBtn=document.querySelector('#closeDemo');
+if(closeDemoBtn&&modal&&frame){
+  closeDemoBtn.onclick=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');frame.src='about:blank';document.body.style.overflow=''}
+}
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(modal?.classList.contains('open')) closeDemoBtn?.click();
+    const lbEl=document.querySelector('#lightbox');const lbClose=document.querySelector('#closeLightbox');
+    if(lbEl?.classList.contains('open')) lbClose?.click();
+  }
+});
 
-// Image lightbox
-const lb=document.querySelector('#lightbox'),lbImg=document.querySelector('#lightboxImage');document.querySelectorAll('[data-lightbox]').forEach(b=>b.onclick=()=>{lbImg.src=b.dataset.lightbox;lb.classList.add('open');lb.setAttribute('aria-hidden','false')});document.querySelector('#closeLightbox').onclick=()=>{lb.classList.remove('open');lb.setAttribute('aria-hidden','true')};
+// Image lightbox (optional)
+const lb=document.querySelector('#lightbox'),lbImg=document.querySelector('#lightboxImage'),lbClose=document.querySelector('#closeLightbox');
+document.querySelectorAll('[data-lightbox]').forEach(b=>b.onclick=()=>{if(!lb||!lbImg)return;lbImg.src=b.dataset.lightbox;lb.classList.add('open');lb.setAttribute('aria-hidden','false')});
+if(lb&&lbClose){lbClose.onclick=()=>{lb.classList.remove('open');lb.setAttribute('aria-hidden','true')}}
