@@ -73,3 +73,5 @@ body.homepage{
   .homepage-hero-title{font-size:44px}
   .homepage-capabilities{grid-template-columns:1fr;gap:10px}
 }
+
+.homepage-capabilities-section{width:min(var(--max),calc(100% - 12vw));margin:0 auto;}
