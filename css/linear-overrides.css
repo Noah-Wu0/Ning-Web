@@ -226,3 +226,46 @@ body.linear .tn-eyebrow,
 body.linear .eyebrow{
   font-weight:500 !important;
 }
+
+/* Wireframe proof frame — neutral panels/rows, no glow */
+body.linear .proof-frame{
+  background:var(--tn-panel);
+  border:1px solid var(--tn-line);
+  border-radius:12px;
+  padding:16px;
+}
+body.linear .proof-frame small{
+  display:block;
+  color:var(--tn-muted);
+  margin-bottom:8px;
+}
+body.linear .proof-frame .wf-grid{
+  display:grid;
+  grid-template-columns: 200px 1fr;
+  gap:12px;
+}
+body.linear .proof-frame .wf-panel{
+  background:var(--tn-panel-2);
+  border:1px solid var(--tn-line);
+  border-radius:8px;
+  padding:10px;
+}
+body.linear .proof-frame .wf-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px dashed var(--tn-line);
+  padding:6px 0;
+}
+body.linear .proof-frame .wf-row:last-child{ border-bottom:none; }
+body.linear .proof-frame .wf-label{
+  color:var(--tn-muted);
+  font-size:.85rem;
+}
+body.linear .proof-frame .wf-pill{
+  border:1px solid var(--tn-line);
+  padding:2px 8px;
+  border-radius:999px;
+  font-size:.8rem;
+  color:var(--tn-ink);
+}
