@@ -67,7 +67,7 @@ body.homepage{
   .homepage-evidence{grid-template-columns:1fr}
 }
 @media(max-width:560px){
-  .homepage-hero-title{font-size:44px}
+  .homepage-hero-title{font-size:38px}
   .homepage-capabilities{grid-template-columns:1fr;gap:10px}
 }
 
