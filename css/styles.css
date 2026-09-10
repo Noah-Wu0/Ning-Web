@@ -75,3 +75,11 @@ body.homepage{
 }
 
 .homepage-capabilities-section{width:min(var(--max),calc(100% - 12vw));margin:0 auto;}
+
+/* Locked CTA + capability icons (picky review) */
+body.homepage .cta-primary{font-weight:500;border-radius:8px;padding:10px 18px;height:40px;}
+body.homepage .header-cta{display:none;}
+body.homepage .header-cta-text{color:var(--muted);} 
+body.homepage .header-cta-text:hover{color:var(--text);} 
+body.homepage .cap-icon{display:block;color:#A1A1AA;margin:0 0 10px;}
+body.homepage .homepage-capabilities article{padding-top:8px;}
