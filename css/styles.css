@@ -86,3 +86,12 @@ body.homepage .homepage-capabilities article{padding-top:8px;}
 
 body.homepage .proof-scene{display:block;padding:10px 12px 0;color:var(--muted);font-size:13px;font-weight:500;letter-spacing:.02em;}
 body.homepage .cta-primary{font-weight:500 !important;height:40px;padding:0 18px;border-radius:8px;}
+
+/* homepage header no gradient */
+body.homepage .site-header,
+body.homepage header.site-header{
+  background:#0A0A0B !important;
+  background-image:none !important;
+  border-bottom:1px solid #27272A;
+  backdrop-filter:none !important;
+}
