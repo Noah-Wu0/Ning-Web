@@ -171,6 +171,23 @@ body.linear .tn-step-panel .state-change span:last-child{
   background:color-mix(in srgb, var(--tn-accent) 10%, transparent) !important;
 }
 
+/* Mining case in-page nav strip */
+body.linear .case-inpage-nav{
+  display:flex;
+  gap:16px;
+  padding:10px 24px;
+  border-bottom:1px solid var(--tn-line);
+  background:transparent;
+}
+body.linear .case-inpage-nav a{
+  color:var(--tn-muted) !important;
+  text-decoration:none;
+  font-size:.9rem;
+}
+body.linear .case-inpage-nav a:hover{
+  color:var(--tn-ink) !important;
+}
+
 /* Header CTA text variant (if present) */
 body.linear .header-cta-text{ color:var(--tn-muted) !important; }
 body.linear .header-cta-text:hover{ color:var(--tn-ink) !important; }
