@@ -83,3 +83,6 @@ body.homepage .header-cta-text{color:var(--muted);}
 body.homepage .header-cta-text:hover{color:var(--text);} 
 body.homepage .cap-icon{display:block;color:#A1A1AA;margin:0 0 10px;}
 body.homepage .homepage-capabilities article{padding-top:8px;}
+
+body.homepage .proof-scene{display:block;padding:10px 12px 0;color:var(--muted);font-size:13px;font-weight:500;letter-spacing:.02em;}
+body.homepage .cta-primary{font-weight:500 !important;height:40px;padding:0 18px;border-radius:8px;}
