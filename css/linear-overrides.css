@@ -227,6 +227,11 @@ body.linear .eyebrow{
   font-weight:500 !important;
 }
 
+/* Collapse hero layout when no art/screenshot is present */
+body.linear .tn-hero.no-art{
+  grid-template-columns:1fr !important;
+}
+
 body.linear .proof-frame{
   background:var(--tn-panel);
   border:1px solid var(--tn-line);
