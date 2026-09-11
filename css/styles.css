@@ -37,7 +37,7 @@ body.homepage{
   position:relative;z-index:2;width:min(1120px,calc(100% - 160px));margin-inline:auto;
   padding:180px 0 140px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:36px;min-height:70vh;
 }
-.homepage-hero-title{margin:0 0 16px;font-size:clamp(44px,7.2vw,72px);font-weight:600;line-height:1.05;letter-spacing:-0.02em}
+.homepage-hero-title{margin:0 0 16px;font-size:64px;font-weight:600;line-height:1.05;letter-spacing:-0.02em}
 .homepage-hero p.proof{margin:10px 0 22px;color:var(--muted);font-size:18px;line-height:1.55;max-width:760px}
 .homepage-evidence-copy{
   border:0;
@@ -61,7 +61,7 @@ body.homepage{
 /* Evidence section — single-focus */
 .homepage-evidence{
   width:min(1120px,calc(100% - 160px));
-  margin:40px auto 0;
+  margin:96px auto 0;
   padding:40px 0 100px;
   display:grid;
   /* Collapse to a single column to remove the empty right gutter */
