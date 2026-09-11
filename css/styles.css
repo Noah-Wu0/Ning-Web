@@ -58,8 +58,15 @@ body.homepage{
 
 /* Evidence section — single-focus */
 .homepage-evidence{
-  width:min(var(--max),calc(100% - 12vw));margin:40px auto 0;padding:40px 0 100px;display:grid;
-  grid-template-columns:1.05fr .95fr;align-items:center;gap:36px;border-top:1px solid var(--line);
+  width:min(var(--max),calc(100% - 12vw));
+  margin:40px auto 0;
+  padding:40px 0 100px;
+  display:grid;
+  /* Collapse to a single column to remove the empty right gutter */
+  grid-template-columns:1fr;
+  align-items:start;
+  gap:24px;
+  border-top:1px solid var(--line);
 }
 .homepage-evidence p{color:var(--muted);font-size:17px;line-height:1.55;margin:0 0 16px}
 /* image evidence styles removed */
