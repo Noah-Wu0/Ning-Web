@@ -38,8 +38,13 @@ body.homepage{
 }
 .homepage-hero-title{margin:0 0 16px;font-size:64px;font-weight:600;line-height:1.05;letter-spacing:-0.02em}
 .homepage-hero p.proof{margin:10px 0 22px;color:var(--muted);font-size:18px;line-height:1.55;max-width:760px}
-.homepage-proof-frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0b0c0e}
-.homepage-proof-frame img{display:block;width:100%;height:auto;object-fit:cover}
+.homepage-proof-frame{
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  background:transparent;
+  padding:0;
+}
 .homepage-hero-actions{display:flex;align-items:center;gap:12px;margin-top:22px}
 
 /* Capabilities — three concise, “locked” one-liners */
@@ -94,3 +99,12 @@ body.homepage header.site-header{
 }
 
 body.homepage .homepage-evidence h3{color:#A1A1AA;font-weight:500;}
+
+/* Mechanism line — unified 18/400 muted */
+body.homepage .mechanism{
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.55;
+  font-weight:400;
+  margin:8px 0 14px;
+}
