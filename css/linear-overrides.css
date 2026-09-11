@@ -243,3 +243,12 @@ body.linear .proof-frame small{
   color:var(--tn-muted);
   margin-bottom:8px;
 }
+
+/* Mechanism line on secondary pages — 18/400 muted */
+body.linear .mechanism{
+  color:var(--tn-muted) !important;
+  font-size:18px !important;
+  line-height:1.55 !important;
+  font-weight:400 !important;
+  margin:8px 0 14px !important;
+}
