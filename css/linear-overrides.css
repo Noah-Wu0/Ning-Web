@@ -1,0 +1,254 @@
+/* Scoped linear brand overrides — DO NOT TOUCH HOMEPAGE */
+/* Apply by adding `linear` to the body class on secondary pages */
+
+body.linear{
+  /* Global tokens */
+  --bg:#0A0A0B;
+  --ink:#FAFAFA;
+  --muted:#A1A1AA;
+  --line:#27272A;
+  --accent:#7DD3C0;
+
+  /* TrueNorth tokens */
+  --tn-bg:#0A0A0B;
+  --tn-panel:#0F1113;
+  --tn-panel-2:#121416;
+  --tn-ink:#FAFAFA;
+  --tn-muted:#A1A1AA;
+  --tn-line:#27272A;
+  --tn-accent:#7DD3C0;
+  --tn-accent-2:#7DD3C0;
+  --tn-warm:#7DD3C0;
+}
+
+/* Header — shared pattern */
+body.linear .site-header,
+body.linear header.site-header,
+body.linear .case-header{
+  background:#0A0A0B !important;
+  background-image:none !important;
+  border-bottom:1px solid #27272A;
+  backdrop-filter:none !important;
+}
+body.linear .site-header nav a,
+body.linear .case-header nav a{ color:#c9c9ce; }
+body.linear .site-header nav a:hover,
+body.linear .case-header nav a:hover{ color:#FAFAFA; }
+
+/* Primary CTA — filled accent */
+body.linear .header-cta,
+body.linear .disclosure a,
+body.linear .tn-btn.primary,
+body.linear .primary{
+  background:var(--accent) !important;
+  border:1px solid color-mix(in srgb, var(--accent) 75%, #000 25%) !important;
+  color:#0a1513 !important;
+}
+
+/* Neutral buttons */
+body.linear .tn-btn:not(.primary),
+body.linear .ghost{
+  background:transparent !important;
+  border:1px solid var(--tn-line) !important;
+  color:var(--tn-ink) !important;
+}
+
+/* Remove purple/blue gradients, particle glows, and mists */
+body.linear .tn-hero:before,
+body.linear .tn-hero-art:after,
+body.linear .tn-cta{
+  background:none !important;
+}
+body.linear .tn-card{
+  background:var(--tn-panel) !important;
+  border-color:var(--tn-line) !important;
+}
+body.linear .tn-step-panel{
+  background:var(--tn-panel) !important;
+  border-color:var(--tn-line) !important;
+}
+body.linear .tn-native-art{
+  background:var(--tn-panel) !important;
+  border-color:var(--tn-line) !important;
+}
+body.linear .tn-comparison article:last-child{
+  background:var(--tn-panel) !important;
+}
+body.linear .ww-capability-media{
+  background:var(--tn-panel) !important;
+}
+body.linear .tn-story-media{
+  background:var(--tn-panel) !important;
+  border-color:var(--tn-line) !important;
+}
+body.linear .loop-detail{
+  background:var(--tn-panel) !important;
+  border-color:var(--tn-line) !important;
+}
+
+/* Eyebrows/kickers/architecture labels — muted, accent only on CTA/key */
+body.linear .tn-kicker,
+body.linear .tn-eyebrow,
+body.linear .eyebrow,
+body.linear .section-index,
+body.linear .tn-layer b,
+body.linear .ww-architecture b,
+body.linear .ww-lifecycle small,
+body.linear .ww-capability-copy small,
+body.linear .system-strip article b,
+body.linear .method-grid b,
+body.linear .path-line small,
+body.linear .loop-detail span,
+body.linear .decision-loop button small,
+body.linear .runtime-row small,
+body.linear .runtime-core small,
+body.linear .fde-node small,
+body.linear .runtime-core:before{
+  color:#A1A1AA !important;
+}
+
+/* Alt sections */
+body.linear .tn-section.alt{
+  background:transparent !important;
+  border-top:1px solid var(--tn-line) !important;
+  border-bottom:1px solid var(--tn-line) !important;
+}
+
+/* Text tones */
+body.linear,
+body.linear p,
+body.linear li{ color:var(--tn-ink); }
+body.linear .tn-section-head p,
+body.linear .tn-story-copy p,
+body.linear .tn-card p,
+body.linear .tn-card li,
+body.linear .lead,
+body.linear .ww-capability-copy p,
+body.linear .ww-source-note,
+body.linear .path-line p{
+  color:var(--tn-muted) !important;
+}
+
+/* Mining case specifics */
+body.linear .progress{ background:var(--accent) !important; }
+body.linear .hero-shade{
+  background:rgba(10,10,11,.72) !important;
+  background-image:none !important;
+}
+@media (max-width:900px){
+  body.linear .hero-shade{
+    background:rgba(10,10,11,.88) !important;
+    background-image:none !important;
+  }
+}
+/* FDE: kill glow + warm gradient */
+body.linear .fde-arrow{
+  text-shadow:none !important;
+  color:#A1A1AA !important;
+}
+body.linear .fde-node.outcome{
+  background:var(--tn-panel) !important;
+  background-image:none !important;
+  border-color:var(--tn-line) !important;
+}
+body.linear .system-strip>i,
+body.linear .cause-chain i,
+body.linear .operations-intelligence-grid .icon,
+body.linear .sense-flow i{
+  color:var(--accent) !important;
+}
+body.linear .path-line article{
+  border-top-color: color-mix(in srgb, var(--accent) 45%, transparent) !important;
+}
+body.linear .path-line article:before{ background:var(--accent) !important; }
+
+/* Chips and active states */
+body.linear .tn-chain i,
+body.linear .tn-step.on,
+body.linear .tn-step-panel .state-change span:last-child{
+  color:var(--tn-accent) !important;
+  border-color:var(--tn-accent) !important;
+  background:color-mix(in srgb, var(--tn-accent) 10%, transparent) !important;
+}
+
+/* Mining case in-page nav strip */
+body.linear .case-inpage-nav{
+  display:flex;
+  gap:16px;
+  padding:10px 24px;
+  border-bottom:1px solid var(--tn-line);
+  background:transparent;
+}
+body.linear .case-inpage-nav a{
+  color:var(--tn-muted) !important;
+  text-decoration:none;
+  font-size:.9rem;
+}
+body.linear .case-inpage-nav a:hover{
+  color:var(--tn-ink) !important;
+}
+
+/* Header CTA text variant (if present) */
+body.linear .header-cta-text{ color:var(--tn-muted) !important; }
+body.linear .header-cta-text:hover{ color:var(--tn-ink) !important; }
+
+/* Old cyan #66e5dc → brand accent or neutral */
+body.linear .truenorth-product:hover{
+  border-color:var(--tn-line) !important;
+}
+body.linear .truenorth-product em{
+  color:#A1A1AA !important;
+}
+body.linear .offering-link:hover{
+  border-color:var(--tn-line) !important;
+}
+body.linear .offering-link:after{
+  background:var(--accent) !important;
+  border-color:var(--accent) !important;
+  color:#0a1513 !important;
+  font-weight:500 !important;
+}
+body.linear .offering-link:focus-visible{
+  outline-color:var(--accent) !important;
+}
+
+/* Filled primary CTA font-weight 500 */
+body.linear .header-cta,
+body.linear .tn-btn.primary,
+body.linear .primary,
+body.linear .offering-link:after{
+  font-weight:500 !important;
+}
+body.linear .tn-btn,
+body.linear .ghost,
+body.linear .tn-kicker,
+body.linear .tn-eyebrow,
+body.linear .eyebrow{
+  font-weight:500 !important;
+}
+
+/* Collapse hero layout when no art/screenshot is present */
+body.linear .tn-hero.no-art{
+  grid-template-columns:1fr !important;
+}
+
+body.linear .proof-frame{
+  background:var(--tn-panel);
+  border:1px solid var(--tn-line);
+  border-radius:12px;
+  padding:16px;
+}
+body.linear .proof-frame small{
+  display:block;
+  color:var(--tn-muted);
+  margin-bottom:8px;
+}
+
+/* Mechanism line on secondary pages — 18/400 muted */
+body.linear .mechanism{
+  color:var(--tn-muted) !important;
+  font-size:18px !important;
+  line-height:1.55 !important;
+  font-weight:400 !important;
+  margin:8px 0 14px !important;
+}
